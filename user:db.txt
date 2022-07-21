@@ -1,0 +1,5 @@
+CREATE USER table_open
+WITH CREATEDB PASSWORD 'password';
+
+CREATE DATABASE table_open_dev
+WITH OWNER table_open;
