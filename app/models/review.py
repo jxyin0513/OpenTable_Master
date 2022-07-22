@@ -1,7 +1,4 @@
-from flask_sqlalchemy import SQLAlchemy
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
+from .db import db
 
 class Review(db.Model):
   __tablename__ = 'reviews'
