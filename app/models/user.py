@@ -1,4 +1,5 @@
 from .db import db
+from .restaurant import favorites
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
@@ -10,6 +11,11 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+
+    restaurants = db.relationship('Restaurant', back_populates='users')
+    reviews = db.relationship('Review', back_populates='user')
+    reservations = db.relationship('Reservation', back_populates='user')
+    user_favorite = db.relationship('Restaurant', secondary=favorites, back_populates='restaurant_favorite', cascade='all, delete')
 
     @property
     def password(self):

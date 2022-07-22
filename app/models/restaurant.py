@@ -1,5 +1,10 @@
 from .db import db
 
+favorites = db.Table('favorites',
+  db.Model.metadata,
+  db.Column('restaurants', db.Integer, db.ForeignKey('restaurants.id'), primary_key=True),
+  db.Column('users', db.Integer, db.ForeignKey('users.id'), primary_key=True))
+
 class Restaurant(db.Model):
   __tablename__ = 'restaurants'
 
@@ -12,4 +17,7 @@ class Restaurant(db.Model):
   hours = db.Column(db.String, nullable=False)
   price_point = db.Column(db.Integer, nullable=False)
 
-  user = db.relationship('User', back_populates='restaurants')
+  users = db.relationship('User', back_populates='restaurants')
+  reviews = db.relationship('Review', back_populates='restaurant')
+  reservations = db.relationship('Reservation', back_populates='restaurant')
+  restaurant_favorite = db.relationship('User', secondary=favorites, back_populates='user_favorite', cascade='all, delete')
