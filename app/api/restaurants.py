@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, render_template
+from flask import Blueprint, redirect, render_template, request
 from app.models import Restaurant, db, restaurant
 from app.forms import newRestaurant
 
@@ -24,3 +24,22 @@ def newRestaurantForm(id):
     if form.errors:
         return form.errors()
     return render_template('newRestaurant.html', form=form)
+
+
+# test postman
+# @restaurant_router.route('/<id>/newRestaurant', methods=['GET', 'POST'])
+# def newRestaurantForm(id):
+#     data=request.json
+#     restaurants= Restaurant(**data)
+
+#     db.session.add(restaurants)
+#     db.session.commit()
+#     return {
+#         'id': restaurants.id,
+#         'name': restaurants.name,
+#         'phone': restaurants.phone,
+#         'street': restaurants.street,
+#         'cuisine': restaurants.cuisine,
+#         'hours':restaurants.hours,
+#         'price_point':restaurants.price_point
+#     }
