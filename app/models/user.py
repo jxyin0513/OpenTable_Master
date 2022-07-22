@@ -14,7 +14,7 @@ class User(db.Model, UserMixin):
 
     restaurants = db.relationship('Restaurant', back_populates='users')
     reviews = db.relationship('Review', back_populates='user')
-    reservations = db.relationship('Reservations', back_populates='user')
+    reservations = db.relationship('Reservation', back_populates='user')
     user_favorite = db.relationship('Restaurant', secondary=favorites, back_populates='restaurant_favorite', cascade='all, delete')
 
     @property
