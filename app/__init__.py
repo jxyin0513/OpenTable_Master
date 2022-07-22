@@ -9,6 +9,7 @@ from .models import db, User, Restaurant
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.restaurants import restaurant_router
+from .api.restaurant_routes import restaurant_view
 from .seeds import seed_commands
 
 from .config import Config
@@ -32,6 +33,7 @@ app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(restaurant_router)
+app.register_blueprint(restaurant_view)
 db.init_app(app)
 Migrate(app, db, compare_type=True)
 
