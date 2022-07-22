@@ -23,9 +23,22 @@ def newRestaurantForm(id):
         return form.errors()
     return render_template('newRestaurant.html', form=form, id=str(id))
 
-# @restaurant_router.route('/<id>/newRestaurant/delete', methods=['POST'])
-# def deleteRestaurant(id):
 
+@restaurant_router.route('/restaurant/<restaurantId>')
+def singleRestaurant(restaurantId):
+    restaurant= Restaurant.query.get(restaurantId)
+    return render_template('single-restaurant.html', restaurant=restaurant)
+
+
+
+
+@restaurant_router.route('/restaurant/<restaurantId>/delete', methods=['POST'])
+def deleteRestaurant(restaurantId):
+    restaurant= Restaurant.query.get(restaurantId)
+    db.session.delete(restaurant)
+    db.session.commit()
+    return {"Message":"Good, success, great"}
+    # return redirect('/')
 
 # test postman
 # @restaurant_router.route('/<id>/newRestaurant', methods=['GET', 'POST'])
