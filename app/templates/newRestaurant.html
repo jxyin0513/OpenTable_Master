@@ -1,0 +1,25 @@
+<form method="POST" action={{ '/' + id + '/newRestaurant' }}>
+    {{ form.csrf_token }}
+    <p>
+        {{form.name.label}}{{form.name}}
+    </p>
+    <p>
+        {{form.phone.label}}{{form.phone}}
+    </p>
+    <p>
+        {{form.street.label}}{{form.street}}
+    </p>
+    <p>
+        {{form.cuisine.label}}{{form.cuisine}}
+    </p>
+    <p>
+        {{form.hours.label}}{{form.hours}}
+    </p>
+    <p>
+        {{form.price_point.label}}{{form.price_point}}
+    </p>
+    <p>
+        {{form.submit}}
+    </p>
+
+</form>
