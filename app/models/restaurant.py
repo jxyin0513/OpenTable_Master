@@ -12,4 +12,6 @@ class Restaurant(db.Model):
   hours = db.Column(db.String, nullable=False)
   price_point = db.Column(db.Integer, nullable=False)
 
-  user = db.relationship('User', back_populates='restaurants')
+  users = db.relationship('User', back_populates='restaurants')
+  reviews = db.relationship('Review', back_populates='restaurant')
+  reservations = db.relationship('Reservation', back_populates='restaurant')
