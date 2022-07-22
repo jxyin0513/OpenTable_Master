@@ -5,10 +5,10 @@ from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 
-from .models import db, User
+from .models import db, User, Restaurant
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
-
+from .api.restaurants import restaurant_router
 from .seeds import seed_commands
 
 from .config import Config
@@ -31,6 +31,7 @@ app.cli.add_command(seed_commands)
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
+app.register_blueprint(restaurant_router)
 db.init_app(app)
 Migrate(app, db, compare_type=True)
 
@@ -70,3 +71,8 @@ def react_root(path):
     if path == 'favicon.ico':
         return app.send_static_file('favicon.ico')
     return app.send_static_file('index.html')
+
+@app.route('/')
+def getAllRestaurants():
+    restaurants = Restaurant.query.all()
+    return { k:v for k , v in enumerate(restaurants) }
