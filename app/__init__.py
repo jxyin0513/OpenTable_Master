@@ -75,4 +75,15 @@ def react_root(path):
 @app.route('/')
 def getAllRestaurants():
     restaurants = Restaurant.query.all()
-    return { k:v for k , v in enumerate(restaurants) }
+    restaurantsObj = [{
+        'id': restaurant.id,
+        'name': restaurant.name,
+        'phone': restaurant.phone,
+        'street': restaurant.street,
+        'cuisine': restaurant.cuisine,
+        'hours':restaurant.hours,
+        'price_point':restaurant.price_point
+    } for restaurant in restaurants]
+    # print(restaurantsObj['0'])
+    # print('--------------------------------------')
+    return {'restaurants':restaurantsObj}
