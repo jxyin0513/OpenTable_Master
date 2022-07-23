@@ -7,21 +7,41 @@ restaurant_router = Blueprint('restaurants',__name__)
 
 @restaurant_router.route('/<id>/newRestaurant', methods=['GET', 'POST'])
 def newRestaurantForm(id):
-    form = NewRestaurantForm()
-    if form.validate_on_submit():
-        new_restaurant = Restaurant(user_id = id,
-                                    name = form.data['name'],
-                                    phone = form.data['phone'],
-                                    street = form.data['street'],
-                                    cuisine = form.data['cuisine'],
-                                    hours = form.data['hours'],
-                                    price_point = form.data['price_point'])
-        db.session.add(new_restaurant)
-        db.session.commit()
-        return redirect(f'/restaurant/{new_restaurant.id}')
-    if form.errors:
-        return form.errors()
-    return render_template('newRestaurant.html', form=form, id=str(id))
+    data = request.json
+    print(data, "/")
+    restaurant = Restaurant(user_id = id,
+                            name = data['name'],
+                            phone = data['phone'],
+                            street = data['street'],
+                            cuisine = data['cuisine'],
+                            hours = data['hours'],
+                            price_point = data['price_point'])
+    db.session.add(restaurant)
+    db.session.commit()
+    return {
+        'user_id': restaurant.id,
+        'name': restaurant.name,
+        'phone': restaurant.phone,
+        'street': restaurant.street,
+        'cuisine': restaurant.cuisine,
+        'hours':restaurant.hours,
+        'price_point':restaurant.price_point
+    }
+    # form = NewRestaurantForm()
+    # if form.validate_on_submit():
+    #     new_restaurant = Restaurant(user_id = id,
+    #                                 name = form.data['name'],
+    #                                 phone = form.data['phone'],
+    #                                 street = form.data['street'],
+    #                                 cuisine = form.data['cuisine'],
+    #                                 hours = form.data['hours'],
+    #                                 price_point = form.data['price_point'])
+    #     db.session.add(new_restaurant)
+    #     db.session.commit()
+    #     return redirect('/')
+    # if form.errors:
+    #     return form.errors()
+    # return render_template('newRestaurant.html', form=form, id=str(id))
 
 @restaurant_router.route('/restaurant/<restaurantId>')
 def singleRestaurant(restaurantId):
@@ -41,7 +61,7 @@ def deleteRestaurant(restaurantId):
 def editRestaurant(restaurantId):
     restaurant= Restaurant.query.get(restaurantId)
     form= NewRestaurantForm()
-    
+
     restaurant.name= form.data['name']
     restaurant.phone = form.data['phone'],
     restaurant.street = form.data['street'],
