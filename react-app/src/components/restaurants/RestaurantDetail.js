@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DeleteRestaurantThunk, GetRestaurantDetailThunk } from '../../store/restaurant';
+import EditRestaurant from './RestaurantEdit';
 import Reviews from '../reviews/Reviews';
 import { useParams, NavLink, useHistory } from 'react-router-dom'
 
@@ -12,6 +13,8 @@ function RestaurantDetail() {
     const userId = useSelector(state => state.session.user?.id)
     const session = useSelector(state => state.session)
     const history = useHistory()
+    const [edit, setEdit] = useState(false)
+    const [review, setReview] = useState(false)
 
     useEffect(() => {
         dispatch(GetRestaurantDetailThunk(id))
@@ -22,6 +25,11 @@ function RestaurantDetail() {
         e.preventDefault();
         await dispatch(DeleteRestaurantThunk(id))
         history.push('/')
+    }
+
+    function handleEdit(e){
+        e.preventDefault()
+        setEdit(true);
     }
 
     return (
@@ -38,7 +46,7 @@ function RestaurantDetail() {
             }
             {session.user && restaurant && restaurant.user_id === userId && (
                 <>
-                    <button id='edit-restaurant' >Edit</button>
+                    <button id='edit-restaurant' onClick={handleEdit}>Edit</button>
                     <button id='delete-restaurant' onClick={handleDelete}>Delete</button>
                 </>
             )}
@@ -46,6 +54,7 @@ function RestaurantDetail() {
                 <button>Write a Review</button>
             </NavLink>
             <Reviews restaurantId={id} />
+            {edit && <EditRestaurant id={id} hide={()=>setEdit(false)}/>}
         </>
 
     )
