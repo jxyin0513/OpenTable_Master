@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DeleteRestaurantThunk, GetRestaurantDetailThunk } from '../../store/restaurant';
+import { removeFavoriteThunk, setFavoriteThunk } from '../../store/favorite';
 import EditRestaurant from './RestaurantEdit';
 import Reviews from '../reviews/Reviews';
 import { useParams, NavLink, useHistory } from 'react-router-dom'
@@ -13,11 +14,46 @@ function RestaurantDetail() {
     const userId = useSelector(state => state.session.user?.id)
     const session = useSelector(state => state.session)
     const history = useHistory()
-    const [edit, setEdit] = useState(false)
+    const [edit, setEdit] = useState(false);
+    const [isFav, setIsFav] = useState(false);
+    const [starFill, setStarFill] = useState('noFill');
+    const [favorited, setFavorited] = useState('Add to Favorites');
+
+    const handleFav = (e) => {
+        if (favorited === 'Add to Favorites') {
+            setFavorited('Remove from Favorites');
+            setStarFill('fill');
+        } else {
+            setFavorited('Add to Favorites');
+            setStarFill('noFill');
+        };
+    };
+
+    const postFav = async (e) => {
+        if (isFav === false) {
+            setIsFav(true);
+            const fav = {
+                user_id: userId,
+                restaurant_id: +id
+            };
+            await dispatch(setFavoriteThunk(fav));
+        };
+    };
+
+    const removeFromFav = async (e) => {
+        if (isFav === true) {
+            setIsFav(false);
+            const fav = {
+                user_id: userId,
+                restaurant_id: +id,
+            };
+            await dispatch(removeFavoriteThunk(fav))
+        }
+    }
 
     useEffect(() => {
         dispatch(GetRestaurantDetailThunk(id))
-    }, [dispatch, id])
+    }, [dispatch, id]);
 
 
     async function handleDelete(e) {
@@ -26,7 +62,7 @@ function RestaurantDetail() {
         history.push('/')
     }
 
-    function handleEdit(e){
+    function handleEdit(e) {
         e.preventDefault()
         setEdit(true);
     }
@@ -34,6 +70,13 @@ function RestaurantDetail() {
     return (
 
         <>
+            <div>
+                <button onClick={() => {
+                    postFav();
+                    removeFromFav();
+                    handleFav();
+                }} className={`star-${starFill}`}>{favorited}</button>
+            </div>
             {session && restaurant && (
                 <div>
                     <div>{restaurant.name}</div>
@@ -53,7 +96,7 @@ function RestaurantDetail() {
                 <button>Write a Review</button>
             </NavLink>
             <Reviews restaurantId={id} />
-            {edit && <EditRestaurant id={id} hide={()=>setEdit(false)}/>}
+            {edit && <EditRestaurant id={id} hide={() => setEdit(false)} />}
         </>
 
     )
