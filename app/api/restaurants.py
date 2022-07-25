@@ -1,63 +1,43 @@
 from flask import Blueprint, redirect, render_template, request
 from app.forms.newRestaurant import NewRestaurantForm
-from app.models import Restaurant, db, restaurant
+from app.models import Restaurant, db
 
 restaurant_router = Blueprint('restaurants',__name__)
 
 
-@restaurant_router.route('/<id>/newRestaurant', methods=['GET', 'POST'])
+@restaurant_router.route('/newRestaurant', methods=['GET', 'POST'])
 def newRestaurantForm(id):
-    data = request.json
-    print(data, "/")
-    restaurant = Restaurant(user_id = id,
-                            name = data['name'],
-                            phone = data['phone'],
-                            street = data['street'],
-                            cuisine = data['cuisine'],
-                            hours = data['hours'],
-                            price_point = data['price_point'])
-    db.session.add(restaurant)
-    db.session.commit()
-    return {
-        'user_id': restaurant.id,
-        'name': restaurant.name,
-        'phone': restaurant.phone,
-        'street': restaurant.street,
-        'cuisine': restaurant.cuisine,
-        'hours':restaurant.hours,
-        'price_point':restaurant.price_point
-    }
-    # form = NewRestaurantForm()
-    # if form.validate_on_submit():
-    #     new_restaurant = Restaurant(user_id = id,
-    #                                 name = form.data['name'],
-    #                                 phone = form.data['phone'],
-    #                                 street = form.data['street'],
-    #                                 cuisine = form.data['cuisine'],
-    #                                 hours = form.data['hours'],
-    #                                 price_point = form.data['price_point'])
-    #     db.session.add(new_restaurant)
-    #     db.session.commit()
-    #     return redirect('/')
-    # if form.errors:
-    #     return form.errors()
-    # return render_template('newRestaurant.html', form=form, id=str(id))
+    form = NewRestaurantForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    print(form.data)
+    if form.validate_on_submit():
+        restaurant = Restaurant(
+                                user_id = id,
+                                name = form.data['name'],
+                                phone = form.data['phone'],
+                                street = form.data['street'],
+                                cuisine = form.data['cuisine'],
+                                hours = form.data['hours'],
+                                price_point = form.data['price_point']
+                                )
+        db.session.add(restaurant)
+        db.session.commit()
+        return restaurant.to_dict()
 
-@restaurant_router.route('/restaurant/<restaurantId>')
+@restaurant_router.route('/<restaurantId>')
 def singleRestaurant(restaurantId):
     restaurant= Restaurant.query.get(restaurantId)
-    return render_template('single-restaurant.html', restaurant=restaurant)
+    return restaurant.to_dict()
 
-
-@restaurant_router.route('/restaurant/<restaurantId>/delete', methods=['POST'])
+@restaurant_router.route('/<restaurantId>/delete', methods=['DELETE'])
 def deleteRestaurant(restaurantId):
     restaurant= Restaurant.query.get(restaurantId)
     db.session.delete(restaurant)
     db.session.commit()
-    return {"Message":"Good, success, great"}
+    return restaurant.to_dict()
     # return redirect('/')
 
-@restaurant_router.route('/restaurant/<restaurantId>/edit', methods=['POST'])
+@restaurant_router.route('/<restaurantId>/edit', methods=['PUT'])
 def editRestaurant(restaurantId):
     restaurant= Restaurant.query.get(restaurantId)
     form= NewRestaurantForm()
@@ -70,7 +50,7 @@ def editRestaurant(restaurantId):
     restaurant.price_point = form.data['price_point']
 
     db.session.commit()
-    return redirect(f'/restaurant/{restaurantId}')
+    return restaurant.to_dict()
 
 
 # test postman

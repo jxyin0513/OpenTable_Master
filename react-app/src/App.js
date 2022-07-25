@@ -5,8 +5,10 @@ import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
+import RestaurantDetail from './components/restaurants/RestaurantDetail';
 import RestaurantForm from './components/restaurants/restaurantForm';
 import Restaurants from './components/restaurants/Restaurants';
+import ReviewForm from './components/reviews/ReviewForm';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
@@ -36,6 +38,9 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
+        <Route path='/restaurants/:id'>
+          <RestaurantDetail />
+        </Route>
         <ProtectedRoute path='/new-form'>
           <RestaurantForm />
         </ProtectedRoute>
@@ -44,6 +49,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
+        </ProtectedRoute>
+        <ProtectedRoute path='/:restaurantId/review/'>
+          <ReviewForm />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <h1>My Home Page</h1>
