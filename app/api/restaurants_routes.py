@@ -1,28 +1,31 @@
 from flask import Blueprint, redirect, render_template, request
-from app.forms.newRestaurant import NewRestaurantForm
+from app.forms.restaurant_form import NewRestaurantForm
 from app.models import Restaurant, db
 
 restaurant_router = Blueprint('restaurants',__name__)
 
 
 @restaurant_router.route('/newRestaurant', methods=['GET', 'POST'])
-def newRestaurantForm(id):
+def newRestaurantForm():
     form = NewRestaurantForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(form.data)
-    if form.validate_on_submit():
-        restaurant = Restaurant(
-                                user_id = id,
-                                name = form.data['name'],
-                                phone = form.data['phone'],
-                                street = form.data['street'],
-                                cuisine = form.data['cuisine'],
-                                hours = form.data['hours'],
-                                price_point = form.data['price_point']
-                                )
-        db.session.add(restaurant)
-        db.session.commit()
-        return restaurant.to_dict()
+    print(form.data, 'this is what you want')
+    data= request.json
+    restaurant= Restaurant(**data)
+    # if form.validate_on_submit():
+    #     restaurant = Restaurant(
+    #                             user_id = form.data['user_id'],
+    #                             name = form.data['name'],
+    #                             phone = form.data['phone'],
+    #                             street = form.data['street'],
+    #                             cuisine = form.data['cuisine'],
+    #                             hours = form.data['hours'],
+    #                             price_point = form.data['price_point']
+    #                             )
+
+    db.session.add(restaurant)
+    db.session.commit()
+    return restaurant.to_dict()
 
 @restaurant_router.route('/<restaurantId>')
 def singleRestaurant(restaurantId):

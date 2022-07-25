@@ -18,7 +18,7 @@ class Restaurant(db.Model):
   price_point = db.Column(db.Integer, nullable=False)
 
   users = db.relationship('User', back_populates='restaurants')
-  reviews = db.relationship('Review', back_populates='restaurant')
+  reviews = db.relationship('Review', back_populates='restaurant', cascade= 'all, delete')
   reservations = db.relationship('Reservation', back_populates='restaurant')
   restaurant_favorite = db.relationship('User', secondary=favorites, back_populates='user_favorite', cascade='all, delete')
 
