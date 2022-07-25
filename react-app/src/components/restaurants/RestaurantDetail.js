@@ -14,7 +14,6 @@ function RestaurantDetail() {
     const session = useSelector(state => state.session)
     const history = useHistory()
     const [edit, setEdit] = useState(false)
-    const [review, setReview] = useState(false)
 
     useEffect(() => {
         dispatch(GetRestaurantDetailThunk(id))

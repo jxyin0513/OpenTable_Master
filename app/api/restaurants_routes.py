@@ -10,18 +10,18 @@ def newRestaurantForm():
     form = NewRestaurantForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     print(form.data, 'this is what you want')
-    data= request.json
-    restaurant= Restaurant(**data)
-    # if form.validate_on_submit():
-    #     restaurant = Restaurant(
-    #                             user_id = form.data['user_id'],
-    #                             name = form.data['name'],
-    #                             phone = form.data['phone'],
-    #                             street = form.data['street'],
-    #                             cuisine = form.data['cuisine'],
-    #                             hours = form.data['hours'],
-    #                             price_point = form.data['price_point']
-    #                             )
+    # data= request.json
+    # restaurant= Restaurant(**data)
+    if form.validate_on_submit():
+        restaurant = Restaurant(
+                                user_id = form.data['user_id'],
+                                name = form.data['name'],
+                                phone = form.data['phone'],
+                                street = form.data['street'],
+                                cuisine = form.data['cuisine'],
+                                hours = form.data['hours'],
+                                price_point = form.data['price_point']
+                                )
 
     db.session.add(restaurant)
     db.session.commit()
