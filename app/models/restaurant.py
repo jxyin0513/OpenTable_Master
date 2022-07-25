@@ -21,3 +21,15 @@ class Restaurant(db.Model):
   reviews = db.relationship('Review', back_populates='restaurant')
   reservations = db.relationship('Reservation', back_populates='restaurant')
   restaurant_favorite = db.relationship('User', secondary=favorites, back_populates='user_favorite', cascade='all, delete')
+
+  def to_dict(self):
+    return {
+        'id':self.id,
+        'user_id': self.user_id,
+        'name': self.name,
+        'phone': self.phone,
+        'street': self.street,
+        'cuisine': self.cuisine,
+        'hours':self.hours,
+        'price_point':self.price_point
+    }
