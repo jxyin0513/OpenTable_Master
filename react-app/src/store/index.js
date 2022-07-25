@@ -3,10 +3,12 @@ import thunk from 'redux-thunk';
 import session from './session'
 import { restaurantReducer } from './restaurant';
 import reviewReducer from './review';
+import favoriteReducer from './favorite';
 const rootReducer = combineReducers({
   session,
   restaurants: restaurantReducer,
-  reviews: reviewReducer
+  reviews: reviewReducer,
+  favorites: favoriteReducer
 });
 
 

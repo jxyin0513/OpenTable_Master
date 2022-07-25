@@ -1,6 +1,7 @@
 from flask import Blueprint, redirect, render_template, request
 from app.forms.restaurant_form import NewRestaurantForm
-from app.models import Restaurant, db
+from app.models import Restaurant, db, favorites
+from app.models.user import User
 
 restaurant_router = Blueprint('restaurants',__name__)
 
@@ -54,6 +55,39 @@ def editRestaurant(restaurantId):
 
     db.session.commit()
     return restaurant.to_dict()
+
+@restaurant_router.route('/favorites', methods=['POST'])
+def favorite_restaurant():
+    data = request.json
+    user = User.query.get(data['user_id'])
+    restaurant = Restaurant.query.get(data['restaurant_id'])
+    user.user_favorite.append(restaurant);
+    # new_favorite = favorites(
+    #     users = data['user_id'],
+    #     restaurants = data['restaurant_id']
+    # )
+    db.session.commit()
+    return {
+        "user_id": user.id,
+        "restaurant_id": restaurant.id
+    }
+
+@restaurant_router.route('/<user_id>/<restaurant_id>', methods=['DELETE'])
+def remove_favorite(user_id, restaurant_id):
+    user = User.query.get(user_id)
+    restaurant = Restaurant.query.get(restaurant_id)
+    if restaurant in user.user_favorite:
+        user.user_favorite.remove(restaurant)
+        db.session.commit()
+        return {
+            "user_id": user_id,
+            "restaurant_id": restaurant_id
+        }
+    # print("USER_ID:: ", user.user_favorite)
+    # user.user_favorite.remove(restaurant_id)
+    # db.session.commit()
+    # user_favorites.remove(restaurant_id)
+    # db.session.commit()
 
 
 # test postman
