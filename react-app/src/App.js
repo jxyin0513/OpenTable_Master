@@ -6,7 +6,7 @@ import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import RestaurantDetail from './components/restaurants/RestaurantDetail';
-import RestaurantForm from './components/restaurants/restaurantForm';
+import RestaurantForm from './components/restaurants/RestaurantForm';
 import Restaurants from './components/restaurants/Restaurants';
 import ReviewForm from './components/reviews/ReviewForm';
 import UsersList from './components/UsersList';
@@ -18,7 +18,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       await dispatch(authenticate());
       setLoaded(true);
     })();
@@ -45,7 +45,7 @@ function App() {
           <RestaurantForm />
         </ProtectedRoute>
         <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
+          <UsersList />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
