@@ -4,7 +4,7 @@ import { DeleteRestaurantThunk, GetRestaurantDetailThunk } from '../../store/res
 import { removeFavoriteThunk, setFavoriteThunk } from '../../store/favorite';
 import EditRestaurant from './RestaurantEdit';
 import Reviews from '../reviews/Reviews';
-import Reservation from '../reservations/Reservations'
+import ReservationForm from '../reservations/ReservationForm'
 import { useParams, NavLink, useHistory } from 'react-router-dom'
 
 function RestaurantDetail() {
@@ -98,7 +98,7 @@ function RestaurantDetail() {
             </NavLink>
             <Reviews restaurantId={id} />
             {edit && <EditRestaurant id={id} hide={() => setEdit(false)} />}
-            <Reservation/>
+            <ReservationForm/>
 
         </>
 

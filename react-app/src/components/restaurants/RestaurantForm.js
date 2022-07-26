@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CreateRestaurantThunk } from '../../store/restaurant';
 import { useDispatch, useSelector } from 'react-redux'
+
 function RestaurantForm() {
     const dispatch = useDispatch()
     const userId = useSelector(state => state.session.user.id)
