@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetReservationThunk, DeleteReservationThunk } from '../../store/reservation';
-import { useParams, NavLink, useHistory } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 
 function Reservation() {
     const dispatch = useDispatch()
     const signedInUserId = useSelector(state => state.session.user?.id)
-    const session = useSelector(state => state.session)
-    const {userId} = useParams()
+    // const session = useSelector(state => state.session)
+    const { userId } = useParams()
     const reservations = useSelector(state => Object.values(state.reservations).filter(reservation => reservation.user_id = userId))
     console.log(userId)
     console.log('--------------')
     // console.log(reservations[0])
     useEffect(() => {
         dispatch(GetReservationThunk(userId))
-    },[dispatch, userId]);
+    }, [dispatch, userId]);
 
     async function deleteRes(e) {
         e.preventDefault()
@@ -31,7 +31,7 @@ function Reservation() {
             <p>Reservations --</p>
             {signedInUserId && reservations && reservations.map(reservation => (
                 <div key={reservation.id}>
-                {/* {userId === reservation.user_id && */}
+                    {/* {userId === reservation.user_id && */}
                     <div key={reservation.id}>
                         <div>Id: {reservation.id}</div>
                         <div>Restaurant Id: {reservation.restaurant_id}</div>
@@ -40,7 +40,7 @@ function Reservation() {
                         <div>Party Size: {reservation.party_size}</div>
                         <button className={`del_${reservation.id}`} onClick={deleteRes}>Delete Reservation</button>
                     </div>
-                {/* } */}
+                    {/* } */}
                 </div>
             ))}
 

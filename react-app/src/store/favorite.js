@@ -1,11 +1,11 @@
-const GET_FAVORITE_RESTAURANTS = 'get/favoriteRestaurants'
+// const GET_FAVORITE_RESTAURANTS = 'get/favoriteRestaurants'
 const POST_FAVORITE_RESTAURANT = 'post/favoriteRestaurant'
 const REMOVE_FAVORITE_RESTAURANT = 'delete/favoriteRestaurant'
 
-const get = (payload) => ({
-  type: GET_FAVORITE_RESTAURANTS,
-  payload,
-})
+// const get = (payload) => ({
+//   type: GET_FAVORITE_RESTAURANTS,
+//   payload,
+// })
 
 const favorite = (payload) => ({
   type: POST_FAVORITE_RESTAURANT,

@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { EditRestaurantThunk } from '../../store/restaurant';
 import { useDispatch, useSelector } from 'react-redux'
 
-function EditRestaurant({id, hide}){
+function EditRestaurant({ id, hide }) {
     const dispatch = useDispatch()
     const userId = useSelector(state => state.session.user.id)
-    const restaurant = useSelector(state=> state.restaurants[id])
+    const restaurant = useSelector(state => state.restaurants[id])
     const [name, setName] = useState(restaurant.name)
     const [phone, setPhone] = useState(restaurant.phone)
     const [street, setStreet] = useState(restaurant.street)
@@ -13,7 +13,7 @@ function EditRestaurant({id, hide}){
     const [hours, setHours] = useState(restaurant.hours)
     const [price_point, setPrice_Point] = useState(restaurant.price_point)
 
-    async function onSubmit(e){
+    async function onSubmit(e) {
         e.preventDefault();
 
         const restaurant = {
@@ -26,9 +26,9 @@ function EditRestaurant({id, hide}){
             hours,
             price_point
         }
-        const edited =  await dispatch(EditRestaurantThunk(restaurant))
+        const edited = await dispatch(EditRestaurantThunk(restaurant))
 
-        if(edited){
+        if (edited) {
             hide();
         }
 
