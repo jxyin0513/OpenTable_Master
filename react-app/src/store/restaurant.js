@@ -1,5 +1,6 @@
 const GET_RESTAURANTS = '/get/restaurants'
 const GET_RESTAURANT = '/get/restaurant/detail'
+const SEARCH_RESTAURANTS = '/get/searchRestaurants'
 const CREATE_RESTAURANT = '/post/restaurant'
 const EDIT_RESTAURANT = '/edit/restaurant'
 const DELETE_RESTAURANT = '/delete/restaurant'
@@ -7,27 +8,32 @@ const DELETE_RESTAURANT = '/delete/restaurant'
 const getRestaurants = (restaurants) => ({
     type: GET_RESTAURANTS,
     restaurants
-})
+});
 
 const getRestaurant = (restaurant) => ({
     type: GET_RESTAURANT,
     restaurant
-})
+});
 
 const createRestaurant = (restaurant) => ({
     type: CREATE_RESTAURANT,
     restaurant
-})
+});
 
 const editRestaurant = (restaurant) => ({
     type: EDIT_RESTAURANT,
     restaurant
-})
+});
 
 const deleteRestaurant = (restaurant) => ({
     type: DELETE_RESTAURANT,
     restaurant
-})
+});
+
+const searchRestaurants = (restaurants) => ({
+    type: SEARCH_RESTAURANTS,
+    restaurants
+});
 
 export const GetRestaurantThunk = () => async (dispatch) => {
     const response = await fetch('/all/restaurants')
@@ -88,6 +94,21 @@ export const DeleteRestaurantThunk = (id) => async (dispatch) => {
     }
 }
 
+export const SearchRestaurantsThunk = (params) => async (dispatch) => {
+    const response = await fetch(`/api/restaurants/search`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(params)
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(searchRestaurants(data.restaurants));
+        return data;
+    } else {
+        return { "Message": "Unsuccessful" }
+    }
+};
+
 
 const initialState = {}
 export const restaurantReducer = (state = initialState, action) => {
@@ -113,7 +134,9 @@ export const restaurantReducer = (state = initialState, action) => {
         case DELETE_RESTAURANT:
             delete newState[action.restaurant.id];
             return newState;
-
+        case SEARCH_RESTAURANTS:
+            action.restaurants.forEach(restaurant => newState[restaurant.id] = restaurant)
+            return newState;
         default:
             return state
     }

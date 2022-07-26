@@ -5,7 +5,6 @@ from app.models.user import User
 
 restaurant_router = Blueprint('restaurants',__name__)
 
-
 @restaurant_router.route('/newRestaurant', methods=['GET', 'POST'])
 def newRestaurantForm():
     form = NewRestaurantForm()
@@ -88,6 +87,17 @@ def remove_favorite(user_id, restaurant_id):
     # db.session.commit()
     # user_favorites.remove(restaurant_id)
     # db.session.commit()
+
+@restaurant_router.route('/search', methods=['GET', 'POST'])
+def search_restaurant():
+    query = request.json
+    print(query)
+    results = Restaurant.query.filter(Restaurant.name.ilike(f'{query}%')).all()
+    print(results)
+    restaurants = [k.to_dict() for k in results]
+    print(restaurants)
+    return { "restaurants": restaurants }
+
 
 
 # test postman
