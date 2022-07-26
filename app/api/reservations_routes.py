@@ -15,3 +15,19 @@ def getReservations(restaurantId):
     return {
         "reservations": allReservations
     }
+
+@reservation_router.route('/new/reservation', methods=['POST'])
+def new_reservation():
+    data = request.json
+    new_res = Reservation(**data)
+
+    return new_res.to_dict()
+
+@reservation_router.route('/<id>/delete', methods=['DELETE'])
+def delete_reservation(id):
+
+    reservation=Reservation.query.get(id)
+    db.session.delete(reservation)
+    db.session.commit()
+
+    return reservation.to_dict()
