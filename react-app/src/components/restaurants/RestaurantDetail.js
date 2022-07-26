@@ -98,7 +98,7 @@ function RestaurantDetail() {
             </NavLink>
             <Reviews restaurantId={id} />
             {edit && <EditRestaurant id={id} hide={() => setEdit(false)} />}
-            <Reservation/>
+            {/* <Reservation/> */}
 
         </>
 
