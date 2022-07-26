@@ -92,7 +92,12 @@ def remove_favorite(user_id, restaurant_id):
 def search_restaurant():
     query = request.json
     print(query)
-    results = Restaurant.query.filter(Restaurant.name.ilike(f'{query}%')).all()
+    nameResults = Restaurant.query.filter(Restaurant.name.ilike(f'{query}%')).all()
+    cuisineResults = Restaurant.query.filter(Restaurant.cuisine.ilike(f'{query}%')).all()
+    if nameResults:
+        results = nameResults
+    else:
+        results = cuisineResults
     print(results)
     restaurants = [k.to_dict() for k in results]
     print(restaurants)

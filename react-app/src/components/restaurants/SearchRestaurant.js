@@ -14,7 +14,7 @@ const Search = () => {
   const searchQuery = async (e) => {
     e.preventDefault();
     const res = await dispatch(SearchRestaurantsThunk(search));
-    console.log("RES:: ", res.restaurants);
+    // console.log("RES:: ", res.restaurants);
     if (res) {
       setResultsFound(true);
       setResults(res.restaurants)
