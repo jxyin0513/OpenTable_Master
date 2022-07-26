@@ -17,15 +17,16 @@ function Reservation() {
 
     return (
         <>
-            {reservations && reservations.map(reservation => {
-            <div key={reservation.id}>
-                <div>{reservation.id}</div>
-                <div>{reservation.restaurant_id}</div>
-                <div>{reservation.res_date}</div>
-                <div>{reservation.res_time}</div>
-                <div>{reservation.party_size}</div>
-            </div>
-            })}
+            {reservations && reservations.map(reservation => (
+
+                <div key={reservation.id}>
+                    <div>{reservation.id}</div>
+                    <div>{reservation.restaurant_id}</div>
+                    <div>{reservation.res_date}</div>
+                    <div>{reservation.res_time}</div>
+                    <div>{reservation.party_size}</div>
+                </div>
+            ))}
         </>
     )
 

@@ -79,7 +79,7 @@ def remove_favorite(user_id, restaurant_id):
     if restaurant in user.user_favorite:
         user.user_favorite.remove(restaurant)
         db.session.commit()
-        return {
+    return {
             "user_id": user_id,
             "restaurant_id": restaurant_id
         }

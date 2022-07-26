@@ -51,12 +51,15 @@ export const removeFavoriteThunk = (payload) => async dispatch => {
 const favoriteReducer = (state = {}, action) => {
   let newState = { ...state };
   switch (action.type) {
+
     case POST_FAVORITE_RESTAURANT:
       newState[action.payload.restaurant_id] = action.payload;
       return newState;
+
     case REMOVE_FAVORITE_RESTAURANT:
       delete newState[action.payload.restaurant_id];
       return newState;
+
     default:
       return state;
   };
