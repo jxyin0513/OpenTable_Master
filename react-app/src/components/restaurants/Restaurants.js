@@ -18,6 +18,7 @@ function Restaurants() {
             {allRestaurants && allRestaurants.map(restaurant =>
             (
                 <div key={restaurant.id}>
+                    <img src={restaurant.image_url} alt="image"></img>
                     <div>{restaurant.name}</div>
                     <div>{restaurant.phone}</div>
                     <div>{restaurant.street}</div>

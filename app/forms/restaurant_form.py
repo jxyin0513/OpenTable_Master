@@ -1,9 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, SubmitField
+from wtforms import StringField, IntegerField, SubmitField, TimeField, SelectField
 from wtforms.validators import DataRequired
 
 # Split hours field into two (Opening, Closing Times)
-# CUISINE_CHOICES = [American, Chinese, Barbecue, Indian, etc.]
+CUISINE_CHOICES = ['American', 'Chinese', 'Barbecue', 'Indian', 'more...']
 # Image Url Field (With default?)
 
 class NewRestaurantForm(FlaskForm):
@@ -11,9 +11,8 @@ class NewRestaurantForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     phone = StringField('Phone')
     street = StringField('Street', validators=[DataRequired()])
-    cuisine = StringField('Cuisine', validators=[DataRequired()])
-    hours = StringField('Hours', validators=[DataRequired()])
-    #imageUrl = StringField('Image', default='ourdefaultimage')
+    cuisine = SelectField('Cuisine', choices=CUISINE_CHOICES, validators=[DataRequired()])
+    open_hours = TimeField('Open', validators=[DataRequired()])
+    close_hours = TimeField('Close', validators=[DataRequired()])
+    image_url = StringField('Image')
     price_point = IntegerField('Price Point', validators=[DataRequired()])
-
-    submit = SubmitField('Submit')

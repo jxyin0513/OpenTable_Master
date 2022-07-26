@@ -6,16 +6,29 @@ function EditRestaurant({ id, hide }) {
     const dispatch = useDispatch()
     const userId = useSelector(state => state.session.user.id)
     const restaurant = useSelector(state => state.restaurants[id])
+    // const openHoursArr = restaurant.open_hours.split(':')
+    // const [hour, minute, seconds] = openHoursArr
+    // const openHour = new Date(null, null, null, hour, minute)
+    const trimOpen = restaurant.open_hours.split(':').slice(0,2).join(':')
+    const trimClose = restaurant.close_hours.split(':').slice(0,2).join(':')
+    console.log(trimOpen)
     const [name, setName] = useState(restaurant.name)
     const [phone, setPhone] = useState(restaurant.phone)
     const [street, setStreet] = useState(restaurant.street)
     const [cuisine, setCuisine] = useState(restaurant.cuisine)
-    const [hours, setHours] = useState(restaurant.hours)
+    const [openHours, setOpenHours] = useState(trimOpen)
+    const [closeHours, setCloseHours] = useState(trimClose)
+    const [url, setURL] = useState(restaurant.image_url)
     const [price_point, setPrice_Point] = useState(restaurant.price_point)
 
+    const openHoursArr = openHours.split(':')
+    const closeHoursArr = closeHours.split(':')
+    const [hour, minute, seconds] = openHoursArr
+    const [hourC, minuteC, secondsC] = closeHoursArr
+    console.log(openHours, closeHours)
     async function onSubmit(e) {
         e.preventDefault();
-
+        console.log(openHours, closeHours)
         const restaurant = {
             id,
             user_id: userId,
@@ -23,7 +36,9 @@ function EditRestaurant({ id, hide }) {
             phone,
             street,
             cuisine,
-            hours,
+            open_hours: openHours,
+            close_hours: closeHours,
+            image_url:url,
             price_point
         }
         const edited = await dispatch(EditRestaurantThunk(restaurant))
@@ -48,8 +63,14 @@ function EditRestaurant({ id, hide }) {
                 <label>Cuisine:
                     <input type='text' name='cuisine' value={cuisine} onChange={e => setCuisine(e.target.value)}></input>
                 </label>
-                <label>Hours:
-                    <input type='text' name='hours' value={hours} onChange={e => setHours(e.target.value)}></input>
+                <label>Open Hours:
+                    <input type='time' name='open_hours' value={`${hour}:${minute}`} onChange={e => setOpenHours(e.target.value)}></input>
+                </label>
+                <label>Close Hours:
+                    <input type='time' name='close_hours' value={`${hourC}:${minuteC}`} onChange={e => setCloseHours(e.target.value)}></input>
+                </label>
+                <label>Image URL:
+                <input type='text' name='image_url' value={url} onChange={e => setURL(e.target.value)}></input>
                 </label>
                 <label>Price point:
                     <input type='text' name='price_point' value={price_point} onChange={e => setPrice_Point(e.target.value)}></input>
