@@ -10,7 +10,7 @@ function ReservationForm() {
     const [date, setDate] = useState(new Date())
     const [time, setTime] = useState(new Date())
     const [partySize, setPartySize] = useState(1)
-
+    // Form select field contains times starting from opening to closing in half hour increments
     async function onSubmit(e) {
         e.preventDefault();
         const reservation = {
