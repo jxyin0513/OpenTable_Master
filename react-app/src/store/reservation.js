@@ -34,6 +34,7 @@ export const CreateReservationThunk = (reservation) => async (dispatch) => {
     })
     if (res.ok) {
         const data = await res.json()
+        console.log(data)
         dispatch(createReservation(data))
         return data
     }
@@ -56,8 +57,9 @@ const reservationReducer = (state = initialState, action) => {
     let newState = {...state }
     switch (action.type) {
         case GET_RESERVATIONS:
-            action.reservations.forEach(reservation => newState[reservation.id] = reservation)
-            return newState;
+            const STATE = {}
+            action.reservations.forEach(reservation => STATE[reservation.id] = reservation)
+            return STATE;
 
         case CREATE_RESERVATION:
             newState[action.reservation.id] = action.reservation;

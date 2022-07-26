@@ -4,15 +4,15 @@ import { GetReservationThunk, DeleteReservationThunk } from '../../store/reserva
 import { useParams, NavLink, useHistory } from 'react-router-dom'
 
 
-function Reservation({userId}) {
+function Reservation() {
     const dispatch = useDispatch()
-    const reservations = useSelector(state => Object.values(state.reservations))
     const signedInUserId = useSelector(state => state.session.user?.id)
     const session = useSelector(state => state.session)
-    const {id} = useParams()
-
+    const {userId} = useParams()
+    const reservations = useSelector(state => Object.values(state.reservations).filter(reservation => reservation.user_id = userId))
+    console.log(userId)
     console.log('--------------')
-    console.log(reservations[0])
+    // console.log(reservations[0])
     useEffect(() => {
         dispatch(GetReservationThunk(userId))
     },[dispatch, userId]);
@@ -23,19 +23,24 @@ function Reservation({userId}) {
         await dispatch(DeleteReservationThunk(deleteNum))
     }
 
-
+    // const userReservations = reservations.find(reservation => reservation.user_id == userId)
+    console.log('---------------------------')
+    console.log(reservations)
     return (
         <>
             <p>Reservations --</p>
-            {signedInUserId && reservations.map(reservation => (
-
+            {signedInUserId && reservations && reservations.map(reservation => (
                 <div key={reservation.id}>
-                    <div>Id: {reservation.id}</div>
-                    <div>Restaurant Id: {reservation.restaurant_id}</div>
-                    <div>Date: {reservation.res_date}</div>
-                    <div>Time: {reservation.res_time}</div>
-                    <div>Party Size: {reservation.party_size}</div>
-                    <button className={`del_${reservation.id}`} onClick={deleteRes}>Delete Reservation</button>
+                {/* {userId === reservation.user_id && */}
+                    <div key={reservation.id}>
+                        <div>Id: {reservation.id}</div>
+                        <div>Restaurant Id: {reservation.restaurant_id}</div>
+                        <div>Date: {reservation.res_date}</div>
+                        <div>Time: {reservation.res_time}</div>
+                        <div>Party Size: {reservation.party_size}</div>
+                        <button className={`del_${reservation.id}`} onClick={deleteRes}>Delete Reservation</button>
+                    </div>
+                {/* } */}
                 </div>
             ))}
 
