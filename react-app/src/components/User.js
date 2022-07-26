@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { GetReservationThunk } from './../store/reservation';
-import { useParams, NavLink, useHistory } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import Reservation from './reservations/Reservations';
 
 function User() {
   const dispatch = useDispatch()
   const [user, setUser] = useState({});
-  const { userId }  = useParams();
-  const reservations = useSelector(state => Object.values(state.reservations))
+  const { userId } = useParams();
+  // const reservations = useSelector(state => Object.values(state.reservations))
 
   useEffect(() => {
     if (!userId) {
@@ -28,18 +28,18 @@ function User() {
 
   return (
     <>
-    <ul>
-      <li>
-        <strong>User Id</strong> {userId}
-      </li>
-      <li>
-        <strong>Username</strong> {user.username}
-      </li>
-      <li>
-        <strong>Email</strong> {user.email}
-      </li>
-    </ul>
-    <Reservation userId={userId}/>
+      <ul>
+        <li>
+          <strong>User Id</strong> {userId}
+        </li>
+        <li>
+          <strong>Username</strong> {user.username}
+        </li>
+        <li>
+          <strong>Email</strong> {user.email}
+        </li>
+      </ul>
+      <Reservation userId={userId} />
     </>
   );
 }

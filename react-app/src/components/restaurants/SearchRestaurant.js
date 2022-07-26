@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { SearchRestaurantsThunk } from '../../store/restaurant'
-import SearchResults from './SearchResults';
+// import SearchResults from './SearchResults';
 
 const Search = () => {
   const dispatch = useDispatch()

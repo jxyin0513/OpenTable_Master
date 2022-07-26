@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { CreateReservationThunk } from '../../store/reservation'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 function ReservationForm() {
     const dispatch = useDispatch()
     const userId = useSelector(state => state.session.user.id)
-    const {id} = useParams()
+    const { id } = useParams()
     const [date, setDate] = useState(new Date())
     const [time, setTime] = useState(new Date())
     const [partySize, setPartySize] = useState(1)
@@ -20,7 +20,7 @@ function ReservationForm() {
             res_time: time,
             party_size: partySize
         }
-        const res = await dispatch(CreateReservationThunk(reservation))
+        await dispatch(CreateReservationThunk(reservation))
     }
 
     return (
@@ -32,7 +32,7 @@ function ReservationForm() {
                 <input type='time' name='time' onChange={(e) => setTime(e.target.value)}></input>
             </label>
             <label>Party Size
-                <input type='number' name='partySize' onChange={(e)=> setPartySize(e.target.value)} min={1} max={10}></input>
+                <input type='number' name='partySize' onChange={(e) => setPartySize(e.target.value)} min={1} max={10}></input>
             </label>
             <button type='submit'>Submit</button>
         </form>

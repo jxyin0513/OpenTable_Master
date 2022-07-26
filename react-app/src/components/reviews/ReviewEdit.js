@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { editReviewsThunk } from '../../store/review';
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-function EditReview({id, hide}){
+function EditReview({ id, hide }) {
     const dispatch = useDispatch();
-    const review = useSelector(state=>state.reviews[id])
+    const review = useSelector(state => state.reviews[id])
     const [content, setContent] = useState(review.content);
     const [rating, setRating] = useState(review.rating);
 
-    async function onSubmit(e){
+    async function onSubmit(e) {
         e.preventDefault()
 
         const review = {
@@ -17,8 +17,8 @@ function EditReview({id, hide}){
             rating
         }
 
-        const editedReview =  await dispatch(editReviewsThunk(review))
-        if(editedReview){
+        const editedReview = await dispatch(editReviewsThunk(review))
+        if (editedReview) {
             hide();
         }
 
