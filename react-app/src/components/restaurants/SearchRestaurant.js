@@ -10,6 +10,12 @@ const Search = () => {
   const [search, setSearch] = useState('');
   const [resultsFound, setResultsFound] = useState(false);
   const [results, setResults] = useState([])
+  const [enhancedSearch, setEnhancedSearch] = useState([])
+  const [keystroke, setKeystroke] = useState('');
+
+  const cleanup = () => {
+    setEnhancedSearch([])
+  }
 
   const searchQuery = async (e) => {
     e.preventDefault();
@@ -22,7 +28,6 @@ const Search = () => {
       return <h3>0 Results Found</h3>
     }
   }
-  console.log(results);
 
   return (
     <>
@@ -43,6 +48,26 @@ const Search = () => {
         value={search}
         onChange={e => setSearch(e.target.value)} />
       <button onClick={searchQuery}>Search</button>
+
+      <input type='text'
+        value={keystroke}
+        onChange={async (e) => {
+          setKeystroke(e.target.value)
+          const res = await dispatch(SearchRestaurantsThunk(e.target.value))
+          if (res) {
+            console.log("RES:: ", res)
+            setEnhancedSearch(res.restaurants)
+          } else {
+            cleanup()
+          }
+        }} />
+      <div className='results-container'>
+        {enhancedSearch.map(result => (
+          <div key={result.id}>
+            <Link to={`/restaurants/${result.id}`}>{result.name}</Link>
+          </div>
+        ))}
+      </div>
     </>
   )
 };
