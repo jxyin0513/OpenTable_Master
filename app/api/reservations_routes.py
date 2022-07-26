@@ -7,7 +7,7 @@ reservation_router = Blueprint('reservations',__name__)
 # Get route all reservations for specified restuarant.
 @reservation_router.route('/<restaurantId>')
 def getReservations(restaurantId):
-    reservations = Reservation.query.filter_by(restaurant_id = restaurantId).all()
+    reservations = Reservation.query.filter_by(user_id = restaurantId).all()
 
     allReservations = [res.to_dict() for res in reservations]
     print(allReservations)

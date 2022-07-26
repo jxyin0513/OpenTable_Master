@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { GetReservationThunk } from '../../store/reservation';
+import { GetReservationThunk, DeleteReservationThunk } from '../../store/reservation';
 import { useParams, NavLink, useHistory } from 'react-router-dom'
 
 
@@ -17,6 +17,13 @@ function Reservation({userId}) {
         dispatch(GetReservationThunk(userId))
     },[dispatch, userId]);
 
+    async function deleteRes(e) {
+        e.preventDefault()
+        const deleteNum = e.target.className.split('_')[1]
+        await dispatch(DeleteReservationThunk(deleteNum))
+    }
+
+
     return (
         <>
             <p>Reservations --</p>
@@ -28,6 +35,7 @@ function Reservation({userId}) {
                     <div>Date: {reservation.res_date}</div>
                     <div>Time: {reservation.res_time}</div>
                     <div>Party Size: {reservation.party_size}</div>
+                    <button className={`del_${reservation.id}`} onClick={deleteRes}>Delete Reservation</button>
                 </div>
             ))}
 

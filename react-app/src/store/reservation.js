@@ -34,19 +34,19 @@ export const CreateReservationThunk = (reservation) => async (dispatch) => {
     })
     if (res.ok) {
         const data = await res.json()
-        dispatch(createReservation(data.reservations))
+        dispatch(createReservation(data))
         return data
     }
 }
 
-export const DeleteReservationThunk = (reservation) => async (dispatch) => {
-    const res = await fetch(`/api/reservations/${reservation.id}/delete`,{
+export const DeleteReservationThunk = (id) => async (dispatch) => {
+    const res = await fetch(`/api/reservations/${id}/delete`,{
         method: 'DELETE',
         headers: {'Content-Type': 'application/json'}
     })
     if (res.ok) {
         const data = await res.json()
-        dispatch(deleteReservation(data.reservations))
+        dispatch(deleteReservation(data))
         return data
     }
 }
