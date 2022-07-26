@@ -2,7 +2,7 @@ from app.models import db, Restaurant, Reservation, Review, favorites
 from datetime import date, time
 def seed_restaurants():
   demo = Restaurant(
-    user_id=1, name='Joe\'s', phone='867-5309', street='555 Nowhere', cuisine='American', hours='9 to 5', price_point=2
+    user_id=1, name='Joe\'s', phone='867-5309', street='555 Nowhere', cuisine='American', open_hours=time.fromisoformat('09:00:00'), close_hours=time.fromisoformat('09:00:00'), image_url='https://static.wikia.nocookie.net/shrek/images/5/58/Fc19d7db9cbcb7659aae3dce7bf6b3c1.jpg/revision/latest?cb=20170129025042', price_point=2
   )
 
   db.session.add(demo)

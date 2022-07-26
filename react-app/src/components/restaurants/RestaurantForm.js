@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { CreateRestaurantThunk } from '../../store/restaurant';
 import { useDispatch, useSelector } from 'react-redux'
+import {useHistory} from 'react-router-dom'
 
 function RestaurantForm() {
     const dispatch = useDispatch()
+    const history = useHistory()
     const userId = useSelector(state => state.session.user.id)
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
     const [street, setStreet] = useState('')
     const [cuisine, setCuisine] = useState('')
-    const [hours, setHours] = useState('')
+    const [openHours, setOpenHours] = useState('')
+    const [closeHours, setCloseHours] = useState('')
     const [price_point, setPrice_Point] = useState(0)
+    const [url, setURL] = useState('')
 
     async function onSubmit(e) {
         e.preventDefault();
@@ -20,11 +24,16 @@ function RestaurantForm() {
             phone,
             street,
             cuisine,
-            hours,
+            open_hours: openHours,
+            close_hours: closeHours,
+            image_url: url,
             price_point
         }
         console.log(restaurant.user_id, 'react')
-        await dispatch(CreateRestaurantThunk(restaurant))
+        const newRestaurant = await dispatch(CreateRestaurantThunk(restaurant))
+        if(newRestaurant){
+            history.push('/')
+        }
     }
     return (
         <>
@@ -42,8 +51,14 @@ function RestaurantForm() {
                 <label>Cuisine:
                     <input type='text' name='cuisine' onChange={e => setCuisine(e.target.value)}></input>
                 </label>
-                <label>Hours:
-                    <input type='text' name='hours' onChange={e => setHours(e.target.value)}></input>
+                <label>Open Hours:
+                    <input type='time' name='open_hours' onChange={e => setOpenHours(e.target.value)}></input>
+                </label>
+                <label>Close Hours:
+                    <input type='time' name='close_hours' onChange={e => setCloseHours(e.target.value)}></input>
+                </label>
+                <label>Image URL:
+                <input type='text' name='image_url' onChange={e => setURL(e.target.value)}></input>
                 </label>
                 <label>Price point:
                     <input type='text' name='price_point' onChange={e => setPrice_Point(e.target.value)}></input>

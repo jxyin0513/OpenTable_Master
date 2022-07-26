@@ -80,10 +80,12 @@ function RestaurantDetail() {
             </div>
             {session && restaurant && (
                 <div>
+                    <img src={restaurant.image_url} alt="Image"></img>
                     <div>{restaurant.name}</div>
                     <div>{restaurant.phone}</div>
                     <div>{restaurant.cuisine}</div>
-                    <div>{restaurant.hours}</div>
+                    <div>Hours Open: {restaurant.open_hours} - {restaurant.close_hours}</div>
+
                     <div>{restaurant.price_point}</div>
                 </div>)
             }

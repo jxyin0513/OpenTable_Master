@@ -14,7 +14,9 @@ class Restaurant(db.Model):
   phone = db.Column(db.String)
   street = db.Column(db.String, nullable=False)
   cuisine = db.Column(db.String, nullable=False)
-  hours = db.Column(db.String, nullable=False)
+  open_hours = db.Column(db.Time, nullable=False)
+  close_hours = db.Column(db.Time, nullable=False)
+  image_url = db.Column(db.String, nullable=False)
   price_point = db.Column(db.Integer, nullable=False)
 
   users = db.relationship('User', back_populates='restaurants')
@@ -30,6 +32,8 @@ class Restaurant(db.Model):
         'phone': self.phone,
         'street': self.street,
         'cuisine': self.cuisine,
-        'hours':self.hours,
+        'open_hours':str(self.open_hours),
+        'close_hours': str(self.close_hours),
+        'image_url': self.image_url,
         'price_point':self.price_point
     }

@@ -86,7 +86,9 @@ def getAllRestaurants():
         'phone': restaurant.phone,
         'street': restaurant.street,
         'cuisine': restaurant.cuisine,
-        'hours':restaurant.hours,
+        'open_hours':str(restaurant.open_hours),
+        'close_hours': str(restaurant.close_hours),
+        'image_url': restaurant.image_url,
         'price_point':restaurant.price_point
     } for restaurant in restaurants]
     return {'restaurants':restaurantsObj}

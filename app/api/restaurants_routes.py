@@ -19,7 +19,9 @@ def newRestaurantForm():
                                 phone = form.data['phone'],
                                 street = form.data['street'],
                                 cuisine = form.data['cuisine'],
-                                hours = form.data['hours'],
+                                open_hours = form.data['open_hours'],
+                                close_hours = form.data['close_hours'],
+                                image_url = form.data['image_url'],
                                 price_point = form.data['price_point']
                                 )
 
@@ -44,15 +46,19 @@ def deleteRestaurant(restaurantId):
 def editRestaurant(restaurantId):
     restaurant= Restaurant.query.get(restaurantId)
     form= NewRestaurantForm()
-
+    print(form.data)
     restaurant.name= form.data['name']
-    restaurant.phone = form.data['phone'],
-    restaurant.street = form.data['street'],
-    restaurant.cuisine = form.data['cuisine'],
-    restaurant.hours = form.data['hours'],
+    restaurant.phone = form.data['phone']
+    restaurant.street = form.data['street']
+    restaurant.cuisine = form.data['cuisine']
+    restaurant.open_hours = form.data['open_hours']
+    restaurant.close_hours = form.data['close_hours']
+    restaurant.image_url = form.data['image_url']
     restaurant.price_point = form.data['price_point']
 
+    print(form.data['open_hours'], "---------")
     db.session.commit()
+
     return restaurant.to_dict()
 
 @restaurant_router.route('/favorites', methods=['POST'])
@@ -60,7 +66,7 @@ def favorite_restaurant():
     data = request.json
     user = User.query.get(data['user_id'])
     restaurant = Restaurant.query.get(data['restaurant_id'])
-    user.user_favorite.append(restaurant);
+    user.user_favorite.append(restaurant)
     # new_favorite = favorites(
     #     users = data['user_id'],
     #     restaurants = data['restaurant_id']
