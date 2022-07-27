@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { CreateReservationThunk } from '../../store/reservation'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 
 function ReservationForm() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const userId = useSelector(state => state.session.user.id);
     const { id } = useParams();
     const [date, setDate] = useState(new Date());
@@ -21,14 +22,29 @@ function ReservationForm() {
             res_time: time,
             party_size: partySize
         }
-        await dispatch(CreateReservationThunk(reservation))
+
+        const newRes = await dispatch(CreateReservationThunk(reservation))
+        if(newRes){
+            history.push(`/users/${userId}`)
+        }
     }
     useEffect(()=>{
-
-    })
+        const current = Date.now();
+        const reservedDate = new Date(`${date}T${time}:00`)
+        const arr =[]
+        if(current>=reservedDate){
+            arr.push('Please select appropriate time')
+        }
+        setErrors(arr)
+    },[date, time])
 
     return (
         <form onSubmit={onSubmit}>
+            <ul>
+                {errors.length>0 && errors.map(error=>
+                    <li className="errors">{error}</li>
+                )}
+            </ul>
             <label>Date
                 <input type='date' name='date' onChange={(e) => setDate(e.target.value)}></input>
             </label>
@@ -38,7 +54,7 @@ function ReservationForm() {
             <label>Party Size
                 <input type='number' name='partySize' onChange={(e) => setPartySize(e.target.value)} min={1} max={10}></input>
             </label>
-            <button type='submit'>Submit</button>
+            <button type='submit' disabled={errors.length===0 ? false : true}>Submit</button>
         </form>
 
     )

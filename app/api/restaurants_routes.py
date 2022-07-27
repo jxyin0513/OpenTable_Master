@@ -35,6 +35,7 @@ def newRestaurantForm():
                                 price_point = form.data['price_point']
                                 )
     if form.errors:
+        print(form.errors)
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
     db.session.add(restaurant)
     db.session.commit()
@@ -57,17 +58,22 @@ def deleteRestaurant(restaurantId):
 def editRestaurant(restaurantId):
     restaurant= Restaurant.query.get(restaurantId)
     form= NewRestaurantForm()
-    print(form.data)
-    restaurant.name= form.data['name']
-    restaurant.phone = form.data['phone']
-    restaurant.street = form.data['street']
-    restaurant.cuisine = form.data['cuisine']
-    restaurant.open_hours = form.data['open_hours']
-    restaurant.close_hours = form.data['close_hours']
-    restaurant.image_url = form.data['image_url']
-    restaurant.price_point = form.data['price_point']
+    form['csrf_token'].data = request.cookies['csrf_token']
+    print(form.data['name'])
+    if(form.validate_on_submit()):
+        restaurant.name= form.data['name']
+        restaurant.phone = form.data['phone']
+        restaurant.street = form.data['street']
+        restaurant.cuisine = form.data['cuisine']
+        restaurant.open_hours = form.data['open_hours']
+        restaurant.close_hours = form.data['close_hours']
+        restaurant.image_url = form.data['image_url']
+        restaurant.price_point = form.data['price_point']
 
-    print(form.data['open_hours'], "---------")
+    if form.errors:
+        print(form.errors)
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
     db.session.commit()
 
     return restaurant.to_dict()

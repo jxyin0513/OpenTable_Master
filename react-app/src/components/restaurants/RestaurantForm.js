@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { CreateRestaurantThunk } from '../../store/restaurant';
 import { useDispatch, useSelector } from 'react-redux'
 import {useHistory} from 'react-router-dom'
@@ -16,6 +16,7 @@ function RestaurantForm() {
     const [price_point, setPrice_Point] = useState(0)
     const [url, setURL] = useState('')
     const [errors, setErrors] = useState([])
+    const cuisines = ['American', 'Barbecue', 'Cafe', 'Chinese', 'Fast Food', 'Indian', 'Italian', 'Japanese', 'Korean BBQ', 'Mediterranean', 'Mexican', 'Middle Earth', 'Thai', 'Vegan']
 
     async function onSubmit(e) {
         e.preventDefault();
@@ -32,20 +33,13 @@ function RestaurantForm() {
         }
 
         const newRestaurant = await dispatch(CreateRestaurantThunk(restaurant))
-        if(newRestaurant){
+        if(!newRestaurant){
             history.push('/')
+        }else{
+            console.log(newRestaurant)
+            setErrors(newRestaurant)
         }
-        // return await dispatch(CreateRestaurantThunk(restaurant)).then(()=>{history.push('/')})
-        //                 .catch(async(res)=>{
-        //                     const response = await res.json();
-        //                     console.log(response)
-        //                     setErrors(response.errors)
-        //                 })
     }
-
-    useEffect(()=>{
-
-    })
 
     return (
         <>
@@ -65,7 +59,11 @@ function RestaurantForm() {
                     <input type='text' name='street' onChange={e => setStreet(e.target.value)}></input>
                 </label>
                 <label>Cuisine:
-                    <input type='text' name='cuisine' onChange={e => setCuisine(e.target.value)}></input>
+                    <select name='cuisine' onChange={e => setCuisine(e.target.value)}>
+                        {cuisines.map(cuisine=>(
+                            <option key={cuisine} value={cuisine}>{cuisine}</option>
+                        ))}
+                    </select>
                 </label>
                 <label>Open Hours:
                     <input type='time' name='open_hours' onChange={e => setOpenHours(e.target.value)}></input>
@@ -79,7 +77,7 @@ function RestaurantForm() {
                 <label>Price point:
                     <input type='text' name='price_point' onChange={e => setPrice_Point(e.target.value)}></input>
                 </label>
-                <button type='submit' disabled={errors.length===0 ? false : true} >Submit</button>
+                <button type='submit'>Submit</button>
             </form>
         </>
     )

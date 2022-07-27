@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { createReviewsThunk } from '../../store/review';
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 
 function ReviewForm() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const { restaurantId } = useParams()
     const user = useSelector(state => state.session.user)
     // const restaurant = useSelector(state=>state.session.restaurants)
@@ -12,7 +13,7 @@ function ReviewForm() {
     const [rating, setRating] = useState(1);
     const [errors, setErrors] = useState([]);
 
-    function onSubmit(e) {
+    async function onSubmit(e) {
         e.preventDefault();
 
         const review = {
@@ -21,7 +22,10 @@ function ReviewForm() {
             content,
             rating
         }
-        dispatch(createReviewsThunk(review))
+        const newReview = await dispatch(createReviewsThunk(review))
+        if(newReview){
+            history.push(`/restaurants/${restaurantId}`)
+        }
     }
     useEffect(()=>{
         const arr = []
