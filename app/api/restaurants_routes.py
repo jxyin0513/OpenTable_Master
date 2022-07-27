@@ -78,9 +78,10 @@ def editRestaurant(restaurantId):
 
     return restaurant.to_dict()
 
-@restaurant_router.route('/favorites', methods=['POST'])
+@restaurant_router.route('/favorites', methods=['GET','POST'])
 def favorite_restaurant():
     data = request.json
+   
     user = User.query.get(data['user_id'])
     restaurant = Restaurant.query.get(data['restaurant_id'])
     user.user_favorite.append(restaurant)
@@ -92,6 +93,13 @@ def favorite_restaurant():
     return {
         "user_id": user.id,
         "restaurant_id": restaurant.id
+    }
+
+@restaurant_router.route('/favorites/<user_id>/<restaurant_id>')
+def get_favorites(user_id, restaurant_id):
+        return {
+        "user_id": user_id,
+        "restaurant_id": restaurant_id
     }
 
 @restaurant_router.route('/<user_id>/<restaurant_id>', methods=['DELETE'])

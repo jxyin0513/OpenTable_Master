@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DeleteRestaurantThunk, GetRestaurantDetailThunk } from '../../store/restaurant';
-import { removeFavoriteThunk, setFavoriteThunk } from '../../store/favorite';
+import { getFavoritesThunk, removeFavoriteThunk, setFavoriteThunk } from '../../store/favorite';
 import EditRestaurant from './RestaurantEdit';
 import Reviews from '../reviews/Reviews';
 import ReservationForm from '../reservations/ReservationForm'
@@ -37,6 +37,7 @@ function RestaurantDetail() {
                 user_id: userId,
                 restaurant_id: +id
             };
+
             await dispatch(setFavoriteThunk(fav));
         };
     };
@@ -54,6 +55,7 @@ function RestaurantDetail() {
 
     useEffect(() => {
         dispatch(GetRestaurantDetailThunk(id))
+        dispatch(getFavoritesThunk(userId, id))
     }, [dispatch, id]);
 
 
@@ -100,7 +102,7 @@ function RestaurantDetail() {
             </NavLink>
             <Reviews restaurantId={id} />
             {edit && <EditRestaurant id={id} hide={() => setEdit(false)} />}
-            <ReservationForm/>
+            <ReservationForm />
 
         </>
 
