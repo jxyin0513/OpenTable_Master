@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+}
+
+
+.navBar {
+    background-color: white;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.navUl {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+.navUl > li > a {
+    text-decoration: none;
+    color: black;
+}
+.navUl > li > a:hover {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+.navUl > li {
+    list-style: none;
+    font-family: arial;
+}
+.logout {
+    height: 30px;
+    width: 100px;
+    background-color: white;
+    border: 1px solid #66666666;
+    font-weight: bold;
+}
+.logout:hover {
+    background-color: #bbbbbbbb;
+    cursor: pointer;
+}
