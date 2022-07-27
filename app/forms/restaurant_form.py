@@ -3,7 +3,7 @@ from wtforms import StringField, IntegerField, SubmitField, TimeField, SelectFie
 from wtforms.validators import DataRequired
 
 # Split hours field into two (Opening, Closing Times)
-CUISINE_CHOICES = ['American', 'Chinese', 'Barbecue', 'Indian', 'more...']
+CUISINE_CHOICES = ['American', 'Barbecue', 'Cafe', 'Chinese', 'Fast Food', 'Indian', 'Italian', 'Japanese', 'Korean BBQ', 'Mediterranean', 'Mexican', 'Middle Earth', 'Thai', 'Vegan']
 # Image Url Field (With default?)
 
 class NewRestaurantForm(FlaskForm):
