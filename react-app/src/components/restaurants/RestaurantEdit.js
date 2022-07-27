@@ -21,6 +21,7 @@ function EditRestaurant({ id, hide }) {
     const [url, setURL] = useState(restaurant.image_url)
     const [price_point, setPrice_Point] = useState(restaurant.price_point)
     const [errors, setErrors] = useState([]);
+    const cuisines = ['American', 'Barbecue', 'Cafe', 'Chinese', 'Fast Food', 'Indian', 'Italian', 'Japanese', 'Korean BBQ', 'Mediterranean', 'Mexican', 'Middle Earth', 'Thai', 'Vegan']
 
     const openHoursArr = openHours.split(':')
     const closeHoursArr = closeHours.split(':')
@@ -44,8 +45,10 @@ function EditRestaurant({ id, hide }) {
         }
         const edited = await dispatch(EditRestaurantThunk(restaurant))
 
-        if (edited) {
+        if (!edited) {
             hide();
+        }else{
+            setErrors(edited)
         }
     }
 
@@ -68,7 +71,11 @@ function EditRestaurant({ id, hide }) {
                     <input type='text' name='street' value={street} onChange={e => setStreet(e.target.value)}></input>
                 </label>
                 <label>Cuisine:
-                    <input type='text' name='cuisine' value={cuisine} onChange={e => setCuisine(e.target.value)}></input>
+                    <select name='cuisine' value={cuisine} onChange={e => setCuisine(e.target.value)}>
+                        {cuisines.map(cuisine=>(
+                            <option key={cuisine} value={cuisine}>{cuisine}</option>
+                        ))}
+                    </select>
                 </label>
                 <label>Open Hours:
                     <input type='time' name='open_hours' value={`${hour}:${minute}`} onChange={e => setOpenHours(e.target.value)}></input>
