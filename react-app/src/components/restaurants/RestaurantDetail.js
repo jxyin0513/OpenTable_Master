@@ -14,13 +14,29 @@ function RestaurantDetail() {
     console.log(restaurant, 'this is the restaurant')
     const userId = useSelector(state => state.session.user?.id)
     const session = useSelector(state => state.session)
+    const favorite = useSelector(state => state.favorites[id])
+    const [favorited, setFavorited] = useState('Add to Favorites');
+    const favBool = (favorite) => {
+        console.log('favBool happened')
+        if (favorite) {
+            console.log('true')
+
+            return true
+        } else {
+            console.log('false')
+            return false
+        }
+
+    }
+    console.log('then everything else')
     const history = useHistory()
     const [edit, setEdit] = useState(false);
-    const [isFav, setIsFav] = useState(false);
+    const [isFav, setIsFav] = useState(favBool(favorite));
     const [starFill, setStarFill] = useState('noFill');
-    const [favorited, setFavorited] = useState('Add to Favorites');
+
 
     const handleFav = (e) => {
+
         if (favorited === 'Add to Favorites') {
             setFavorited('Remove from Favorites');
             setStarFill('fill');
@@ -31,29 +47,40 @@ function RestaurantDetail() {
     };
 
     const postFav = async (e) => {
+        const fav = {
+            user_id: userId,
+            restaurant_id: +id
+        };
         if (isFav === false) {
             setIsFav(true);
-            const fav = {
-                user_id: userId,
-                restaurant_id: +id
-            };
-
+            setFavorited('Add to Favorites');
+            setStarFill('noFill');
             await dispatch(setFavoriteThunk(fav));
-        };
+        }
     };
 
     const removeFromFav = async (e) => {
-        if (isFav === true) {
-            setIsFav(false);
-            const fav = {
-                user_id: userId,
-                restaurant_id: +id,
-            };
-            await dispatch(removeFavoriteThunk(fav))
-        }
+        // if (isFav === true) {
+        setIsFav(false);
+        const fav = {
+            user_id: userId,
+            restaurant_id: +id,
+        };
+        await dispatch(removeFavoriteThunk(fav))
+        // }
     }
 
     useEffect(() => {
+        // if (favorite) {
+        //     setIsFav(true)
+        // }
+        // if (isFav) {
+        //     setFavorited('Remove from Favorites');
+        //     setStarFill('fill');
+        // } else {
+        //     setFavorited('Add to Favorites');
+        //     setStarFill('noFill');
+        // }
         dispatch(GetRestaurantDetailThunk(id))
         dispatch(getFavoritesThunk(userId, id))
     }, [dispatch, id]);
@@ -74,11 +101,21 @@ function RestaurantDetail() {
 
         <>
             <div>
-                <button onClick={() => {
-                    postFav();
-                    removeFromFav();
-                    handleFav();
-                }} className={`star-${starFill}`}>{favorited}</button>
+                {isFav === true && (
+                    <button onClick={() => {
+                        removeFromFav();
+                        handleFav();
+                    }} className={`star-${starFill}`}>Remove from Favorites</button>
+
+                )}
+                {isFav === false && (
+                    <button onClick={() => {
+                        postFav();
+                        handleFav();
+                    }} className={`star-${starFill}`}>Add to Favorites</button>
+
+                )}
+
             </div>
             {session && restaurant && (
                 <div>
