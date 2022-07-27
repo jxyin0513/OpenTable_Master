@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CreateReservationThunk } from '../../store/reservation'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 function ReservationForm() {
-    const dispatch = useDispatch()
-    const userId = useSelector(state => state.session.user.id)
-    const { id } = useParams()
-    const [date, setDate] = useState(new Date())
-    const [time, setTime] = useState(new Date())
-    const [partySize, setPartySize] = useState(1)
+    const dispatch = useDispatch();
+    const userId = useSelector(state => state.session.user.id);
+    const { id } = useParams();
+    const [date, setDate] = useState(new Date());
+    const [time, setTime] = useState(new Date());
+    const [partySize, setPartySize] = useState(1);
+    const [errors, setErrors] = useState([]);
     // Form select field contains times starting from opening to closing in half hour increments
     async function onSubmit(e) {
         e.preventDefault();
@@ -22,6 +23,9 @@ function ReservationForm() {
         }
         await dispatch(CreateReservationThunk(reservation))
     }
+    useEffect(()=>{
+
+    })
 
     return (
         <form onSubmit={onSubmit}>

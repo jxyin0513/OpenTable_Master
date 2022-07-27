@@ -8,8 +8,8 @@ CUISINE_CHOICES = ['American', 'Barbecue', 'Cafe', 'Chinese', 'Fast Food', 'Indi
 
 class NewRestaurantForm(FlaskForm):
     user_id = IntegerField('userId')
-    name = StringField('Name', validators=[DataRequired()])
-    phone = StringField('Phone')
+    name = StringField('Name', validators=[DataRequired(message="Please provide name of the restaurant.")])
+    phone = StringField('Phone', validators=[RegExp('(\d{3}[-\.\s]??\d{3}[-\.\s]??\d{4}|\(\d{3}\)\s*\d{3}[-\.\s]??\d{4}|\d{3}[-\.\s]??\d{4})', message="Please provide correct format")])
     street = StringField('Street', validators=[DataRequired()])
     cuisine = SelectField('Cuisine', choices=CUISINE_CHOICES, validators=[DataRequired()])
     open_hours = TimeField('Open', validators=[DataRequired()])

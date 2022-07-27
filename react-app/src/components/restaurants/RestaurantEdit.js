@@ -20,6 +20,7 @@ function EditRestaurant({ id, hide }) {
     const [closeHours, setCloseHours] = useState(trimClose)
     const [url, setURL] = useState(restaurant.image_url)
     const [price_point, setPrice_Point] = useState(restaurant.price_point)
+    const [errors, setErrors] = useState([]);
 
     const openHoursArr = openHours.split(':')
     const closeHoursArr = closeHours.split(':')
@@ -46,11 +47,17 @@ function EditRestaurant({ id, hide }) {
         if (edited) {
             hide();
         }
-
     }
+
+
     return (
         <>
             <form onSubmit={onSubmit}>
+                <ul>
+                    {errors.length>0 && errors.map(error=>
+                        <li className="errors">{error}</li>
+                    )}
+                </ul>
                 <label>Name:
                     <input type='text' name='name' value={name} onChange={e => setName(e.target.value)}></input>
                 </label>

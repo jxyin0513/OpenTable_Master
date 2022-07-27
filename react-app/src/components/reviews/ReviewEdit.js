@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { editReviewsThunk } from '../../store/review';
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -7,6 +7,7 @@ function EditReview({ id, hide }) {
     const review = useSelector(state => state.reviews[id])
     const [content, setContent] = useState(review.content);
     const [rating, setRating] = useState(review.rating);
+    const [errors, setErrors] = useState([])
 
     async function onSubmit(e) {
         e.preventDefault()
@@ -23,10 +24,25 @@ function EditReview({ id, hide }) {
         }
 
     }
+    useEffect(()=>{
+        const arr = []
+        if(rating<1|| rating>5){
+            arr.push("Please provide rating between 1 and 5.")
+        }
+        if(content.length>255){
+            arr.push('Please provide content in 255 characters.')
+        }
+        setErrors(arr)
+    }, [rating, content]);
 
     return (
         <>
             <form onSubmit={onSubmit}>
+                <ul>
+                    {errors.length>0 && errors.map(error=>
+                        <li className="errors">{error}</li>
+                    )}
+                </ul>
                 <div>
                     <label>Comment: </label>
                     <input type='text' name='content' value={content} onChange={e => setContent(e.target.value)}></input>
@@ -35,7 +51,7 @@ function EditReview({ id, hide }) {
                     <label>rating: </label>
                     <input type='number' name='rating' value={rating} onChange={e => setRating(e.target.value)}></input>
                 </div>
-                <button type='submit'>Edit</button>
+                <button type='submit' disabled={errors.length===0 ? false : true}>Edit</button>
             </form>
         </>
     )
