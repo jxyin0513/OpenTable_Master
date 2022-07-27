@@ -81,7 +81,7 @@ def editRestaurant(restaurantId):
 @restaurant_router.route('/favorites', methods=['GET','POST'])
 def favorite_restaurant():
     data = request.json
-   
+
     user = User.query.get(data['user_id'])
     restaurant = Restaurant.query.get(data['restaurant_id'])
     user.user_favorite.append(restaurant)
@@ -97,10 +97,17 @@ def favorite_restaurant():
 
 @restaurant_router.route('/favorites/<user_id>/<restaurant_id>')
 def get_favorites(user_id, restaurant_id):
+
+    user = User.query.get(user_id)
+    restaurant = Restaurant.query.get(restaurant_id)
+    print(user.user_favorite)
+    if(restaurant in user.user_favorite):
         return {
         "user_id": user_id,
         "restaurant_id": restaurant_id
-    }
+        }
+
+
 
 @restaurant_router.route('/<user_id>/<restaurant_id>', methods=['DELETE'])
 def remove_favorite(user_id, restaurant_id):
