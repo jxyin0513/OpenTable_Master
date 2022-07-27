@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CreateRestaurantThunk } from '../../store/restaurant';
 import { useDispatch, useSelector } from 'react-redux'
 import {useHistory} from 'react-router-dom'
@@ -15,6 +15,7 @@ function RestaurantForm() {
     const [closeHours, setCloseHours] = useState('')
     const [price_point, setPrice_Point] = useState(0)
     const [url, setURL] = useState('')
+    const [errors, setErrors] = useState([])
 
     async function onSubmit(e) {
         e.preventDefault();
@@ -29,16 +30,31 @@ function RestaurantForm() {
             image_url: url,
             price_point
         }
-        console.log(restaurant.user_id, 'react')
+
         const newRestaurant = await dispatch(CreateRestaurantThunk(restaurant))
         if(newRestaurant){
             history.push('/')
         }
+        // return await dispatch(CreateRestaurantThunk(restaurant)).then(()=>{history.push('/')})
+        //                 .catch(async(res)=>{
+        //                     const response = await res.json();
+        //                     console.log(response)
+        //                     setErrors(response.errors)
+        //                 })
     }
+
+    useEffect(()=>{
+
+    })
+
     return (
         <>
-
             <form onSubmit={onSubmit}>
+                <ul>
+                    {errors.length>0 && errors.map(error=>
+                        <li className="errors">{error}</li>
+                    )}
+                </ul>
                 <label>Name:
                     <input type='text' name='name' onChange={e => setName(e.target.value)}></input>
                 </label>
@@ -63,7 +79,7 @@ function RestaurantForm() {
                 <label>Price point:
                     <input type='text' name='price_point' onChange={e => setPrice_Point(e.target.value)}></input>
                 </label>
-                <button type='submit'>Submit</button>
+                <button type='submit' disabled={errors.length===0 ? false : true} >Submit</button>
             </form>
         </>
     )

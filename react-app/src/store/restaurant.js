@@ -66,9 +66,16 @@ export const CreateRestaurantThunk = (restaurant) => async (dispatch) => {
         dispatch(createRestaurant(data))
         // console.log(data.user_id, 'after thunk dispatch')
         return data
+    }else {
+        return false
     }
+    // if (response.status < 500) {
+    //     const data = await response.json();
+    //     if (data.errors) {
+    //       return data.errors;
+    //     }
+    // }
 }
-
 export const EditRestaurantThunk = (restaurant) => async (dispatch) => {
     const response = await fetch(`/api/restaurants/${restaurant.id}/edit`, {
         method: "PUT",

@@ -8,7 +8,7 @@ CUISINE_CHOICES = ['American', 'Chinese', 'Barbecue', 'Indian', 'more...']
 
 class NewRestaurantForm(FlaskForm):
     user_id = IntegerField('userId')
-    name = StringField('Name', validators=[DataRequired()])
+    name = StringField('Name', validators=[DataRequired(message="Please provide name of the restaurant.")])
     phone = StringField('Phone')
     street = StringField('Street', validators=[DataRequired()])
     cuisine = SelectField('Cuisine', choices=CUISINE_CHOICES, validators=[DataRequired()])
