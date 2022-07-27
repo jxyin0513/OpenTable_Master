@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { getFavoritesThunk } from '../../store/favorite';
 import { GetRestaurantThunk } from '../../store/restaurant';
 import Search from './SearchRestaurant';
 function Restaurants() {
@@ -10,6 +11,7 @@ function Restaurants() {
 
     useEffect(() => {
         dispatch(GetRestaurantThunk())
+        // dispatch(getFavoritesThunk())
     }, [dispatch])
 
     return (

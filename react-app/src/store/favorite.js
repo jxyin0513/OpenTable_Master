@@ -1,11 +1,11 @@
-// const GET_FAVORITE_RESTAURANTS = 'get/favoriteRestaurants'
+const GET_FAVORITE_RESTAURANTS = 'get/favoriteRestaurants'
 const POST_FAVORITE_RESTAURANT = 'post/favoriteRestaurant'
 const REMOVE_FAVORITE_RESTAURANT = 'delete/favoriteRestaurant'
 
-// const get = (payload) => ({
-//   type: GET_FAVORITE_RESTAURANTS,
-//   payload,
-// })
+const get = (payload) => ({
+  type: GET_FAVORITE_RESTAURANTS,
+  payload,
+})
 
 const favorite = (payload) => ({
   type: POST_FAVORITE_RESTAURANT,
@@ -17,8 +17,18 @@ const removeFavorite = (payload) => ({
   payload
 });
 
-export const getFavoritesThunk = (payload) => async dispatch => {
+export const getFavoritesThunk = (userId, id) => async dispatch => {
 
+  const response = await fetch(`/api/restaurants/favorites/${userId}/${id}`)
+  console.log('you hit the getFavoriteThunk')
+  if (response.ok) {
+    const data = await response.json();
+    console.log(data)
+    dispatch(get(data))
+    return data
+  } else {
+    return 'You had a bad response'
+  }
 }
 
 export const setFavoriteThunk = (payload) => async dispatch => {
@@ -51,6 +61,14 @@ export const removeFavoriteThunk = (payload) => async dispatch => {
 const favoriteReducer = (state = {}, action) => {
   let newState = { ...state };
   switch (action.type) {
+    case GET_FAVORITE_RESTAURANTS:
+      // action.payload.forEach(favorite =>
+      //   newState[favorite.restaurants] = favorite
+      // )
+      newState[action.payload.restaurant_id] = action.payload
+
+      console.log(newState, 'in GET_FAVORITE_RESTAURANTS in reducer')
+      return newState;
 
     case POST_FAVORITE_RESTAURANT:
       newState[action.payload.restaurant_id] = action.payload;
