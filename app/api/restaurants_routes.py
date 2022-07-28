@@ -15,13 +15,13 @@ def validation_errors_to_error_messages(validation_errors):
             errorMessages.append(f'{field} : {error}')
     return errorMessages
 
+#GETs new restaurant form
+#POST adds a new restaurant
 @restaurant_router.route('/newRestaurant', methods=['GET', 'POST'])
 def newRestaurantForm():
     form = NewRestaurantForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     print(form.data, 'this is what you want')
-    # data= request.json
-    # restaurant= Restaurant(**data)
     if form.validate_on_submit():
         restaurant = Restaurant(
                                 user_id = form.data['user_id'],
@@ -41,19 +41,21 @@ def newRestaurantForm():
     db.session.commit()
     return restaurant.to_dict()
 
+#GET's an individual restaurants details
 @restaurant_router.route('/<restaurantId>')
 def singleRestaurant(restaurantId):
     restaurant= Restaurant.query.get(restaurantId)
     return restaurant.to_dict()
 
+#Deletes an individual restaurant and all objects with relations to it
 @restaurant_router.route('/<restaurantId>/delete', methods=['DELETE'])
 def deleteRestaurant(restaurantId):
     restaurant= Restaurant.query.get(restaurantId)
     db.session.delete(restaurant)
     db.session.commit()
     return restaurant.to_dict()
-    # return redirect('/')
 
+#PUTs updated info to a restaurant
 @restaurant_router.route('/<restaurantId>/edit', methods=['PUT'])
 def editRestaurant(restaurantId):
     restaurant= Restaurant.query.get(restaurantId)
@@ -78,6 +80,8 @@ def editRestaurant(restaurantId):
 
     return restaurant.to_dict()
 
+
+#POSTs a new favorite for a user
 @restaurant_router.route('/favorites', methods=['GET','POST'])
 def favorite_restaurant():
     data = request.json
@@ -85,16 +89,14 @@ def favorite_restaurant():
     user = User.query.get(data['user_id'])
     restaurant = Restaurant.query.get(data['restaurant_id'])
     user.user_favorite.append(restaurant)
-    # new_favorite = favorites(
-    #     users = data['user_id'],
-    #     restaurants = data['restaurant_id']
-    # )
+
     db.session.commit()
     return {
         "user_id": user.id,
         "restaurant_id": restaurant.id
     }
 
+#GET's a user's favorite restaurants
 @restaurant_router.route('/favorites/<user_id>/<restaurant_id>')
 def get_favorites(user_id, restaurant_id):
 
@@ -111,6 +113,7 @@ def get_favorites(user_id, restaurant_id):
             "message": "no favs"
         }
 
+#Gets a user's favorite restaurants ... in a different way
 @restaurant_router.route('/favorites/<user_id>')
 def get_all_favorites(user_id):
     user = User.query.get(user_id)
@@ -130,12 +133,8 @@ def remove_favorite(user_id, restaurant_id):
             "user_id": user_id,
             "restaurant_id": restaurant_id
         }
-    # print("USER_ID:: ", user.user_favorite)
-    # user.user_favorite.remove(restaurant_id)
-    # db.session.commit()
-    # user_favorites.remove(restaurant_id)
-    # db.session.commit()
 
+#Autofill search route
 @restaurant_router.route('/search', methods=['GET', 'POST'])
 def search_restaurant():
     query = request.json
@@ -150,23 +149,3 @@ def search_restaurant():
     restaurants = [k.to_dict() for k in results]
     print(restaurants)
     return { "restaurants": restaurants }
-
-
-
-# test postman
-# @restaurant_router.route('/<id>/newRestaurant', methods=['GET', 'POST'])
-# def newRestaurantForm(id):
-#     data=request.json
-#     restaurants= Restaurant(**data)
-
-#     db.session.add(restaurants)
-#     db.session.commit()
-#     return {
-#         'id': restaurants.id,
-#         'name': restaurants.name,
-#         'phone': restaurants.phone,
-#         'street': restaurants.street,
-#         'cuisine': restaurants.cuisine,
-#         'hours':restaurants.hours,
-#         'price_point':restaurants.price_point
-#     }

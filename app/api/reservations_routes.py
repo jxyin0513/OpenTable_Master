@@ -11,12 +11,11 @@ def getReservations(userId):
     reservations = Reservation.query.filter_by(user_id = userId).all()
 
     allReservations = [res.to_dict() for res in reservations]
-    # print(allReservations)
-    # print("---------------------------")
     return {
         "reservations": allReservations
     }
 
+# Create a new reservation
 @reservation_router.route('/new/reservation', methods=['POST'])
 def new_reservation():
     data = request.json
@@ -25,6 +24,7 @@ def new_reservation():
     db.session.commit()
     return new_res.to_dict()
 
+# Delete a reservation
 @reservation_router.route('/<id>/delete', methods=['DELETE'])
 def delete_reservation(id):
 
