@@ -22,13 +22,12 @@ const NavBar = () => {
   return (
     <nav className='navBar'>
       <ul className='navUl'>
-        <li className='TableOpen'><img src='./PLACEHOLDER' alt='Site Logo'></img>
-          TableOpen</li>
-        <li>
-          <NavLink to='/' exact={true} activeClassName='active'>
-            Home
-          </NavLink>
-        </li>
+        <NavLink to='/' exact={true} activeClassName='active'>
+          <li className='TableOpen'>
+            <img src='./assets/images/table_open_default.jpg' height='50px' width='auto' alt='Site Logo'></img>
+          </li>
+        </NavLink>
+
         <li>
           <NavLink to='/login' exact={true} activeClassName='active'>
             Login

@@ -14,7 +14,7 @@ function EditReview() {
     const [errors, setErrors] = useState([])
 
     function onClick(){
-        history.push(`/restaurants/${review.restaurantId}`)
+        history.push(`/restaurants/${restaurantId}`)
     }
 
     async function onSubmit(e) {
@@ -59,7 +59,7 @@ function EditReview() {
                     <label>rating: </label>
                     <input type='number' name='rating' value={rating} onChange={e => setRating(e.target.value)}></input>
                 </div>
-                <button type='submit' disabled={errors.length===0 ? false : true}>Edit</button>
+                <button type='submit' disabled={errors.length===0 ? false : true}>Submit</button>
                 <button onClick={onClick}>Cancel</button>
             </form>
         </>
