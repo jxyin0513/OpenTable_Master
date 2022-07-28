@@ -8,6 +8,10 @@ function EditReview({ id, hide }) {
     const [content, setContent] = useState(review.content);
     const [rating, setRating] = useState(review.rating);
     const [errors, setErrors] = useState([])
+    console.log(review)
+    function onClick(){
+        hide()
+    }
 
     async function onSubmit(e) {
         e.preventDefault()
@@ -52,6 +56,7 @@ function EditReview({ id, hide }) {
                     <input type='number' name='rating' value={rating} onChange={e => setRating(e.target.value)}></input>
                 </div>
                 <button type='submit' disabled={errors.length===0 ? false : true}>Edit</button>
+                <button onClick={onClick}>Cancel</button>
             </form>
         </>
     )

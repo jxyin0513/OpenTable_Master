@@ -13,6 +13,10 @@ function ReviewForm() {
     const [rating, setRating] = useState(1);
     const [errors, setErrors] = useState([]);
 
+    function onClick(){
+        history.push(`/restaurants/${restaurantId}`)
+    }
+
     async function onSubmit(e) {
         e.preventDefault();
 
@@ -55,6 +59,7 @@ function ReviewForm() {
                     <input type='number' name='rating' onChange={e => setRating(e.target.value)}></input>
                 </div>
                 <button type='submit' disabled={errors.length===0? false : true}>Edit</button>
+                <button onClick={onClick}>Cancel</button>
             </form>
         </>
     )

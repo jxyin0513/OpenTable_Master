@@ -141,6 +141,7 @@ function RestaurantDetail() {
             <NavLink to={`/${id}/review`}>
                 <button>Write a Review</button>
             </NavLink>
+
             <Reviews restaurantId={id} />
             {edit && <EditRestaurant id={id} hide={() => setEdit(false)} />}
             <ReservationForm />

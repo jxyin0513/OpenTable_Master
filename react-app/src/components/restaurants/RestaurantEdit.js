@@ -28,6 +28,11 @@ function EditRestaurant({ id, hide }) {
     const [hour, minute, seconds] = openHoursArr
     const [hourC, minuteC, secondsC] = closeHoursArr
     console.log(openHours, closeHours)
+
+    function onClick(){
+        hide()
+    }
+
     async function onSubmit(e) {
         e.preventDefault();
         console.log(openHours, closeHours)
@@ -90,6 +95,7 @@ function EditRestaurant({ id, hide }) {
                     <input type='text' name='price_point' value={price_point} onChange={e => setPrice_Point(e.target.value)}></input>
                 </label>
                 <button type='submit'>Submit</button>
+                <button onClick={onClick}>Cancel</button>
             </form>
         </>
     )
