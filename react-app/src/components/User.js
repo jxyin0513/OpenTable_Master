@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { GetReservationThunk } from './../store/reservation';
 import { useParams } from 'react-router-dom'
 import Reservation from './reservations/Reservations';
+import UserFavorites from './restaurants/UserFavorites';
 
 function User() {
   const dispatch = useDispatch()
@@ -40,6 +41,7 @@ function User() {
         </li>
       </ul>
       <Reservation userId={userId} />
+      <UserFavorites />
     </>
   );
 }

@@ -9,8 +9,8 @@ function EditRestaurant({ id, hide }) {
     // const openHoursArr = restaurant.open_hours.split(':')
     // const [hour, minute, seconds] = openHoursArr
     // const openHour = new Date(null, null, null, hour, minute)
-    const trimOpen = restaurant.open_hours.split(':').slice(0,2).join(':')
-    const trimClose = restaurant.close_hours.split(':').slice(0,2).join(':')
+    const trimOpen = restaurant.open_hours.split(':').slice(0, 2).join(':')
+    const trimClose = restaurant.close_hours.split(':').slice(0, 2).join(':')
     console.log(trimOpen)
     const [name, setName] = useState(restaurant.name)
     const [phone, setPhone] = useState(restaurant.phone)
@@ -25,8 +25,8 @@ function EditRestaurant({ id, hide }) {
 
     const openHoursArr = openHours.split(':')
     const closeHoursArr = closeHours.split(':')
-    const [hour, minute, seconds] = openHoursArr
-    const [hourC, minuteC, secondsC] = closeHoursArr
+    const [hour, minute] = openHoursArr
+    const [hourC, minuteC] = closeHoursArr
     console.log(openHours, closeHours)
     async function onSubmit(e) {
         e.preventDefault();
@@ -40,14 +40,14 @@ function EditRestaurant({ id, hide }) {
             cuisine,
             open_hours: openHours,
             close_hours: closeHours,
-            image_url:url,
+            image_url: url,
             price_point
         }
         const edited = await dispatch(EditRestaurantThunk(restaurant))
 
         if (!edited) {
             hide();
-        }else{
+        } else {
             setErrors(edited)
         }
     }
@@ -57,7 +57,7 @@ function EditRestaurant({ id, hide }) {
         <>
             <form onSubmit={onSubmit}>
                 <ul>
-                    {errors.length>0 && errors.map(error=>
+                    {errors.length > 0 && errors.map(error =>
                         <li className="errors">{error}</li>
                     )}
                 </ul>
@@ -72,7 +72,7 @@ function EditRestaurant({ id, hide }) {
                 </label>
                 <label>Cuisine:
                     <select name='cuisine' value={cuisine} onChange={e => setCuisine(e.target.value)}>
-                        {cuisines.map(cuisine=>(
+                        {cuisines.map(cuisine => (
                             <option key={cuisine} value={cuisine}>{cuisine}</option>
                         ))}
                     </select>
@@ -84,7 +84,7 @@ function EditRestaurant({ id, hide }) {
                     <input type='time' name='close_hours' value={`${hourC}:${minuteC}`} onChange={e => setCloseHours(e.target.value)}></input>
                 </label>
                 <label>Image URL:
-                <input type='text' name='image_url' value={url} onChange={e => setURL(e.target.value)}></input>
+                    <input type='text' name='image_url' value={url} onChange={e => setURL(e.target.value)}></input>
                 </label>
                 <label>Price point:
                     <input type='text' name='price_point' value={price_point} onChange={e => setPrice_Point(e.target.value)}></input>
