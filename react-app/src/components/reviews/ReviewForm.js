@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { createReviewsThunk } from '../../store/review';
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
-function ReviewForm() {
+function ReviewForm({restaurantId, hide}) {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { restaurantId } = useParams()
+
     const user = useSelector(state => state.session.user)
     // const restaurant = useSelector(state=>state.session.restaurants)
     const [content, setContent] = useState('');
     const [rating, setRating] = useState(1);
     const [errors, setErrors] = useState([]);
+
+    function onClick(){
+        hide()
+    }
 
     async function onSubmit(e) {
         e.preventDefault();
@@ -24,7 +28,7 @@ function ReviewForm() {
         }
         const newReview = await dispatch(createReviewsThunk(review))
         if(newReview){
-            history.push(`/restaurants/${restaurantId}`)
+            hide()
         }
     }
     useEffect(()=>{
@@ -55,6 +59,7 @@ function ReviewForm() {
                     <input type='number' name='rating' onChange={e => setRating(e.target.value)}></input>
                 </div>
                 <button type='submit' disabled={errors.length===0? false : true}>Edit</button>
+                <button onClick={onClick}>Cancel</button>
             </form>
         </>
     )
