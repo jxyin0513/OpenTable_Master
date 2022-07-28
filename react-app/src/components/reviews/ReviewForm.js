@@ -58,7 +58,7 @@ function ReviewForm({restaurantId, hide}) {
                     <label>rating: </label>
                     <input type='number' name='rating' onChange={e => setRating(e.target.value)}></input>
                 </div>
-                <button type='submit' disabled={errors.length===0? false : true}>Edit</button>
+                <button type='submit' disabled={errors.length===0? false : true}>Submit</button>
                 <button onClick={onClick}>Cancel</button>
             </form>
         </>
