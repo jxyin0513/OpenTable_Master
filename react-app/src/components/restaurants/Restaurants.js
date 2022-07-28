@@ -32,18 +32,18 @@ function Restaurants() {
                 <div className='restaurantsListWrapper'>
                     {allRestaurants && allRestaurants.map(restaurant =>
                     (
-                        <NavLink to={`/restaurants/${restaurant.id}`}>
-                          <div key={restaurant.id} className='restaurantDiv'>
-                              <img src={restaurant.image_url} alt="restaurant"></img>
-                              <div className='restaurantName'>{restaurant.name}</div>
-                              <div className='restaurantPhone'>{restaurant.phone}</div>
-                              <div className='restaurantStreet'>{restaurant.street}</div>
-                              <div className='restaurantCuisine'>{restaurant.cuisine}</div>
-                              <div className='restaurantHours'>{restaurant.hours}</div>
-                              <div className='restaurantPrice'>
-                                  {'$'.repeat(restaurant.price_point)}
-                              </div>
-                          </div>
+                        <NavLink key={restaurant.id} to={`/restaurants/${restaurant.id}`}>
+                            <div key={restaurant.id} className='restaurantDiv'>
+                                <img src={restaurant.image_url} alt="restaurant"></img>
+                                <div className='restaurantName'>{restaurant.name}</div>
+                                <div className='restaurantPhone'>{restaurant.phone}</div>
+                                <div className='restaurantStreet'>{restaurant.street}</div>
+                                <div className='restaurantCuisine'>{restaurant.cuisine}</div>
+                                <div className='restaurantHours'>{restaurant.hours}</div>
+                                <div className='restaurantPrice'>
+                                    {'$'.repeat(restaurant.price_point)}
+                                </div>
+                            </div>
                         </NavLink>
                     ))}
                 </div>

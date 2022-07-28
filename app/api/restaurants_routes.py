@@ -106,6 +106,10 @@ def get_favorites(user_id, restaurant_id):
         "user_id": user_id,
         "restaurant_id": restaurant_id
         }
+    else:
+        return {
+            "message": "no favs"
+        }
 
 @restaurant_router.route('/favorites/<user_id>')
 def get_all_favorites(user_id):

@@ -67,7 +67,7 @@ function RestaurantDetail() {
 
     useEffect(() => {
         (async () => {
-            await dispatch(getFavoritesThunk(userId, id))
+            if (userId) await dispatch(getFavoritesThunk(userId, id))
             await dispatch(GetRestaurantDetailThunk(id))
         })()
         // if (favorite) {
@@ -96,19 +96,23 @@ function RestaurantDetail() {
         e.preventDefault()
         setEdit(true);
     }
-    function reviewClick(e){
+    function reviewClick(e) {
+        if (!session.user) {
+            history.push('/login')
+        }
         setReview(true)
     }
     return (
 
         <>
             <div>
-
-                <button onClick={(e) => {
-                    // removeFromFav();
-                    handleFav(e);
-                }} className={`star-${starFill}`}>{favorite !== undefined ? "Remove from Favorites" : "Add to Favorites"}</button>
-
+                {session.user && (
+                    <button onClick={(e) => {
+                        // removeFromFav();
+                        handleFav(e);
+                    }} className={`star-${starFill}`}>{favorite !== undefined ? "Remove from Favorites" : "Add to Favorites"}
+                    </button>
+                )}
 
                 {/* {isFav === false && (
                     <button onClick={() => {
@@ -136,8 +140,10 @@ function RestaurantDetail() {
                     <button id='delete-restaurant' onClick={handleDelete}>Delete</button>
                 </>
             )}
+            {/* {session.user && ( */}
             <button onClick={reviewClick}>Write a Review</button>
-            {review && <ReviewForm restaurantId={id} hide={()=>setReview(false)} />}
+
+            {review && <ReviewForm restaurantId={id} hide={() => setReview(false)} />}
             <Reviews restaurantId={id} />
             {edit && <EditRestaurant id={id} hide={() => setEdit(false)} />}
             <ReservationForm />
