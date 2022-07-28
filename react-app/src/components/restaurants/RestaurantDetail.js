@@ -4,6 +4,7 @@ import { DeleteRestaurantThunk, GetRestaurantDetailThunk } from '../../store/res
 import { getFavoritesThunk, removeFavoriteThunk, setFavoriteThunk } from '../../store/favorite';
 import EditRestaurant from './RestaurantEdit';
 import Reviews from '../reviews/Reviews';
+import ReviewForm from '../reviews/ReviewForm';
 import ReservationForm from '../reservations/ReservationForm'
 import { useParams, NavLink, useHistory } from 'react-router-dom'
 
@@ -17,6 +18,7 @@ function RestaurantDetail() {
     const favorite = useSelector(state => state.favorites[id])
     const history = useHistory()
     const [edit, setEdit] = useState(false);
+    const [review, setReview] = useState(false)
     // const [isFav, setIsFav] = useState(false);
     const [starFill, setStarFill] = useState('noFill');
 
@@ -94,7 +96,9 @@ function RestaurantDetail() {
         e.preventDefault()
         setEdit(true);
     }
-
+    function reviewClick(e){
+        setReview(true)
+    }
     return (
 
         <>
@@ -132,12 +136,12 @@ function RestaurantDetail() {
                     <button id='delete-restaurant' onClick={handleDelete}>Delete</button>
                 </>
             )}
-            <NavLink to={`/${id}/review`}>
-                <button>Write a Review</button>
-            </NavLink>
+            <button onClick={reviewClick}>Write a Review</button>
+            {review && <ReviewForm restaurantId={id} hide={()=>setReview(false)} />}
             <Reviews restaurantId={id} />
             {edit && <EditRestaurant id={id} hide={() => setEdit(false)} />}
             <ReservationForm />
+
 
         </>
 
