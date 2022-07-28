@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { useDispatch, } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
@@ -9,7 +9,7 @@ import RestaurantDetail from './components/restaurants/RestaurantDetail';
 import RestaurantForm from './components/restaurants/RestaurantForm';
 import Restaurants from './components/restaurants/Restaurants';
 import EditReview from './components/reviews/ReviewEdit';
-import UsersList from './components/UsersList';
+// import UsersList from './components/UsersList';
 import User from './components/User';
 import CustomFooter from './components/footer';
 import { authenticate } from './store/session';
@@ -41,6 +41,9 @@ function App() {
         </Route>
         <Route path='/restaurants/:id'>
           <RestaurantDetail />
+        </Route>
+        <Route path='/restaurants'>
+          <Redirect to='/' />
         </Route>
         <ProtectedRoute path='/new-form'>
           <RestaurantForm />
