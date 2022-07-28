@@ -6,7 +6,7 @@ import EditRestaurant from './RestaurantEdit';
 import Reviews from '../reviews/Reviews';
 import ReviewForm from '../reviews/ReviewForm';
 import ReservationForm from '../reservations/ReservationForm'
-import { useParams, NavLink, useHistory, Route } from 'react-router-dom'
+import { useParams, useHistory, Route } from 'react-router-dom'
 
 function RestaurantDetail() {
     const dispatch = useDispatch()
@@ -22,11 +22,18 @@ function RestaurantDetail() {
     // const [isFav, setIsFav] = useState(false);
     const [starFill, setStarFill] = useState('noFill');
 
-
-
+    const timeConverter = (time) => {
+        let hours = time.split(':')[0];
+        if (+hours > 12) {
+            hours = `${((+hours + 11) % 12 + 1)}PM`;
+        }
+        else {
+            hours = `${hours}AM`;
+        }
+        return hours;
+    }
 
     const handleFav = async (e) => {
-        console.log(e.target.innerText)
         const fav = {
             user_id: userId,
             restaurant_id: +id
@@ -81,8 +88,6 @@ function RestaurantDetail() {
         //     setFavorited('Add to Favorites');
         //     setStarFill('noFill');
         // }
-
-
     }, [dispatch, id, userId]);
 
 
@@ -130,9 +135,9 @@ function RestaurantDetail() {
                         <div>{restaurant.name}</div>
                         <div>{restaurant.phone}</div>
                         <div>{restaurant.cuisine}</div>
-                        <div>Hours Open: {restaurant.open_hours} - {restaurant.close_hours}</div>
+                        <div>Hours Open: {timeConverter(restaurant.open_hours)} - {timeConverter(restaurant.close_hours)}</div>
 
-                        <div>{restaurant.price_point}</div>
+                        <div>Price Point: {'$'.repeat(restaurant.price_point)}</div>
                     </div>)
                 }
                 {session.user && restaurant && restaurant.user_id === userId && (
@@ -142,12 +147,12 @@ function RestaurantDetail() {
                     </>
                 )}
                 {/* {session.user && ( */}
-                <button onClick={reviewClick}>Write a Review</button>
 
                 {review && <ReviewForm restaurantId={id} hide={() => setReview(false)} />}
                 <Reviews restaurantId={id} />
                 {edit && <EditRestaurant id={id} hide={() => setEdit(false)} />}
                 <ReservationForm />
+                <button onClick={reviewClick}>Write a Review</button>
 
 
             </>
