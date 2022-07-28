@@ -1,0 +1,13 @@
+.footer-wrapper {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+.gitHub {
+    height: 25px;
+    width: 25px;
+}
+.linkedIn {
+    height: 25px;
+    width: 25px;
+}
