@@ -24,6 +24,7 @@ class Restaurant(db.Model):
   reservations = db.relationship('Reservation', back_populates='restaurant', cascade= 'all, delete')
   restaurant_favorite = db.relationship('User', secondary=favorites, back_populates='user_favorite', cascade='all, delete')
 
+  #Class method that converts Class Obj to JSON-able dictionary
   def to_dict(self):
     return {
         'id':self.id,
