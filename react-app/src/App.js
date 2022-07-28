@@ -11,6 +11,7 @@ import Restaurants from './components/restaurants/Restaurants';
 import EditReview from './components/reviews/ReviewEdit';
 import UsersList from './components/UsersList';
 import User from './components/User';
+import CustomFooter from './components/footer';
 import { authenticate } from './store/session';
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
         </Route>
         <Route><h1>404 Page Not Found</h1></Route>
       </Switch>
+      <CustomFooter/>
     </BrowserRouter>
   );
 }
