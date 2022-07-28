@@ -6,12 +6,19 @@ import { useParams, useHistory } from 'react-router-dom'
 function ReservationForm() {
     const dispatch = useDispatch();
     const history = useHistory();
+
     const userId = useSelector(state => state.session.user?.id);
     const { id } = useParams();
     const [date, setDate] = useState(new Date());
     const [time, setTime] = useState(new Date());
     const [partySize, setPartySize] = useState(1);
     const [errors, setErrors] = useState([]);
+    const restaurant = useSelector(state => state.restaurants[id])
+    // console.log(restaurants, 'entire restaurants slice')
+    // if (restaurants.values) {
+    //     const restaurant = useSelector(state => state.restaurants[id])
+
+    // }
     // Form select field contains times starting from opening to closing in half hour increments
     async function onSubmit(e) {
         e.preventDefault();
@@ -29,9 +36,22 @@ function ReservationForm() {
         }
     }
     useEffect(() => {
-        const current = Date.now();
         const reservedDate = new Date(`${date}T${time}:00`)
+        const current = Date.now();
         const arr = []
+        if (restaurant) {
+            const open = restaurant.open_hours
+            const close = restaurant.close_hours
+            console.log(open, close)
+            const openCheck = new Date(`${date}T${open}`)
+            const closeCheck = new Date(`${date}T${close}`)
+            if (reservedDate < openCheck) {
+                arr.push('Please select a time after open')
+            }
+            if (reservedDate > closeCheck) {
+                arr.push('Please select a time before close')
+            }
+        }
         if (current >= reservedDate) {
             arr.push('Please select appropriate time')
         }
@@ -43,7 +63,7 @@ function ReservationForm() {
             <form onSubmit={onSubmit}>
                 <ul>
                     {errors.length > 0 && errors.map(error =>
-                        <li className="errors">{error}</li>
+                        <li key={error} className="errors">{error}</li>
                     )}
                 </ul>
                 <label>Date
