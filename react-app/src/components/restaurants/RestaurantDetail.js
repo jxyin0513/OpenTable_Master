@@ -20,6 +20,7 @@ function RestaurantDetail() {
     const [favorited, setFavorited] = useState('Add to Favorites');
     const history = useHistory()
     const [edit, setEdit] = useState(false);
+    const [review, setReview] = useState(false)
     // const [isFav, setIsFav] = useState(false);
     const [starFill, setStarFill] = useState('noFill');
 
@@ -101,7 +102,9 @@ function RestaurantDetail() {
         e.preventDefault()
         setEdit(true);
     }
-
+    function reviewClick(e){
+        setReview(true)
+    }
     return (
 
         <>
@@ -139,13 +142,12 @@ function RestaurantDetail() {
                     <button id='delete-restaurant' onClick={handleDelete}>Delete</button>
                 </>
             )}
-            <NavLink to={`/${id}/review`}>
-                <button>Write a Review</button>
-            </NavLink>
-
+            <button onClick={reviewClick}>Write a Review</button>
+            {review && <ReviewForm restaurantId={id} hide={()=>setReview(false)} />}
             <Reviews restaurantId={id} />
             {edit && <EditRestaurant id={id} hide={() => setEdit(false)} />}
             <ReservationForm />
+
 
         </>
 

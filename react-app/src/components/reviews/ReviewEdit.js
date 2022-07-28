@@ -1,30 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { editReviewsThunk } from '../../store/review';
 import { useDispatch, useSelector } from 'react-redux'
+import {useParams, useHistory} from 'react-router-dom'
 
-function EditReview({ id, hide }) {
+function EditReview() {
     const dispatch = useDispatch();
-    const review = useSelector(state => state.reviews[id])
+    const {reviewId} = useParams();
+    const history = useHistory();
+    const review = useSelector(state => state.reviews[reviewId])
+    const restaurantId = review.restaurant_id
     const [content, setContent] = useState(review.content);
     const [rating, setRating] = useState(review.rating);
     const [errors, setErrors] = useState([])
-    console.log(review)
+
     function onClick(){
-        hide()
+        history.push(`/restaurants/${review.restaurantId}`)
     }
 
     async function onSubmit(e) {
         e.preventDefault()
 
         const review = {
-            id,
+            id:reviewId,
             content,
             rating
         }
 
         const editedReview = await dispatch(editReviewsThunk(review))
         if (editedReview) {
-            hide();
+            history.push(`/restaurants/${restaurantId}`)
         }
 
     }

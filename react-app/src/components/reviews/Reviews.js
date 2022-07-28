@@ -4,6 +4,7 @@ import { deleteReviewThunk } from '../../store/review';
 import EditReview from './ReviewEdit';
 // import { editReviewsThunk } from '../../store/review';
 import { useDispatch, useSelector } from 'react-redux'
+import {NavLink} from 'react-router-dom'
 
 function Reviews({ restaurantId }) {
     const dispatch = useDispatch();
@@ -22,10 +23,6 @@ function Reviews({ restaurantId }) {
         dispatch(deleteReviewThunk(e.target.className))
 
     }
-    function onEdit(e) {
-        e.preventDefault()
-        setEditReview(true)
-    }
 
     return (
         <>
@@ -40,12 +37,14 @@ function Reviews({ restaurantId }) {
                                 {user && user.id === review.user_id && (
                                     <div>
                                         <div>
-                                            <button className={review.id} onClick={onEdit}>edit</button>
+                                            <NavLink to={`/edit/${review.id}`}>
+                                                <button className={review.id}>edit</button>
+                                            </NavLink>
                                             <button className={review.id} onClick={onDelete}>delete</button>
                                         </div>
-                                        <div>
+                                        {/* <div>
                                             {editReview && (<EditReview id={review.id} hide={() => setEditReview(false)} />)}
-                                        </div>
+                                        </div> */}
                                     </div>
                                 )
                                 }
