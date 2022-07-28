@@ -21,7 +21,7 @@ class Restaurant(db.Model):
 
   users = db.relationship('User', back_populates='restaurants')
   reviews = db.relationship('Review', back_populates='restaurant', cascade= 'all, delete')
-  reservations = db.relationship('Reservation', back_populates='restaurant')
+  reservations = db.relationship('Reservation', back_populates='restaurant', cascade= 'all, delete')
   restaurant_favorite = db.relationship('User', secondary=favorites, back_populates='user_favorite', cascade='all, delete')
 
   def to_dict(self):
