@@ -107,7 +107,13 @@ def get_favorites(user_id, restaurant_id):
         "restaurant_id": restaurant_id
         }
 
-
+@restaurant_router.route('/favorites/<user_id>')
+def get_all_favorites(user_id):
+    user = User.query.get(user_id)
+    favorites = [restaurant.to_dict() for restaurant in user.user_favorite]
+    return {
+        "favorites": favorites
+    }
 
 @restaurant_router.route('/<user_id>/<restaurant_id>', methods=['DELETE'])
 def remove_favorite(user_id, restaurant_id):

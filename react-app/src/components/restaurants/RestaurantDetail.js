@@ -16,8 +16,6 @@ function RestaurantDetail() {
     const userId = useSelector(state => state.session.user?.id)
     const session = useSelector(state => state.session)
     const favorite = useSelector(state => state.favorites[id])
-    const [isFav, setIsFav] = useState(false);
-    const [favorited, setFavorited] = useState('Add to Favorites');
     const history = useHistory()
     const [edit, setEdit] = useState(false);
     const [review, setReview] = useState(false)
@@ -35,13 +33,9 @@ function RestaurantDetail() {
         };
 
         if (e.target.innerText === 'Add to Favorites') {
-            setIsFav(true);
-            setFavorited('Remove from Favorites');
             setStarFill('fill');
             await dispatch(setFavoriteThunk(fav));
-        }else{
-            setIsFav(false);
-            setFavorited('Add to Favorites');
+        } else {
             setStarFill('noFill');
             await dispatch(removeFavoriteThunk(fav));
         }
@@ -72,7 +66,7 @@ function RestaurantDetail() {
     // }
 
     useEffect(() => {
-        (async ()=>{
+        (async () => {
             await dispatch(getFavoritesThunk(userId, id))
             await dispatch(GetRestaurantDetailThunk(id))
         })()
@@ -89,7 +83,7 @@ function RestaurantDetail() {
         // }
 
 
-    }, [dispatch, id]);
+    }, [dispatch, id, userId]);
 
 
     async function handleDelete(e) {
@@ -110,10 +104,10 @@ function RestaurantDetail() {
         <>
             <div>
 
-                    <button onClick={(e) => {
-                        // removeFromFav();
-                        handleFav(e);
-                    }} className={`star-${starFill}`}>{favorite!==undefined? "Remove from Favorites" : "Add to Favorites"}</button>
+                <button onClick={(e) => {
+                    // removeFromFav();
+                    handleFav(e);
+                }} className={`star-${starFill}`}>{favorite !== undefined ? "Remove from Favorites" : "Add to Favorites"}</button>
 
 
                 {/* {isFav === false && (
@@ -127,7 +121,7 @@ function RestaurantDetail() {
             </div>
             {session && restaurant && (
                 <div>
-                    <img src={restaurant.image_url} alt="Image"></img>
+                    <img src={restaurant.image_url} alt="restaurant"></img>
                     <div>{restaurant.name}</div>
                     <div>{restaurant.phone}</div>
                     <div>{restaurant.cuisine}</div>

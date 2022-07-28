@@ -7,9 +7,9 @@ import { SearchRestaurantsThunk } from '../../store/restaurant'
 const Search = () => {
   const dispatch = useDispatch()
 
-  const [search, setSearch] = useState('');
-  const [resultsFound, setResultsFound] = useState(false);
-  const [results, setResults] = useState([])
+  // const [search, setSearch] = useState('');
+  // const [resultsFound, setResultsFound] = useState(false);
+  // const [results, setResults] = useState([])
   const [enhancedSearch, setEnhancedSearch] = useState([])
   const [keystroke, setKeystroke] = useState('');
   const restaurants = useSelector(state=>state.restaurants)
@@ -21,21 +21,21 @@ const Search = () => {
     setEnhancedSearch([])
   }
 
-  const searchQuery = async (e) => {
-    e.preventDefault();
-    const res = await dispatch(SearchRestaurantsThunk(search));
-    // console.log("RES:: ", res.restaurants);
-    if (res) {
-      setResultsFound(true);
-      setResults(res.restaurants)
-    } else {
-      return <h3>0 Results Found</h3>
-    }
-  }
+  // const searchQuery = async (e) => {
+  //   e.preventDefault();
+  //   const res = await dispatch(SearchRestaurantsThunk(search));
+  //   // console.log("RES:: ", res.restaurants);
+  //   if (res) {
+  //     setResultsFound(true);
+  //     setResults(res.restaurants)
+  //   } else {
+  //     return <h3>0 Results Found</h3>
+  //   }
+  // }
 
   return (
     <>
-      {resultsFound && (
+      {/* {resultsFound && (
         <div className='results_container'>
           <h3>{results.length} results found.</h3>
           {results.map(result => (
@@ -47,19 +47,21 @@ const Search = () => {
             </div>
           ))}
         </div>
-      )}
-      <input type='text'
+      )} */}
+      {/* <input type='text'
         value={search}
         onChange={e => setSearch(e.target.value)} />
-      <button onClick={searchQuery}>Search</button>
+      <button onClick={searchQuery}>Search</button> */}
 
-      <input type='text'
+      <input
+        className='restaurantSearch'
+        type='text'
         value={keystroke}
+        placeholder="Search your favorite restaurant or cuisine"
         onChange={async (e) => {
           setKeystroke(e.target.value)
           const res = await dispatch(SearchRestaurantsThunk(e.target.value))
           if (res) {
-            console.log("RES:: ", res)
             setEnhancedSearch(res.restaurants)
           } else {
             cleanup()

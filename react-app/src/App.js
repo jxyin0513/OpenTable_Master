@@ -54,9 +54,9 @@ function App() {
           <EditReview />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
           <Restaurants />
         </ProtectedRoute>
+        <Route><h1>404 Page Not Found</h1></Route>
       </Switch>
     </BrowserRouter>
   );
