@@ -46,7 +46,7 @@ const NavBar = () => {
         {sessionUser && (
           <li>
             <NavLink to={`/users/${sessionUser.id}`} exact={true} activeClassName='active'>
-              User Profile
+              {sessionUser.username}
             </NavLink>
           </li>
         )}

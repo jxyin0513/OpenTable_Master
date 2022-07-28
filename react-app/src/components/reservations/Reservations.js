@@ -23,6 +23,18 @@ function Reservation() {
         await dispatch(DeleteReservationThunk(deleteNum))
     }
 
+    const timeConverter = (time) => {
+        let hours = time.split(':')[0];
+        let min = time.split(':')[1];
+        if (+hours > 12) {
+            hours = `${((+hours + 11) % 12 + 1)}:${min}PM`;
+        }
+        else {
+            hours = `${hours}:${min}AM`;
+        }
+        return hours;
+    }
+
     // const userReservations = reservations.find(reservation => reservation.user_id == userId)
     console.log('---------------------------')
     console.log(reservations)
@@ -36,9 +48,9 @@ function Reservation() {
                         <div>Id: {reservation.id}</div>
                         <div>Restaurant Id: {reservation.restaurant_id}</div>
                         <div>Date: {reservation.res_date}</div>
-                        <div>Time: {reservation.res_time}</div>
+                        <div>Time: {timeConverter(reservation.res_time)}</div>
                         <div>Party Size: {reservation.party_size}</div>
-                        <button className={`del_${reservation.id}`} onClick={deleteRes}>Delete Reservation</button>
+                        <button className={`del_${reservation.id}`} onClick={deleteRes}>Cancel Reservation</button>
                     </div>
                     {/* } */}
                 </div>
