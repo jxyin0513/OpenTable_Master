@@ -10,8 +10,7 @@ function Reservation() {
     // const session = useSelector(state => state.session)
     const { userId } = useParams()
     const reservations = useSelector(state => Object.values(state.reservations).filter(reservation => reservation.user_id = userId))
-    console.log(userId)
-    console.log('--------------')
+
     // console.log(reservations[0])
     useEffect(() => {
         dispatch(GetReservationThunk(userId))
