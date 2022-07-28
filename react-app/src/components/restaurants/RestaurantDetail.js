@@ -6,7 +6,7 @@ import EditRestaurant from './RestaurantEdit';
 import Reviews from '../reviews/Reviews';
 import ReviewForm from '../reviews/ReviewForm';
 import ReservationForm from '../reservations/ReservationForm'
-import { useParams, NavLink, useHistory } from 'react-router-dom'
+import { useParams, NavLink, useHistory, Route } from 'react-router-dom'
 
 function RestaurantDetail() {
     const dispatch = useDispatch()
@@ -102,19 +102,20 @@ function RestaurantDetail() {
         }
         setReview(true)
     }
-    return (
+    if (restaurant) {
+        return (
 
-        <>
-            <div>
-                {session.user && (
-                    <button onClick={(e) => {
-                        // removeFromFav();
-                        handleFav(e);
-                    }} className={`star-${starFill}`}>{favorite !== undefined ? "Remove from Favorites" : "Add to Favorites"}
-                    </button>
-                )}
+            <>
+                <div>
+                    {session.user && (
+                        <button onClick={(e) => {
+                            // removeFromFav();
+                            handleFav(e);
+                        }} className={`star-${starFill}`}>{favorite !== undefined ? "Remove from Favorites" : "Add to Favorites"}
+                        </button>
+                    )}
 
-                {/* {isFav === false && (
+                    {/* {isFav === false && (
                     <button onClick={() => {
                         postFav();
                         handleFav();
@@ -122,36 +123,39 @@ function RestaurantDetail() {
 
                 )} */}
 
-            </div>
-            {session && restaurant && (
-                <div>
-                    <img src={restaurant.image_url} alt="restaurant"></img>
-                    <div>{restaurant.name}</div>
-                    <div>{restaurant.phone}</div>
-                    <div>{restaurant.cuisine}</div>
-                    <div>Hours Open: {restaurant.open_hours} - {restaurant.close_hours}</div>
+                </div>
+                {session && restaurant && (
+                    <div>
+                        <img src={restaurant.image_url} alt="restaurant"></img>
+                        <div>{restaurant.name}</div>
+                        <div>{restaurant.phone}</div>
+                        <div>{restaurant.cuisine}</div>
+                        <div>Hours Open: {restaurant.open_hours} - {restaurant.close_hours}</div>
 
-                    <div>{restaurant.price_point}</div>
-                </div>)
-            }
-            {session.user && restaurant && restaurant.user_id === userId && (
-                <>
-                    <button id='edit-restaurant' onClick={handleEdit}>Edit</button>
-                    <button id='delete-restaurant' onClick={handleDelete}>Delete</button>
-                </>
-            )}
-            {/* {session.user && ( */}
-            <button onClick={reviewClick}>Write a Review</button>
+                        <div>{restaurant.price_point}</div>
+                    </div>)
+                }
+                {session.user && restaurant && restaurant.user_id === userId && (
+                    <>
+                        <button id='edit-restaurant' onClick={handleEdit}>Edit</button>
+                        <button id='delete-restaurant' onClick={handleDelete}>Delete</button>
+                    </>
+                )}
+                {/* {session.user && ( */}
+                <button onClick={reviewClick}>Write a Review</button>
 
-            {review && <ReviewForm restaurantId={id} hide={() => setReview(false)} />}
-            <Reviews restaurantId={id} />
-            {edit && <EditRestaurant id={id} hide={() => setEdit(false)} />}
-            <ReservationForm />
+                {review && <ReviewForm restaurantId={id} hide={() => setReview(false)} />}
+                <Reviews restaurantId={id} />
+                {edit && <EditRestaurant id={id} hide={() => setEdit(false)} />}
+                <ReservationForm />
 
 
-        </>
+            </>
 
-    )
+        )
+    } else {
+        return (<Route><h1>404 Page Not Found</h1></Route>)
+    }
 }
 
 export default RestaurantDetail
