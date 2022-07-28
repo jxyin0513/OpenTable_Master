@@ -4,6 +4,7 @@ import { DeleteRestaurantThunk, GetRestaurantDetailThunk } from '../../store/res
 import { getFavoritesThunk, removeFavoriteThunk, setFavoriteThunk } from '../../store/favorite';
 import EditRestaurant from './RestaurantEdit';
 import Reviews from '../reviews/Reviews';
+import ReviewForm from '../reviews/ReviewForm';
 import ReservationForm from '../reservations/ReservationForm'
 import { useParams, NavLink, useHistory } from 'react-router-dom'
 
