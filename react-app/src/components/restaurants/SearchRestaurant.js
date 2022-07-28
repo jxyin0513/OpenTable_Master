@@ -44,13 +44,16 @@ const Search = () => {
           ))}
         </div>
       )}
-      <input type='text'
+      {/* <input type='text'
         value={search}
         onChange={e => setSearch(e.target.value)} />
-      <button onClick={searchQuery}>Search</button>
+      <button onClick={searchQuery}>Search</button> */}
 
-      <input type='text'
+      <input
+        className='restaurantSearch'
+        type='text'
         value={keystroke}
+        placeholder="Search your favorite restaurant or cuisine"
         onChange={async (e) => {
           setKeystroke(e.target.value)
           const res = await dispatch(SearchRestaurantsThunk(e.target.value))

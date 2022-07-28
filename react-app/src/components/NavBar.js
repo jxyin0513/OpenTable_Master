@@ -2,11 +2,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
+import './navbar.css'
 
 const NavBar = () => {
   return (
-    <nav>
-      <ul>
+    <nav className='navBar'>
+      <ul className='navUl'>
+        <li className='TableOpen'><img src='./PLACEHOLDER' alt='Site Logo'></img>
+TableOpen</li>
         <li>
           <NavLink to='/' exact={true} activeClassName='active'>
             Home

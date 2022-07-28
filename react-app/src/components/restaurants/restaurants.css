@@ -1,0 +1,97 @@
+.mainPageBanner {
+    font-family: arial;
+}
+.searchBanner {
+    background-color: #47568a;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.searchWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.searchBanner {
+    color: white;
+}
+
+.restaurantSearch {
+    width: 100%;
+    height: 35px;
+    border-radius: 5px;
+    border: 1px solid #666666;
+}
+.results-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    z-index: 1;
+    position: absolute;
+    /* margin-top: 75px; */
+    /* border-right: 1px solid black;
+    border-left: 1px solid black; */
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    /* border: 1px solid black; */
+}
+.results-container {
+    position: relative;
+    width: 100%;
+    height: 100px;
+}
+.results-container > div{
+    border-bottom: 1px solid #666666;
+    background-color: white;
+    width: 100%;
+    font-family: arial;
+    height: 20px;
+    padding: 5px;
+    cursor: hand;
+    position: absolute;
+}
+.results-container > div > a {
+    text-decoration: none;
+    color: black;
+    cursor: crosshair;
+}
+.results-container > div:hover {
+    text-decoration: none;
+    background-color: #888888;
+    cursor: pointer;
+    color: black;
+}
+.restaurantsListWrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    background-color: #cccccc;
+}
+.restaurantDiv {
+    width: 25%;
+    font-family: arial;
+    margin: 5px;
+    background-color: white;
+    padding: 10px;
+    max-width: 300px;
+}
+.restaurantDiv > img {
+height: 121px;
+max-width: 300px;
+}
+.restaurantName {
+    position: relative;
+    top: -23px;
+    left: 5px;
+}
+.restaurantPrice {
+    color: #050;
+    font-weight: bold;
+    font-style: italic;
+}
