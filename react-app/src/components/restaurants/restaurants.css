@@ -1,3 +1,6 @@
+a {
+    text-decoration: none;
+}
 .mainPageBanner {
     font-family: arial;
 }
@@ -14,6 +17,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 60%;
 }
 .searchBanner {
     color: white;
@@ -31,34 +35,39 @@
     justify-content: right;
     z-index: 1;
     position: absolute;
-    /* margin-top: 75px; */
-    /* border-right: 1px solid black;
-    border-left: 1px solid black; */
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    /* border: 1px solid black; */
+    right: 25px;
+}
+.results-container > div {
+    z-index: 0;
 }
 .results-container {
     position: relative;
-    width: 100%;
+    width: 99%;
     height: 100px;
 }
-.results-container > div{
+.individual-result {
     border-bottom: 1px solid #666666;
     background-color: white;
+    border-top: 1px solid white;
     width: 100%;
     font-family: arial;
     height: 20px;
     padding: 5px;
     cursor: hand;
     position: absolute;
+    color: black;
+    width: 100%;
+    position: relative;
+    left: 20px;
 }
-.results-container > div > a {
+.individual-result > a {
     text-decoration: none;
     color: black;
-    cursor: crosshair;
+    cursor: pointer;
 }
-.results-container > div:hover {
+.individual-result:hover {
     text-decoration: none;
     background-color: #888888;
     cursor: pointer;
@@ -80,15 +89,28 @@
     background-color: white;
     padding: 10px;
     max-width: 300px;
+    min-width: 300px;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+}
+.restaurantDiv:hover {
+    border: 1px solid #666;
+    box-shadow: 0px 0px 5px #666;
 }
 .restaurantDiv > img {
-height: 121px;
-max-width: 300px;
+    height: 200px;
+    max-width: 300px;
+    min-width: 150px;
+    width: 300px;
+    z-index: 1;
 }
 .restaurantName {
     position: relative;
-    top: -23px;
-    left: 5px;
+    top: -22px;
+    padding-left: 5px;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(50,50,50,0.65)
 }
 .restaurantPrice {
     color: #050;
