@@ -123,7 +123,7 @@ function RestaurantDetail() {
             </div>
             {session && restaurant && (
                 <div>
-                    <img src={restaurant.image_url} alt="Image"></img>
+                    <img src={restaurant.image_url} alt="Restaurant"></img>
                     <div>{restaurant.name}</div>
                     <div>{restaurant.phone}</div>
                     <div>{restaurant.cuisine}</div>
