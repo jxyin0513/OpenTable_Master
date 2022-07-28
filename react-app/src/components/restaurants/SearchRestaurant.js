@@ -7,9 +7,9 @@ import { SearchRestaurantsThunk } from '../../store/restaurant'
 const Search = () => {
   const dispatch = useDispatch()
 
-  const [search, setSearch] = useState('');
-  const [resultsFound, setResultsFound] = useState(false);
-  const [results, setResults] = useState([])
+  // const [search, setSearch] = useState('');
+  // const [resultsFound, setResultsFound] = useState(false);
+  // const [results, setResults] = useState([])
   const [enhancedSearch, setEnhancedSearch] = useState([])
   const [keystroke, setKeystroke] = useState('');
 
@@ -17,21 +17,21 @@ const Search = () => {
     setEnhancedSearch([])
   }
 
-  const searchQuery = async (e) => {
-    e.preventDefault();
-    const res = await dispatch(SearchRestaurantsThunk(search));
-    // console.log("RES:: ", res.restaurants);
-    if (res) {
-      setResultsFound(true);
-      setResults(res.restaurants)
-    } else {
-      return <h3>0 Results Found</h3>
-    }
-  }
+  // const searchQuery = async (e) => {
+  //   e.preventDefault();
+  //   const res = await dispatch(SearchRestaurantsThunk(search));
+  //   // console.log("RES:: ", res.restaurants);
+  //   if (res) {
+  //     setResultsFound(true);
+  //     setResults(res.restaurants)
+  //   } else {
+  //     return <h3>0 Results Found</h3>
+  //   }
+  // }
 
   return (
     <>
-      {resultsFound && (
+      {/* {resultsFound && (
         <div className='results_container'>
           <h3>{results.length} results found.</h3>
           {results.map(result => (
@@ -43,7 +43,7 @@ const Search = () => {
             </div>
           ))}
         </div>
-      )}
+      )} */}
       {/* <input type='text'
         value={search}
         onChange={e => setSearch(e.target.value)} />
@@ -58,7 +58,6 @@ const Search = () => {
           setKeystroke(e.target.value)
           const res = await dispatch(SearchRestaurantsThunk(e.target.value))
           if (res) {
-            console.log("RES:: ", res)
             setEnhancedSearch(res.restaurants)
           } else {
             cleanup()
