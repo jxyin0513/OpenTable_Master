@@ -22,32 +22,41 @@ const NavBar = () => {
   return (
     <nav className='navBar'>
       <ul className='navUl'>
-        <NavLink to='/' exact={true} activeClassName='active'>
-          <li className='TableOpen'>
-            <img src='./assets/images/table_open_default.jpg' height='50px' width='auto' alt='Site Logo'></img>
-          </li>
-        </NavLink>
+        <li className='TableOpen'>
+          <NavLink to='/' exact={true} activeClassName='active'>
+            <img src='/assets/images/table_open_default.jpg' height='50px' width='auto' alt='Site Logo'></img>
+          </NavLink>
+        </li>
 
-        <li>
-          <NavLink to='/login' exact={true} activeClassName='active'>
-            Login
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/sign-up' exact={true} activeClassName='active'>
-            Sign Up
-          </NavLink>
-        </li>
-        {/* <li>
-          <NavLink to='/users' exact={true} activeClassName='active'>
-            Users
-          </NavLink>
-        </li> */}
-        <li>
-          <NavLink to='/new-form' exact={true} activeClassName='active'>
-            New Restaurant
-          </NavLink>
-        </li>
+        {!sessionUser && (
+          <li>
+            <NavLink to='/login' exact={true} activeClassName='active'>
+              Login
+            </NavLink>
+          </li>
+        )}
+        {!sessionUser && (
+
+          <li>
+            <NavLink to='/sign-up' exact={true} activeClassName='active'>
+              Sign Up
+            </NavLink>
+          </li>
+        )}
+        {sessionUser && (
+          <li>
+            <NavLink to={`/users/${sessionUser.id}`} exact={true} activeClassName='active'>
+              User Profile
+            </NavLink>
+          </li>
+        )}
+        {sessionUser && (
+          <li>
+            <NavLink to='/new-form' exact={true} activeClassName='active'>
+              New Restaurant
+            </NavLink>
+          </li>
+        )}
         {!sessionUser && (
           <li>
             <button id={'demo-login'} onClick={handleClick}>Demo Login</button>

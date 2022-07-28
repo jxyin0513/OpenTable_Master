@@ -22,7 +22,7 @@ const UserFavorites = () => {
     <div className='user-favorites-container'>
       <h2>Your Favorites</h2>
       {favorites.map(favorite => (
-        <div className='user-favorite-card'>
+        <div key={favorite.id} className='user-favorite-card'>
           <Link to={`/restaurants/${favorite.id}`}>{favorite.name}</Link>
           <p>{favorite.phone}</p>
           <p>{favorite.cuisine}</p>

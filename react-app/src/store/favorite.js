@@ -29,7 +29,7 @@ export const getFavoritesThunk = (userId, id) => async dispatch => {
   console.log('you hit the getFavoriteThunk')
   if (response.ok) {
     const data = await response.json();
-    console.log(data)
+    // console.log(data)
     dispatch(get(data))
     return data
   } else {
@@ -79,6 +79,11 @@ const favoriteReducer = (state = {}, action) => {
   let newState = { ...state };
   switch (action.type) {
     case GET_FAVORITE_RESTAURANTS:
+      if (action.payload["message"]) {
+        console.log(action.payload, 'payload')
+        return newState
+
+      }
       newState[action.payload.restaurant_id] = action.payload
       return newState;
 
