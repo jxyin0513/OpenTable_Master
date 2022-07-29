@@ -20,7 +20,7 @@ function RestaurantDetail() {
     const history = useHistory()
     const [edit, setEdit] = useState(false);
     const [review, setReview] = useState(false)
-    const [starFill, setStarFill] = useState('noFill');
+    const [starFill, setStarFill] = useState(favorite ? 'fill' : 'noFill');
     const reviews = useSelector(state => state.reviews)
     let review_user;
     if (reviews) {
@@ -109,16 +109,15 @@ function RestaurantDetail() {
                                             <div>{restaurant.phone}</div>
                                         </div>
                                         <div id='cuisine'>
-                                            <div>CUISINE:  </div>
+                                            <div id='cuisine-tag'>CUISINE:  </div>
                                             <div>{restaurant.cuisine}</div>
                                         </div>
                                         <div id='price-point'>
-                                            <div>
-                                                PRICE: </div>
+                                            <div id='price-tag'>PRICE: </div>
                                             <div id='price-scale'> {'$'.repeat(restaurant.price_point)}</div>
                                         </div>
                                         <div id='hours'>
-                                            <div>HOURS:  </div>
+                                            <div id='hours-tag'>HOURS:  </div>
                                             <div>{timeConverter(restaurant.open_hours)} - {timeConverter(restaurant.close_hours)}</div>
                                         </div>
                                     </div>

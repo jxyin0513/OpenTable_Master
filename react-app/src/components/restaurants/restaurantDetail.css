@@ -121,34 +121,21 @@
     width: 40%;
 }
 
-#phone {
-    width: 30%;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-}
-
-#cuisine {
-    width: 30%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-#price-point {
-    width: 30%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
+#phone,
+#cuisine,
+#price-point,
 #hours {
     width: 30%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+#phone-tag,
+#cuisine-tag,
+#price-point-tag,
+#hours-tag {
+    font-size: 10;
 }
 
 #price-scale {
