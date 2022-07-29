@@ -62,7 +62,7 @@ a {
 }
 
 .individual-result:not(.search-detail) {
-    border-bottom: 1px solid #b4b4b4;
+    border-bottom: 1px solid #b4b4b4
     background-color: white;
     width: 100%;
     font-family: arial;
