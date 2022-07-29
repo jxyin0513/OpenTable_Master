@@ -13,8 +13,8 @@ function Reservation() {
     const restaurants = useSelector(state => Object.values(state.restaurants))
 
     useEffect(() => {
-        dispatch(GetReservationThunk(userId))
         dispatch(GetRestaurantThunk())
+        dispatch(GetReservationThunk(userId))
     }, [dispatch, userId]);
 
     //Delete / cancel a reservation
