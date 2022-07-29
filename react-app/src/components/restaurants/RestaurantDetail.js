@@ -19,10 +19,10 @@ function RestaurantDetail() {
     const [edit, setEdit] = useState(false);
     const [review, setReview] = useState(false)
     const [starFill, setStarFill] = useState('noFill');
-    const reviews = useSelector(state=>state.reviews)
+    const reviews = useSelector(state => state.reviews)
     let review_user;
-    if(reviews){
-        review_user = Object.values(reviews).filter(review=>review.user_id === userId)
+    if (reviews) {
+        review_user = Object.values(reviews).filter(review => review.user_id === userId)
     }
 
     //Converts 24hr format to 12hr format
@@ -81,44 +81,49 @@ function RestaurantDetail() {
     }
     if (restaurant) {
         return (
-
             <>
-                <div>
-                    {session.user && (
-                        <button onClick={(e) => {
-                            handleFav(e);
-                        }} className={`star-${starFill}`}>{favorite !== undefined ? "Remove from Favorites" : "Add to Favorites"}
-                        </button>
+                <img id='restaurant-image' src={restaurant.image_url} alt="restaurant"></img>
+
+                <span id='restaurant-page'>
+                    <div>
+                        {session.user && (
+                            <button onClick={(e) => {
+                                handleFav(e);
+                            }} className={`star-${starFill}`}>{favorite !== undefined ? "Remove from Favorites" : "Add to Favorites"}
+                            </button>
+
+                        )}
+
+                    </div>
+                    {session && restaurant && (
+                        <span id='restaurant-box'>
+
+                            <div id='restaurant-details'>
+                                <div>{restaurant.name}</div>
+                                <div>{restaurant.phone}</div>
+                                <div>{restaurant.cuisine}</div>
+                                <div>Hours Open: {timeConverter(restaurant.open_hours)} - {timeConverter(restaurant.close_hours)}</div>
+
+                                <div>Price Point: {'$'.repeat(restaurant.price_point)}</div>
+                            </div>
+                        </span>
+                    )}
+                    {session.user && restaurant && restaurant.user_id === userId && (
+                        <>
+                            <button id='edit-restaurant' onClick={handleEdit}>Edit</button>
+                            <button id='delete-restaurant' onClick={handleDelete}>Delete</button>
+                        </>
                     )}
 
-                </div>
-                {session && restaurant && (
-                    <div>
-                        <img src={restaurant.image_url} alt="restaurant"></img>
-                        <div>{restaurant.name}</div>
-                        <div>{restaurant.phone}</div>
-                        <div>{restaurant.cuisine}</div>
-                        <div>Hours Open: {timeConverter(restaurant.open_hours)} - {timeConverter(restaurant.close_hours)}</div>
-
-                        <div>Price Point: {'$'.repeat(restaurant.price_point)}</div>
-                    </div>)
-                }
-                {session.user && restaurant && restaurant.user_id === userId && (
-                    <>
-                        <button id='edit-restaurant' onClick={handleEdit}>Edit</button>
-                        <button id='delete-restaurant' onClick={handleDelete}>Delete</button>
-                    </>
-                )}
-
-                {review && <ReviewForm restaurantId={id} hide={() => setReview(false)} />}
-                <Reviews restaurantId={id} />
-                {edit && <EditRestaurant id={id} hide={() => setEdit(false)} />}
-                <ReservationForm />
-                {review_user.length===0 &&<button onClick={reviewClick}>Write a Review</button>}
+                    {review && <ReviewForm restaurantId={id} hide={() => setReview(false)} />}
+                    <Reviews restaurantId={id} />
+                    {edit && <EditRestaurant id={id} hide={() => setEdit(false)} />}
+                    <ReservationForm />
+                    {review_user.length === 0 && <button onClick={reviewClick}>Write a Review</button>}
 
 
+                </span>
             </>
-
         )
     } else {
         return (<Route><h1>404 Page Not Found</h1></Route>)
