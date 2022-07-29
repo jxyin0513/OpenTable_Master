@@ -34,11 +34,10 @@ function Reservation() {
 
     return (
         <>
-            <p>Reservations --</p>
             {signedInUserId && reservations && reservations.map(reservation => (
-                <div key={reservation.id}>
+                <div className='reservationCard' key={reservation.id}>
                     <div key={reservation.id}>
-                        <div>Id: {reservation.id}</div>
+                        <div>Reservation Id: {reservation.id}</div>
                         <div>Restaurant Id: {reservation.restaurant_id}</div>
                         <div>Date: {reservation.res_date}</div>
                         <div>Time: {timeConverter(reservation.res_time)}</div>
