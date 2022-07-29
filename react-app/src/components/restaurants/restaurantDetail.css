@@ -1,0 +1,147 @@
+#restaurant-image {
+    position: relative;
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+#favorite-button-box {
+    z-index: 1;
+    /* background-color: red; */
+    position: absolute;
+    left: 4rem;
+    top: 6rem;
+    height: 35px;
+    width: 170px;
+}
+
+#favorite-button {
+    /* background-color: white; */
+    border-radius: 4px;
+    border: 2px whitesmoke;
+    /* color: black; */
+    height: 100%;
+    width: 100%;
+}
+
+.star-fill {
+    background-color: #f85329;
+    color: white;
+}
+
+.star-noFill {
+    background-color: white;
+    color: black;
+}
+
+#favorite-button:hover {
+    box-shadow: -1.5px 1.5px 1px rgb(183, 181, 181);
+
+}
+
+#restaurant-page {
+
+    height: 500px;
+    display: flex;
+    flex-direction: row;
+}
+
+#restaurant-details {
+    border-radius: 4px;
+    box-shadow: -1.5px 1.5px 1px rgb(183, 181, 181);
+    padding: 15px;
+    background-color: white;
+    position: relative;
+    left: 4rem;
+    top: -200px;
+    display: flex;
+    flex-direction: column;
+    width: 30rem;
+}
+
+
+
+#reservation-form-box {
+    border-radius: 4px;
+    box-shadow: -1.5px 1.5px 1px rgb(183, 181, 181);
+
+    background-color: white;
+    position: relative;
+    left: 100px;
+    top: -200px;
+    width: 17.5rem;
+    height: 280px
+}
+
+#restaurant-name {
+    padding-left: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 100;
+    width: 100%;
+    border-bottom: 1px lightgray solid;
+}
+
+#user-owned-buttons {
+    width: 100px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.detail-button {
+    border-radius: 4px;
+    border: 2px whitesmoke;
+    color: white;
+    background-color: #f85329;
+}
+
+.detail-button:hover {
+    box-shadow: -1.5px 1.5px 1px rgb(183, 181, 181);
+
+}
+
+#restaurant-info {
+    font-family: Arial, Helvetica, sans-serif;
+    /* border: 1px blue solid; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    border-bottom: 1px lightgray solid;
+
+}
+
+#below-name {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+#below-name>div {
+    width: 40%;
+}
+
+#phone,
+#cuisine,
+#price-point,
+#hours {
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#phone-tag,
+#cuisine-tag,
+#price-tag,
+#hours-tag {
+    font-size: 12px;
+    font-weight: bold;
+
+}
+
+#price-scale {
+    font-style: italic;
+    font-weight: bold;
+    color: #050;
+}
