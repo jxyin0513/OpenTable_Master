@@ -6,12 +6,8 @@ function EditRestaurant({ id, hide }) {
     const dispatch = useDispatch()
     const userId = useSelector(state => state.session.user.id)
     const restaurant = useSelector(state => state.restaurants[id])
-    // const openHoursArr = restaurant.open_hours.split(':')
-    // const [hour, minute, seconds] = openHoursArr
-    // const openHour = new Date(null, null, null, hour, minute)
     const trimOpen = restaurant.open_hours.split(':').slice(0, 2).join(':')
     const trimClose = restaurant.close_hours.split(':').slice(0, 2).join(':')
-    console.log(trimOpen)
     const [name, setName] = useState(restaurant.name)
     const [phone, setPhone] = useState(restaurant.phone)
     const [street, setStreet] = useState(restaurant.street)
@@ -27,15 +23,14 @@ function EditRestaurant({ id, hide }) {
     const closeHoursArr = closeHours.split(':')
     const [hour, minute] = openHoursArr
     const [hourC, minuteC] = closeHoursArr
-    console.log(openHours, closeHours)
 
     function onClick(){
         hide()
     }
 
+    //handles editing of restaurant
     async function onSubmit(e) {
         e.preventDefault();
-        console.log(openHours, closeHours)
         const restaurant = {
             id,
             user_id: userId,

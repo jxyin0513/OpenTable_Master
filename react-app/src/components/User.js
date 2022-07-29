@@ -9,8 +9,8 @@ function User() {
   const dispatch = useDispatch()
   const [user, setUser] = useState({});
   const { userId } = useParams();
-  // const reservations = useSelector(state => Object.values(state.reservations))
   const sessionUserId = useSelector(state=>state.session.user.id)
+
 
   useEffect(() => {
     if (!userId) {

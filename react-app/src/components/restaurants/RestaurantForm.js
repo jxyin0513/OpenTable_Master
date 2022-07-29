@@ -18,6 +18,7 @@ function RestaurantForm() {
     const [errors, setErrors] = useState([])
     const cuisines = ['American', 'Barbecue', 'Cafe', 'Chinese', 'Fast Food', 'Indian', 'Italian', 'Japanese', 'Korean BBQ', 'Mediterranean', 'Mexican', 'Middle Earth', 'Thai', 'Vegan']
 
+    //create new restaurant
     async function onSubmit(e) {
         e.preventDefault();
         const restaurant = {
@@ -36,7 +37,6 @@ function RestaurantForm() {
         if(!newRestaurant){
             history.push('/')
         }else{
-            console.log(newRestaurant)
             setErrors(newRestaurant)
         }
     }

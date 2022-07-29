@@ -8,12 +8,11 @@ import './restaurants.css'
 function Restaurants() {
     const dispatch = useDispatch();
     const restaurants = useSelector(state => state.restaurants)
-    console.log(restaurants)
     const allRestaurants = Object.values(restaurants)
 
+    //Fetch all restaurants
     useEffect(() => {
         dispatch(GetRestaurantThunk())
-        // dispatch(getFavoritesThunk())
     }, [dispatch])
 
 

@@ -26,10 +26,8 @@ const removeFavorite = (payload) => ({
 export const getFavoritesThunk = (userId, id) => async dispatch => {
 
   const response = await fetch(`/api/restaurants/favorites/${userId}/${id}`)
-  console.log('you hit the getFavoriteThunk')
   if (response.ok) {
     const data = await response.json();
-    // console.log(data)
     dispatch(get(data))
     return data
   } else {
@@ -62,7 +60,6 @@ export const setFavoriteThunk = (payload) => async dispatch => {
 };
 
 export const removeFavoriteThunk = (payload) => async dispatch => {
-  console.log(payload)
   const { user_id, restaurant_id } = payload
   const res = await fetch(`/api/restaurants/${user_id}/${restaurant_id}`, {
     method: 'DELETE',
@@ -80,7 +77,6 @@ const favoriteReducer = (state = {}, action) => {
   switch (action.type) {
     case GET_FAVORITE_RESTAURANTS:
       if (action.payload["message"]) {
-        console.log(action.payload, 'payload')
         return newState
 
       }

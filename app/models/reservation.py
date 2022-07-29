@@ -13,6 +13,7 @@ class Reservation(db.Model):
   user = db.relationship('User', back_populates='reservations')
   restaurant = db.relationship('Restaurant', back_populates='reservations')
 
+  #Class method that converts Class Obj to JSON-able dictionary
   def to_dict(self):
     return {
         "id":self.id,

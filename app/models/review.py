@@ -12,6 +12,7 @@ class Review(db.Model):
   user = db.relationship('User', back_populates='reviews')
   restaurant = db.relationship('Restaurant', back_populates='reviews')
 
+  #Class method that converts Class Obj to JSON-able dictionary
   def to_dict(self):
     return {
       'id': self.id,

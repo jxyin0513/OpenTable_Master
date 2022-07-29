@@ -36,7 +36,6 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(restaurant_router, url_prefix='/api/restaurants')
 app.register_blueprint(reviews, url_prefix='/api/reviews')
 app.register_blueprint(reservation_router, url_prefix='/api/reservations')
-# app.register_blueprint(restaurant_view)
 db.init_app(app)
 Migrate(app, db, compare_type=True)
 
@@ -77,6 +76,7 @@ def react_root(path):
         return app.send_static_file('favicon.ico')
     return app.send_static_file('index.html')
 
+#Send all restaurants
 @app.route('/all/restaurants')
 def getAllRestaurants():
     restaurants = Restaurant.query.all()
