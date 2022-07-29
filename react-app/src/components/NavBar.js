@@ -1,13 +1,9 @@
-
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import './navbar.css'
 import { demoLogin } from '../store/session';
 import { useDispatch, useSelector } from 'react-redux';
-
-
-
 
 const NavBar = () => {
   const sessionUser = useSelector(state => state.session.user);
@@ -20,7 +16,7 @@ const NavBar = () => {
 
 
   return (
-    <nav className='navBar'>
+    <header className='navBar'>
       <ul className='navUl'>
         <li className='TableOpen'>
           <NavLink to='/' exact={true} activeClassName='active'>
@@ -29,44 +25,43 @@ const NavBar = () => {
         </li>
 
         {!sessionUser && (
-          <li>
-            <NavLink to='/login' exact={true} activeClassName='active'>
-              Login
-            </NavLink>
-          </li>
+          <div className='profile-loggedOut'>
+            <li>
+              <NavLink to='/login' exact={true} activeClassName='active'>
+                Login
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to='/sign-up' exact={true} activeClassName='active'>
+                Sign Up
+              </NavLink>
+            </li>
+            <li>
+              <button id={'demo-login'} onClick={handleClick}>Demo Login</button>
+            </li>
+          </div>
         )}
-        {!sessionUser && (
+        {sessionUser && (
+          <div className='profile-loggedIn'>
+            <li>
+              <NavLink to='/new-form' exact={true} activeClassName='active'>
+                New Restaurant
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={`/users/${sessionUser.id}`} exact={true} activeClassName='active'>
+                Hello {sessionUser.username} !
+              </NavLink>
+            </li>
+            <li>
+              <LogoutButton />
+            </li>
+          </div>
+        )}
 
-          <li>
-            <NavLink to='/sign-up' exact={true} activeClassName='active'>
-              Sign Up
-            </NavLink>
-          </li>
-        )}
-        {sessionUser && (
-          <li>
-            <NavLink to={`/users/${sessionUser.id}`} exact={true} activeClassName='active'>
-              {sessionUser.username}
-            </NavLink>
-          </li>
-        )}
-        {sessionUser && (
-          <li>
-            <NavLink to='/new-form' exact={true} activeClassName='active'>
-              New Restaurant
-            </NavLink>
-          </li>
-        )}
-        {!sessionUser && (
-          <li>
-            <button id={'demo-login'} onClick={handleClick}>Demo Login</button>
-          </li>
-        )}
-        <li>
-          <LogoutButton />
-        </li>
       </ul>
-    </nav>
+
+    </header>
   );
 }
 
