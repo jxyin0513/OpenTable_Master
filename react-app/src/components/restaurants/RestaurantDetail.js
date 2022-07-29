@@ -24,7 +24,7 @@ function RestaurantDetail() {
     const reviews = useSelector(state => state.reviews)
     let review_user;
     if (reviews) {
-        review_user = Object.values(reviews).filter(review => review.user_id === userId)
+        review_user = Object.values(reviews).filter(review => {if(review.user_id === userId && review.restaurant_id===Number(id)) return true})
     }
 
     //Converts 24hr format to 12hr format
