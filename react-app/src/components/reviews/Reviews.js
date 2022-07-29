@@ -10,6 +10,7 @@ function Reviews({ restaurantId }) {
     const allReviews = Object.values(useSelector(state => state.reviews))
     const reviews = allReviews.filter(review => (review.restaurant_id === Number(restaurantId)))
     const user = useSelector(state => state.session.user)
+    const [users, setUsers] = useState([]);
 
     const avgOf = (array) => {
         let total = 0;
@@ -26,14 +27,6 @@ function Reviews({ restaurantId }) {
 
     const averageScore = avgOf(reviews.map(review => review.rating))
 
-    // if (!reviews) {
-    //     averageScore = 0;
-    // } else {
-    //     averageScore = Math.floor(reviews.map(review => review.rating).reduce((a, b) => (a + b)) / reviews.length)
-    // }
-    // const [editReview, setEditReview] = useState(false)
-    const [users, setUsers] = useState([]);
-
     const userMatcher = (userArr, id) => {
         return userArr?.find(user => user.id === id)?.username
     }
@@ -45,9 +38,6 @@ function Reviews({ restaurantId }) {
             setUsers(responseData.users);
         }
         fetchData();
-    }, []);
-
-    useEffect(() => {
         dispatch(getReviewsThunk())
     }, [dispatch])
 

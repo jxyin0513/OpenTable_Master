@@ -32,6 +32,9 @@ function ReservationForm() {
             history.push(`/users/${userId}`)
         }
     }
+    function onClick(){
+        history.push('/login')
+    }
     useEffect(() => {
         // Prevent users from setting invalid reservation dates
         const reservedDate = new Date(`${date}T${time}:00`)
@@ -77,7 +80,14 @@ function ReservationForm() {
 
         )
     }
-    else { return null }
+    else {
+        return (
+        <>
+            <p>Want to make a reservation ?</p>
+            <button onClick={onClick}>login</button>
+        </>
+        )
+     }
 
 }
 
