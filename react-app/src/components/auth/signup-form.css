@@ -1,0 +1,25 @@
+body {
+  background-color: #f85329;
+}
+
+h2,
+h3 {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #f85329;
+  padding: 0;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.signup-form {
+  display: flex;
+  margin: 10% auto auto auto;
+  padding: 20px;
+  background-color: white;
+  flex-direction: column;
+  border-radius: 12px;
+  min-width: 360px;
+  max-width: 420px;
+  min-height: 220px;
+  max-height: 440px;
+}

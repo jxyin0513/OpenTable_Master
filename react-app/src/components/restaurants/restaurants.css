@@ -7,7 +7,7 @@ a {
 }
 
 .searchBanner {
-    background-color: #47568a;
+    background-color: #f85329;
     height: 250px;
     display: flex;
     flex-direction: column;
@@ -32,6 +32,11 @@ a {
     height: 35px;
     border-radius: 5px;
     border: 1px solid #666666;
+    padding-left: 8px
+}
+
+.restaurantSearch:focus {
+    border: 2px solid #f85329
 }
 
 .results-container {
@@ -51,21 +56,21 @@ a {
 
 .results-container {
     position: relative;
-    width: 99%;
+    width: 101%;
     height: 100px;
+    margin-left: auto
 }
 
-.individual-result {
-    border-bottom: 1px solid #666666;
+.individual-result:not(.search-detail) {
+    border-bottom: 1px solid #b4b4b4
     background-color: white;
-    border-top: 1px solid white;
     width: 100%;
     font-family: arial;
-    height: 20px;
-    padding: 5px;
+    height: 55px;
+    padding: 10px;
     cursor: hand;
     position: absolute;
-    color: black;
+    color: #f85329;
     width: 100%;
     position: relative;
     left: 20px;
@@ -73,15 +78,27 @@ a {
 
 .individual-result>a {
     text-decoration: none;
-    color: black;
+    color: #f85329;
     cursor: pointer;
 }
 
 .individual-result:hover {
     text-decoration: none;
-    background-color: #888888;
+    background-color: #ff957b;
     cursor: pointer;
-    color: black;
+    color: white;
+}
+
+.search-name {
+    font-size: 16px;
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+
+.search-detail {
+    color: gray;
+    margin-top: 4px;
+    font-style: italic;
 }
 
 .restaurantsListWrapper {
@@ -91,7 +108,7 @@ a {
     justify-content: center;
     align-items: flex-start;
     width: 100%;
-    background-color: #cccccc;
+    background-color: white;
 }
 
 .restaurantDiv {
