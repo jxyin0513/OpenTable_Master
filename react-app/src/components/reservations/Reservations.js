@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetReservationThunk, DeleteReservationThunk } from '../../store/reservation';
 import { useParams } from 'react-router-dom'
+import { GetRestaurantThunk } from '../../store/restaurant';
 
 
 function Reservation() {
@@ -9,8 +10,11 @@ function Reservation() {
     const signedInUserId = useSelector(state => state.session.user?.id)
     const { userId } = useParams()
     const reservations = useSelector(state => Object.values(state.reservations).filter(reservation => reservation.user_id = userId))
+    const restaurants = useSelector(state => Object.values(state.restaurants))
+
     useEffect(() => {
         dispatch(GetReservationThunk(userId))
+        dispatch(GetRestaurantThunk())
     }, [dispatch, userId]);
 
     //Delete / cancel a reservation
@@ -42,7 +46,7 @@ function Reservation() {
                 <div className='reservationCard' key={reservation.id}>
                     <div key={reservation.id}>
                         <div>Reservation Id: {reservation.id}</div>
-                        <div>Restaurant Id: {reservation.restaurant_id}</div>
+                        <div>@{restaurants.find(restaurant => restaurant.id === reservation.restaurant_id).name}</div>
                         <div>Date: {reservation.res_date}</div>
                         <div>Time: {timeConverter(reservation.res_time)}</div>
                         <div>Party Size: {reservation.party_size}</div>
