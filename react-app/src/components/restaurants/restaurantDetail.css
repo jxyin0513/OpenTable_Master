@@ -133,9 +133,11 @@
 
 #phone-tag,
 #cuisine-tag,
-#price-point-tag,
+#price-tag,
 #hours-tag {
-    font-size: 10;
+    font-size: 12px;
+    font-weight: bold;
+
 }
 
 #price-scale {
