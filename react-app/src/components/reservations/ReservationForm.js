@@ -14,11 +14,8 @@ function ReservationForm() {
     const [partySize, setPartySize] = useState(1);
     const [errors, setErrors] = useState([]);
     const restaurant = useSelector(state => state.restaurants[id])
-    // console.log(restaurants, 'entire restaurants slice')
-    // if (restaurants.values) {
-    //     const restaurant = useSelector(state => state.restaurants[id])
 
-    // }
+
     // Form select field contains times starting from opening to closing in half hour increments
     async function onSubmit(e) {
         e.preventDefault();
@@ -36,13 +33,13 @@ function ReservationForm() {
         }
     }
     useEffect(() => {
+        // Prevent users from setting invalid reservation dates
         const reservedDate = new Date(`${date}T${time}:00`)
         const current = Date.now();
         const arr = []
         if (restaurant) {
             const open = restaurant.open_hours
             const close = restaurant.close_hours
-            console.log(open, close)
             const openCheck = new Date(`${date}T${open}`)
             const closeCheck = new Date(`${date}T${close}`)
             if (reservedDate < openCheck) {
@@ -56,7 +53,7 @@ function ReservationForm() {
             arr.push('Please select appropriate time')
         }
         setErrors(arr)
-    }, [date, time, id])
+    }, [date, time, id, restaurant])
 
     if (userId) {
         return (

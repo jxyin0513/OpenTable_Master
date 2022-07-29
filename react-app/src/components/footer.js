@@ -31,10 +31,13 @@ const CustomFooter = () => {
                         </a>
                     </li>
                     <li>
+
                         <a href={url.luis.linkedIn}>
                             <img src='/assets/images/linkedIn.png' className='linkedIn' alt='linkedIn' />
                             <p>Luis Sanchez-Porras</p>
                         </a>
+
+         
                     </li>
                 </ul>
             <div className='ethan'></div>
@@ -46,10 +49,12 @@ const CustomFooter = () => {
                         </a>
                     </li>
                     <li>
+
                         <a href={url.ethan.linkedIn}>
                             <img src='/assets/images/linkedIn.png' className='linkedIn' alt='linkedIn' />
                             <p>Ethan Browning</p>
                         </a>
+
                     </li>
                 </ul>
             <div className='allen'></div>
@@ -61,10 +66,12 @@ const CustomFooter = () => {
                         </a>
                     </li>
                     <li>
+
                         <a href={url.allen.linkedIn}>
                             <img src='/assets/images/linkedIn.png' className='linkedIn' alt='linkedIn' />
                             <p>Allen Faughn</p>
                         </a>
+
                     </li>
                 </ul>
             <div className='jingxun'></div>
@@ -76,10 +83,12 @@ const CustomFooter = () => {
                         </a>
                     </li>
                     <li>
+
                         <a href={url.jingxun.linkedIn}>
                             <img src='/assets/images/linkedIn.png' className='linkedIn' alt='linkedIn' />
                             <p>Jingxun Yin</p>
                         </a>
+
                     </li>
                 </ul>
         </div>

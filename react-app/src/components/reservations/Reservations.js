@@ -7,21 +7,19 @@ import { useParams } from 'react-router-dom'
 function Reservation() {
     const dispatch = useDispatch()
     const signedInUserId = useSelector(state => state.session.user?.id)
-    // const session = useSelector(state => state.session)
     const { userId } = useParams()
     const reservations = useSelector(state => Object.values(state.reservations).filter(reservation => reservation.user_id = userId))
-
-    // console.log(reservations[0])
     useEffect(() => {
         dispatch(GetReservationThunk(userId))
     }, [dispatch, userId]);
 
+    //Delete / cancel a reservation
     async function deleteRes(e) {
         e.preventDefault()
         const deleteNum = e.target.className.split('_')[1]
         await dispatch(DeleteReservationThunk(deleteNum))
     }
-
+    //Converts time from 24hr format to 12hr format
     const timeConverter = (time) => {
         let hours = time.split(':')[0];
         let min = time.split(':')[1];
@@ -34,15 +32,11 @@ function Reservation() {
         return hours;
     }
 
-    // const userReservations = reservations.find(reservation => reservation.user_id == userId)
-    console.log('---------------------------')
-    console.log(reservations)
     return (
         <>
             <p>Reservations --</p>
             {signedInUserId && reservations && reservations.map(reservation => (
                 <div key={reservation.id}>
-                    {/* {userId === reservation.user_id && */}
                     <div key={reservation.id}>
                         <div>Id: {reservation.id}</div>
                         <div>Restaurant Id: {reservation.restaurant_id}</div>
@@ -51,7 +45,6 @@ function Reservation() {
                         <div>Party Size: {reservation.party_size}</div>
                         <button className={`del_${reservation.id}`} onClick={deleteRes}>Cancel Reservation</button>
                     </div>
-                    {/* } */}
                 </div>
             ))}
 

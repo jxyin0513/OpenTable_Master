@@ -4,12 +4,14 @@ from app.forms.review_form import ReviewForm
 
 reviews = Blueprint('reviews',__name__)
 
+#GETs all reviews by every user for every restaurant and converts them to a dictionary
 @reviews.route('/all')
 def get_reviews():
     reviews = Review.query.all()
     all_reviews = [review.to_dict() for review in reviews]
     return {'reviews': all_reviews}
 
+#POSTs a new review tied to a restaurant and userId
 @reviews.route('/new', methods=['POST'])
 def create_review():
     form = ReviewForm()
@@ -25,6 +27,7 @@ def create_review():
         db.session.commit()
         return review.to_dict()
 
+#PUTs updated review contents by Id
 @reviews.route('/<id>/edit', methods=['PUT'])
 def edit_review(id):
     form = ReviewForm()
@@ -34,6 +37,7 @@ def edit_review(id):
     db.session.commit()
     return review.to_dict()
 
+#DELETEs a review by reviewId
 @reviews.route('/<id>/delete', methods=['DELETE'])
 def delete_review(id):
     review = Review.query.get(id)

@@ -8,12 +8,8 @@ const UserFavorites = () => {
 
   const userId = useSelector(state => state.session.user.id);
   const favorites = useSelector(state => Object.values(state.favorites))
-  console.log(favorites)
 
-  // const favoriteRestaurants = restaurants.filter(restaurant => {
-  //   restaurant == favorites.restaurant_id
-  // });
-
+  //Grab a user's favorites
   useEffect(() => {
     dispatch(getAllFavoritesThunk(userId))
   }, [dispatch, userId]);

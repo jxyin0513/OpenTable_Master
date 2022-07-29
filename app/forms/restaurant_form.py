@@ -11,7 +11,6 @@ class NewRestaurantForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(message="Please provide name of the restaurant.")])
     phone = StringField('Phone', validators=[Regexp('^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$', message="Please provide correct format")])
     street = StringField('Street', validators=[DataRequired(message="Please provide your street address.")])
-    # cuisine = SelectField('Cuisine', choices=CUISINE_CHOICES, validators=[DataRequired()])
     cuisine = StringField('Cuisine', validators=[DataRequired(message="Select your cuisine type")])
     open_hours = TimeField('Open', validators=[DataRequired(message="Please provide your open hour")])
     close_hours = TimeField('Close', validators=[DataRequired(message="Please provide your close hour")])

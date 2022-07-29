@@ -12,22 +12,20 @@ function RestaurantDetail() {
     const dispatch = useDispatch()
     const { id } = useParams()
     const restaurant = useSelector(state => state.restaurants[id])
-    console.log(restaurant, 'this is the restaurant')
     const userId = useSelector(state => state.session.user?.id)
     const session = useSelector(state => state.session)
     const favorite = useSelector(state => state.favorites[id])
     const history = useHistory()
     const [edit, setEdit] = useState(false);
     const [review, setReview] = useState(false)
-    // const [isFav, setIsFav] = useState(false);
     const [starFill, setStarFill] = useState('noFill');
     const reviews = useSelector(state=>state.reviews)
     let review_user;
     if(reviews){
         review_user = Object.values(reviews).filter(review=>review.user_id === userId)
-        console.log(review_user)
     }
 
+    //Converts 24hr format to 12hr format
     const timeConverter = (time) => {
         let hours = time.split(':')[0];
         if (+hours > 12) {
@@ -39,6 +37,7 @@ function RestaurantDetail() {
         return hours;
     }
 
+    //Adds and removes a restaurant from a user's favorites
     const handleFav = async (e) => {
         const fav = {
             user_id: userId,
@@ -54,55 +53,22 @@ function RestaurantDetail() {
         }
     };
 
-    // const postFav = async (e) => {
-    //     const fav = {
-    //         user_id: userId,
-    //         restaurant_id: +id
-    //     };
-    //     if (isFav === false) {
-    //         setIsFav(true);
-    //         setFavorited('Add to Favorites');
-    //         setStarFill('noFill');
-    //         await dispatch(setFavoriteThunk(fav));
-    //     }
-    // };
-
-    // const removeFromFav = async (e) => {
-    //     // if (isFav === true) {
-    //     setIsFav(false);
-    //     const fav = {
-    //         user_id: userId,
-    //         restaurant_id: +id,
-    //     };
-    //     await dispatch(removeFavoriteThunk(fav))
-    //     // }
-    // }
-
+    //Checks if the currently viewed restaurant is a favorite
     useEffect(() => {
         (async () => {
             if (userId) await dispatch(getFavoritesThunk(userId, id))
             await dispatch(GetRestaurantDetailThunk(id))
         })()
-        // if (favorite) {
-        //     setIsFav(true)
-        // }
-        // console.log(isFav, favorite)
-        // if (isFav) {
-        //     setFavorited('Remove from Favorites');
-        //     setStarFill('fill');
-        // } else {
-        //     setFavorited('Add to Favorites');
-        //     setStarFill('noFill');
-        // }
     }, [dispatch, id, userId]);
 
-
+    //Deletes a restaurant if the user is the owner
     async function handleDelete(e) {
         e.preventDefault();
         await dispatch(DeleteRestaurantThunk(id))
         history.push('/')
     }
 
+    //Dispatches edits to the current restaurant if the owner is the user
     function handleEdit(e) {
         e.preventDefault()
         setEdit(true);
@@ -120,19 +86,10 @@ function RestaurantDetail() {
                 <div>
                     {session.user && (
                         <button onClick={(e) => {
-                            // removeFromFav();
                             handleFav(e);
                         }} className={`star-${starFill}`}>{favorite !== undefined ? "Remove from Favorites" : "Add to Favorites"}
                         </button>
                     )}
-
-                    {/* {isFav === false && (
-                    <button onClick={() => {
-                        postFav();
-                        handleFav();
-                    }} className={`star-${starFill}`}>Add to Favorites</button>
-
-                )} */}
 
                 </div>
                 {session && restaurant && (
@@ -152,7 +109,6 @@ function RestaurantDetail() {
                         <button id='delete-restaurant' onClick={handleDelete}>Delete</button>
                     </>
                 )}
-                {/* {session.user && ( */}
 
                 {review && <ReviewForm restaurantId={id} hide={() => setReview(false)} />}
                 <Reviews restaurantId={id} />
