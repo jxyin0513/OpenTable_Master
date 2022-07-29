@@ -127,14 +127,14 @@ function RestaurantDetail() {
                         )}
                         {session.user && restaurant && restaurant.user_id === userId && (
                             <div id="user-owned-buttons">
-                                <button class='detail-button' id='edit-restaurant' onClick={handleEdit}>Edit</button>
-                                <button class='detail-button' id='delete-restaurant' onClick={handleDelete}>Delete</button>
+                                <button className='detail-button' id='edit-restaurant' onClick={handleEdit}>Edit</button>
+                                <button className='detail-button' id='delete-restaurant' onClick={handleDelete}>Delete</button>
                             </div>
                         )}
 
                         {review && <ReviewForm restaurantId={id} hide={() => setReview(false)} />}
                         <Reviews restaurantId={id} />
-                        {review_user.length === 0 && <button class='detail-button' onClick={reviewClick}>Write a Review</button>}
+                        {review_user.length === 0 && <button className='detail-button' onClick={reviewClick}>Write a Review</button>}
                         {edit && <EditRestaurant id={id} hide={() => setEdit(false)} />}
 
 
