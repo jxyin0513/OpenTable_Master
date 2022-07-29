@@ -7,6 +7,8 @@ import Reviews from '../reviews/Reviews';
 import ReviewForm from '../reviews/ReviewForm';
 import ReservationForm from '../reservations/ReservationForm'
 import { useParams, useHistory, Route } from 'react-router-dom'
+import './restaurantDetail.css'
+
 
 function RestaurantDetail() {
     const dispatch = useDispatch()
@@ -32,7 +34,7 @@ function RestaurantDetail() {
             hours = `${((+hours + 11) % 12 + 1)}PM`;
         }
         else {
-            hours = `${hours}AM`;
+            hours = `${((+hours + 11) % 12 + 1)}AM`;
         }
         return hours;
     }
@@ -81,51 +83,68 @@ function RestaurantDetail() {
     }
     if (restaurant) {
         return (
-            <>
+            <span id='overall-box'>
                 <img id='restaurant-image' src={restaurant.image_url} alt="restaurant"></img>
-                <span id='restaurant-details'>
-                    <div id='favorite-button'>
-                        {session.user && (
-                            <button onClick={(e) => {
-                                handleFav(e);
-                            }} className={`star-${starFill}`}>{favorite !== undefined ? "Remove from Favorites" : "Add to Favorites"}
-                            </button>
+                <div id='favorite-button-box'>
+                    {session.user && (
+                        <button id='favorite-button' onClick={(e) => {
+                            handleFav(e);
+                        }} className={`star-${starFill}`}>{favorite !== undefined ? "Remove from Favorites" : "Add to Favorites"}
+                        </button>
 
-                        )}
+                    )}
 
-                    </div>
+                </div>
+                <span id='restaurant-page'>
 
-                    <span id='restaurant-page'>
+                    <span id='restaurant-details'>
                         {session && restaurant && (
                             <span id='restaurant-box'>
 
                                 <div id='restaurant-info'>
-                                    <div>{restaurant.name}</div>
-                                    <div>{restaurant.phone}</div>
-                                    <div>{restaurant.cuisine}</div>
-                                    <div>Hours Open: {timeConverter(restaurant.open_hours)} - {timeConverter(restaurant.close_hours)}</div>
+                                    <h1 id='restaurant-name'>{restaurant.name}</h1>
+                                    <div id='below-name'>
+                                        <div id='phone'>
+                                            <div id='phone-tag'>PHONE:  </div>
+                                            <div>{restaurant.phone}</div>
+                                        </div>
+                                        <div id='cuisine'>
+                                            <div>CUISINE:  </div>
+                                            <div>{restaurant.cuisine}</div>
+                                        </div>
+                                        <div id='price-point'>
+                                            <div>
+                                                PRICE: </div>
+                                            <div id='price-scale'> {'$'.repeat(restaurant.price_point)}</div>
+                                        </div>
+                                        <div id='hours'>
+                                            <div>HOURS:  </div>
+                                            <div>{timeConverter(restaurant.open_hours)} - {timeConverter(restaurant.close_hours)}</div>
+                                        </div>
+                                    </div>
 
-                                    <div>Price Point: {'$'.repeat(restaurant.price_point)}</div>
                                 </div>
                             </span>
                         )}
                         {session.user && restaurant && restaurant.user_id === userId && (
-                            <div id='user-owned-buttons'>
-                                <button id='edit-restaurant' onClick={handleEdit}>Edit</button>
-                                <button id='delete-restaurant' onClick={handleDelete}>Delete</button>
+                            <div id="user-owned-buttons">
+                                <button class='detail-button' id='edit-restaurant' onClick={handleEdit}>Edit</button>
+                                <button class='detail-button' id='delete-restaurant' onClick={handleDelete}>Delete</button>
                             </div>
                         )}
 
                         {review && <ReviewForm restaurantId={id} hide={() => setReview(false)} />}
-                        {review_user.length === 0 && <button onClick={reviewClick}>Write a Review</button>}
                         <Reviews restaurantId={id} />
+                        {review_user.length === 0 && <button class='detail-button' onClick={reviewClick}>Write a Review</button>}
                         {edit && <EditRestaurant id={id} hide={() => setEdit(false)} />}
 
 
                     </span>
-                    <ReservationForm />
+                    <div id='reservation-form-box'>
+                        <ReservationForm />
+                    </div>
                 </span>
-            </>
+            </span>
 
         )
     } else {
