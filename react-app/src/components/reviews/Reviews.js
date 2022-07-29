@@ -35,7 +35,7 @@ function Reviews({ restaurantId }) {
     const [users, setUsers] = useState([]);
 
     const userMatcher = (userArr, id) => {
-        return userArr.find(user => user.id === id)?.username
+        return userArr?.find(user => user.id === id)?.username
     }
 
     useEffect(() => {
