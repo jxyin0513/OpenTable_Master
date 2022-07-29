@@ -1,129 +1,133 @@
-# Flask React Project
+# TableOpen README
+Welcome to the README for TableOpen!
+Live Link https://opentableproject.herokuapp.com
+TableOpen is a straight clone of OpenTable, users can make reservations, set favorites, create restaurants, and leave reviews.
+## Index
+- Features
+- Components
+- Schema
+- Frontend Routes
+- API Routes
+- Redux Store Tree
+- Screenshots
+- How to build & run TableOpen
+- Technologies
+- Planned Features
+- Technical Implementation Details
 
-This is the starter for the Flask React project.
+## Features
+### Sign Up
+Users can login and create accounts and any restaurants, reservations, favorites, or reviews they make will remember who it was that made them.
+### Navigation Bar
+A navigation component is always visible anywhere on the application for quick and easy browsing to any view.
+### Demo User
+A convenient Demo User button is available to those who want to skip the registration process and login with a pre-made account with a few sample restaurants tied to it.
+### Restaurants
+Users may browse all restaurants on the site on the main page, and click their respective cards to view specific details about that restaurant.
+### Reviews
+Users are able to leave a review for a restaurant by assigning it a score of 1-5 and leaving a comment about their experience (Users may only leave 1 review)
+### Favorites
+Users are able to set restaurants as their favorites, and view them on their user profile.
+### Reservations
+Users are able to make reservations at restaurants within the restaurants business hours and declare their party size
+### Search Restaurants
+On the main page, users may search for a restaurant by it's name or the type of cuisine they provide
 
-## Getting started
-1. Clone this repository (only this branch)
+## Components
+- ReservationForm - Create new reservation
+- Reservations - Show All reservations
+- RestaurantDetails - Show a restaurants details
+- RestaurantEdit - Edit form for restaurant
+- RestaurantForm - Show create form for restaurant
+- Restaurants - Show all restaurants
+- SearchRestaurants - Search restaurants by keyword
+- UserFavorites - Show all of a specified users favorites
+- ReviewEdit - Update a user review
+- ReviewForm - Create a review
+- Reviews - Show all reviews
+- User - User profle
+- Footer
+- NavBar
+## Database Schema
+![database schema](https://user-images.githubusercontent.com/97128550/180044616-a554ac75-1e6e-4517-b37f-49eb4d391d6b.png)
+## API Routes
+### All routes begin with /api/
+### __/auth__
+- GET / - Authenticate user
+- POST /login - log user in
+- POST /logout - log user out
+- POST /sign_up - create new user instance and log them in
+### __/restaurants__
+- GET /newRestaurant - Get new restaurant form
+- POST /newRestaurant - Submit new restaurant form
+- GET /:restaurantId - Get details for a specific restaurant
+- DELETE /:restaurantId/delete - Delete a specified restaurant
+- PUT /:restaurantId/edit - Update a restaurants details
+- GET /favorites - Get user's who have this restaurant as their favorite
+- POST /favorites - Set this restaurant as a user's favorite
+- GET /favorites/:userId/:restuarantId - Get user favorite restaurant by restaurant Id
+- DELETE /:userId/:restaurantId - Delete a restaurant from a user's favorites
+- POST /search - Submit a keyword and return all matches from restaurants.
+### __/reservations__
+- GET /:userId - Get all reservations for specified user
+- POST /new/reservation - Create a new reservation
+- DELETE /:id/delete - Delete a reservation
+### /reviews
+- GET /all - Get all reviews
+- POST /new - Post a new review
+- PUT /:reviewId/edit - update a review
+- DELETE /:reviewId/delete - delete a review
+### /users
+- GET /:userId - get logged in user's details
+## Redux Store Tree
 
-   ```bash
-   git clone https://github.com/appacademy-starters/python-project-starter.git
-   ```
+```
+store = {
+    session:{user},
+    restaurants:{
+              restaurantId:{
+                           restaurantData
+                           },
+              optionalOrderedList: []
+             },
+    reviews:{
+             restaurantId:{
+                      reviewData
+                      }
+             optionalOrderedList: []
+              },
+    favorites: {
+              restaurantId:{
+                           restaurantData
+                           },
+              optionalOrderedList: []
+             }
+```
+## Installation
+1. Clone TableOpen
+2. ```cd``` into the ```/app``` folder.
+3. run ```pipenv install ``` and enter your ```pipenv shell```
+4. run ```flask run``` to start the backend flask server on default: `port 3000`
+5. In a seperate terminal, ```cd``` into the ```/react-app``` folder
+6. run ```npm install ```
+7. run ```npm build``` to start the frontend react server on default port: `5000` in production mode
+8. If it does not automatically open a browser window, navigate to ```localhost:5000``` to access the app.
+  ## Technologies Used
+  ![](https://img.shields.io/badge/-HTML-5555ff?style=flat-square&logo=html5&logoColor=FFFFFF) ![](https://img.shields.io/badge/-CSS-5555ff?style=flat-square&logo=css3&logoColor=FFFFFF) ![](https://img.shields.io/badge/-JS-5555ff?style=flat-square&logo=javascript&logoColor=FFFFFF)  ![](https://img.shields.io/badge/-Python-5555ff?style=flat-square&logo=python&logoColor=ffffff)  ![](https://img.shields.io/badge/-React-5555ff?style=flat-square&logo=react&logoColor=FFFFFF) ![](https://img.shields.io/badge/-VScode-5555ff?style=flat-square&logo=visual-studio-code&logoColor=FFFFFF)
+![](https://img.shields.io/badge/-Flask-5555ff?style=flat-square&logo=flask&logoColor=ffffff)  ![](https://img.shields.io/badge/-Redux-5555ff?style=flat-square&logo=redux&logoColor=ffffff)  ![](https://img.shields.io/badge/-Postgres-5555ff?style=flat-square&logo=sequelize&logoColor=ffffff)  ![](https://img.shields.io/badge/-GitHub-5555ff?style=flat-square&logo=github&logoColor=ffffff)
+## Technical Details
+Table Open was built using Flask as it's backend, and React / Redux for it's front end. Python is our group's second langauge and learning it's intricacies while developing a project such as this assisted us in gaining experience working in it's environment.
 
-2. Install dependencies
-
-      ```bash
-      pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
-      ```
-
-3. Create a **.env** file based on the example with proper settings for your
-   development environment
-4. Setup your PostgreSQL user, password and database and make sure it matches your **.env** file
-
-5. Get into your pipenv, migrate your database, seed your database, and run your flask app
-
-   ```bash
-   pipenv shell
-   ```
-
-   ```bash
-   flask db upgrade
-   ```
-
-   ```bash
-   flask seed all
-   ```
-
-   ```bash
-   flask run
-   ```
-
-6. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
-
-***
-
-
-*IMPORTANT!*
-   psycopg2-binary MUST remain a dev dependency because you can't install it on alpine-linux.
-   There is a layer in the Dockerfile that will install psycopg2 (not binary) for us.
-***
-
-### Dev Containers (OPTIONAL for M1 Users)
-The following instructions detail an *optional* development setup for M1 Mac users having issues with the `psycopg` package.
-
-1. Make sure you have the [Microsoft Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension installed. 
-2. Make sure you have [Docker](https://www.docker.com/products/docker-desktop/) installed on your computer. 
-3. Clone the repository (only this branch)
-   ```bash
-   git clone https://github.com/appacademy-starters/python-project-starter.git
-   ```
-4. Open the repo in VS Code. 
-5. Click "Open in Container" when VS Code prompts to open container in the bottom right hand corner. 
-6. **Be Patient!** The initial install will take a LONG time, it's building a container that has postgres preconfigured and even installing all your project dependencies. (For both flask and react!)
-
-   **Note:** This will take much less time on future starts because everything will be cached.
-
-7. Once everything is up, be sure to make a `.env` file based on `.env.example` in both the root directory and the *react-app* directory before running your app. You do not need a `DATABASE_URL` in the `.env` file if you are using this Docker setup for development - the URL is already set in the image (see `.devcontainer/Dockerfile` for the URL).
-
-8. Get into your pipenv, migrate your database, seed your database, and run your flask app
-
-   ```bash
-   pipenv shell
-   ```
-
-   ```bash
-   flask db upgrade
-   ```
-
-   ```bash
-   flask seed all
-   ```
-
-   ```bash
-   flask run
-   ```
-
-9. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
-
-<br>
-
-## Deploy to Heroku
-This repo comes configured with Github Actions. When you push to your main branch, Github will automatically pull your code, package and push it to Heroku, and then release the new image and run db migrations. 
-
-1. Write your Dockerfile. In order for the Github action to work effectively, it must have a configured Dockerfile. Follow the comments found in this [Dockerfile](./Dockerfile) to write your own!
-
-2. Create a new project on Heroku.
-
-3. Under Resources click "Find more add-ons" and add the add on called "Heroku Postgres".
-
-4. Configure production environment variables. In your Heroku app settings -> config variables you should have two environment variables set:
-
-   |    Key          |    Value    |
-   | -------------   | ----------- |
-   | `DATABASE_URL`  | Autogenerated when adding postgres to Heroku app |
-   | `SECRET_KEY`    | Random string full of entropy |
-
-5. Generate a Heroku OAuth token for your Github Action. To do so, log in to Heroku via your command line with `heroku login`. Once you are logged in, run `heroku authorizations:create`. Copy the GUID value for the Token key.
-
-6. In your Github Actions Secrets you should have two environment variables set. You can set these variables via your Github repository settings -> secrets -> actions. Click "New respository secret" to create
-each of the following variables:
-
-   |    Key            |    Value    |
-   | -------------     | ----------- |
-   | `HEROKU_API_KEY`  | Heroku Oauth Token (from step 6)|
-   | `HEROKU_APP_NAME` | Heroku app name    |
-
-7. Push to your `main` branch! This will trigger the Github Action to build your Docker image and deploy your application to the Heroku container registry. Please note that the Github Action will automatically upgrade your production database with `flask db upgrade`. However, it will *not* automatically seed your database. You must manually seed your production database if/when you so choose (see step 8).
-
-8. *Attention!* Please run this command *only if you wish to seed your production database*: `heroku run -a HEROKU_APP_NAME flask seed all`
-
-## Helpful commands
-|    Command            |    Purpose    |
-| -------------         | ------------- |
-| `pipenv shell`        | Open your terminal in the virtual environment and be able to run flask commands without a prefix |
-| `pipenv run`          | Run a command from the context of the virtual environment without actually entering into it. You can use this as a prefix for flask commands  |
-| `flask db upgrade`    | Check in with the database and run any needed migrations  |
-| `flask db downgrade`  | Check in with the database and revert any needed migrations  |
-| `flask seed all`      | Just a helpful syntax to run queries against the db to seed data. See the **app/seeds** folder for reference and more details |
-| `heroku login -i`      | Authenticate your heroku-cli using the command line. Drop the -i to authenticate via the browser |
-| `heroku authorizations:create` | Once authenticated, use this to generate an Oauth token |
-| `heroku run -a <app name>` | Run a command from within the deployed container on Heroku |
+A good portion of development time was spent making the user experience as smooth as possible by accounting for as many realistic edge cases as we could. We wanted to make sure that our site was as close to production ready as possible.
+## Planned Features
+ - [ ] Users can upload their images to AWS instead of just providing a URL
+ - [ ] Users can provide a .pdf of their restaurants menu to be viewed by potential clients
+ - [ ] Users can see how many other people have favorited a restaurant
+ - [ ] Restaurant average scores will appear on the main / route
+## Screenshots
+### Restaurants
+![Restaurants](https://upload.wikimedia.org/wikipedia/commons/1/19/Under_construction_graphic.gif)
+### Restaurant Details
+![RestaurantDetails](https://upload.wikimedia.org/wikipedia/commons/1/19/Under_construction_graphic.gif)
+### User Profile
+![UserProfile](https://upload.wikimedia.org/wikipedia/commons/1/19/Under_construction_graphic.gif)
