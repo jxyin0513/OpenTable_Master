@@ -2,13 +2,29 @@ import React, { useState } from 'react';
 import { CreateRestaurantThunk } from '../../store/restaurant';
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import './new-restaurant-form.css'
 
 function RestaurantForm() {
     const dispatch = useDispatch()
     const history = useHistory()
     const userId = useSelector(state => state.session.user.id)
+
+    const messages = [
+        'Best restaurant in the world?',
+        'I hope they have fancy drinks. 🍹',
+        'Ooh! I hope it\'s got tacos!',
+        'Is it in the nice part of town?',
+        'Watch out other restaurants! New competition coming through.',
+        'Does it have outside seating?',
+        'I hope they\'re open late!',
+        'I\'m gonna be the first to visit!',
+        'Think they\'ll seat 20? 🤔',
+        '🗿'
+    ]
+
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
+    const [message, setMessage] = useState(messages[Math.floor(Math.random() * messages.length)])
     const [street, setStreet] = useState('')
     const [cuisine, setCuisine] = useState('')
     const [openHours, setOpenHours] = useState('')
@@ -42,45 +58,38 @@ function RestaurantForm() {
     }
 
     return (
-        <>
-            <form onSubmit={onSubmit}>
-                <ul>
+        <div className='restaurant-form-container'>
+            <div className='restaurant-form'>
+                <h2 className='restaurant-form-header'>Add a Restaurant</h2>
+                <h3 className='restaurant-form-message'>{message}</h3>
+                <form onSubmit={onSubmit}>
                     {errors.length > 0 && errors.map(error =>
-                        <li className="errors">{error}</li>
+                        <div className="restaurant-error">{error}</div>
                     )}
-                </ul>
-                <label>Name:
-                    <input type='text' name='name' onChange={e => setName(e.target.value)}></input>
-                </label>
-                <label>Phone:
-                    <input type='text' name='phone' onChange={e => setPhone(e.target.value)}></input>
-                </label>
-                <label>Street:
-                    <input type='text' name='street' onChange={e => setStreet(e.target.value)}></input>
-                </label>
-                <label>Cuisine:
-                    <select name='cuisine' onChange={e => setCuisine(e.target.value)}>
-                        <option selected disabled>--Please Choose an Option--</option>
+                    <input type='text' className='restaurant-field' name='name' placeholder='Restaurant Name' onChange={e => setName(e.target.value)}></input>
+
+                    <input type='text' className='restaurant-field' name='phone' placeholder='Phone Number' onChange={e => setPhone(e.target.value)}></input>
+
+                    <input type='text' className='restaurant-field' name='street' placeholder='Street Address' onChange={e => setStreet(e.target.value)}></input>
+
+                    <select name='cuisine' className='restaurant-field' onChange={e => setCuisine(e.target.value)}>
+                        <option selected disabled>--Cuisine--</option>
                         {cuisines.map(cuisine => (
                             <option key={cuisine} value={cuisine}>{cuisine}</option>
                         ))}
                     </select>
-                </label>
-                <label>Open Hours:
-                    <input type='time' name='open_hours' onChange={e => setOpenHours(e.target.value)}></input>
-                </label>
-                <label>Close Hours:
-                    <input type='time' name='close_hours' onChange={e => setCloseHours(e.target.value)}></input>
-                </label>
-                <label>Image URL:
-                    <input type='text' name='image_url' onChange={e => setURL(e.target.value)}></input>
-                </label>
-                <label>Price point:
-                    <input type='text' name='price_point' onChange={e => setPrice_Point(e.target.value)}></input>
-                </label>
-                <button type='submit'>Submit</button>
-            </form>
-        </>
+                    <p>Opening</p>
+                    <input type='time' className='restaurant-field' name='open_hours' onChange={e => setOpenHours(e.target.value)}></input>
+                    <p>Closing</p>
+                    <input type='time' className='restaurant-field' name='close_hours' onChange={e => setCloseHours(e.target.value)}></input>
+
+                    <input type='text' className='restaurant-field' name='image_url' placeholder='Image Url' onChange={e => setURL(e.target.value)}></input>
+
+                    <input type='number' className='restaurant-field' name='price_point' placeholder='Price Point' min='1' max='5' onChange={e => setPrice_Point(e.target.value)}></input>
+                    <button type='submit' className='restaurant-submit'>Submit</button>
+                </form>
+            </div>
+        </div>
     )
 }
 
