@@ -20,6 +20,12 @@ function RestaurantDetail() {
     const [edit, setEdit] = useState(false);
     const [review, setReview] = useState(false)
     const [starFill, setStarFill] = useState('noFill');
+    const reviews = useSelector(state=>state.reviews)
+    let review_user;
+    if(reviews){
+        review_user = Object.values(reviews).filter(review=>review.user_id === userId)
+        console.log(review_user)
+    }
 
     //Converts 24hr format to 12hr format
     const timeConverter = (time) => {
@@ -110,7 +116,7 @@ function RestaurantDetail() {
                 <Reviews restaurantId={id} />
                 {edit && <EditRestaurant id={id} hide={() => setEdit(false)} />}
                 <ReservationForm />
-                <button onClick={reviewClick}>Write a Review</button>
+                {review_user.length===0 &&<button onClick={reviewClick}>Write a Review</button>}
 
 
             </>

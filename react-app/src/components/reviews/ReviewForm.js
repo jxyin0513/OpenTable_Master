@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { createReviewsThunk } from '../../store/review';
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
 
 function ReviewForm({restaurantId, hide}) {
     const dispatch = useDispatch();
-    const history = useHistory();
+
 
     const user = useSelector(state => state.session.user)
     // const restaurant = useSelector(state=>state.session.restaurants)

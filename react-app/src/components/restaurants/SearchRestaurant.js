@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { SearchRestaurantsThunk } from '../../store/restaurant'
 // import SearchResults from './SearchResults';
 
@@ -12,10 +12,10 @@ const Search = () => {
   // const [results, setResults] = useState([])
   const [enhancedSearch, setEnhancedSearch] = useState([])
   const [keystroke, setKeystroke] = useState('');
-  const restaurants = useSelector(state=>state.restaurants)
-  const names = Object.values(restaurants).map(restaurant=>(
-    restaurant.name
-  ))
+  // const restaurants = useSelector(state=>state.restaurants)
+  // const names = Object.values(restaurants).map(restaurant=>(
+  //   restaurant.name
+  // ))
 
   const cleanup = () => {
     setEnhancedSearch([])

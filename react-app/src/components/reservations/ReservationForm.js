@@ -54,7 +54,7 @@ function ReservationForm() {
             arr.push('Please select appropriate time')
         }
         setErrors(arr)
-    }, [date, time])
+    }, [date, time, id])
 
     if (userId) {
         return (
