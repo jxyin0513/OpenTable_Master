@@ -1,11 +1,14 @@
 /* TODO Add site wide styles */
-html, body{
+html,
+body {
     height: 100%;
 }
+
 .footer-container {
     display: flex;
 }
-.footer-outer{
+
+.footer-outer {
     position: relative;
     margin-top: -140px;
     bottom: 0;
@@ -13,24 +16,62 @@ html, body{
     height: 140px;
 }
 
-#root{
+#root {
     min-height: 100%;
     padding-bottom: 140px;
     box-sizing: border-box;
 }
 
-.footer-container > div{
+.footer-container>div {
     padding: 10px;
     margin: 10px;
 }
-.footer-col > ul a{
+
+.footer-col>ul a {
     text-decoration: none;
     color: black;
 
 }
-.footer-col > ul a:hover{
-    color:darkgray;
+
+.footer-col>ul a:hover {
+    color: darkgray;
 }
-.footer-col > ul > li > p{
+
+.footer-col>ul>li>p {
     display: inline;
+}
+
+select {
+    border: 1px solid #f85329;
+    border-radius: 3px;
+    padding: 4px;
+}
+
+input {
+    border: 1px solid #f85329;
+    padding: 4px;
+    border-radius: 3px;
+}
+
+input:focus {
+    border: 2px solid #f85329;
+}
+
+button {
+    border: 2px solid #f85329;
+    padding: 3px;
+    min-width: 50px;
+    max-width: 95px;
+    border-radius: 3px;
+    background-color: white;
+    color: #f85329
+}
+
+button:hover {
+    background-color: #f85329;
+    color: white
+}
+
+label {
+    margin-right: 12px;
 }
