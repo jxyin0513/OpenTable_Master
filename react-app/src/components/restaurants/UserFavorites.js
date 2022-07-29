@@ -16,7 +16,10 @@ const UserFavorites = () => {
 
   return (
     <div className='user-favorites-container'>
-      <h2>Your Favorites</h2>
+      <div className='userFavoritesHeader'>
+        <h3>Your Favorites</h3>
+      </div>
+      <div className='userFavoritesCardWrapper'>
       {favorites.map(favorite => (
         <div key={favorite.id} className='user-favorite-card'>
           <Link to={`/restaurants/${favorite.id}`}>{favorite.name}</Link>
@@ -33,6 +36,7 @@ const UserFavorites = () => {
           }}>Remove From Favorites</button>
         </div>
       ))}
+    </div>
     </div>
   )
 };

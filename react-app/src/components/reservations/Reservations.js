@@ -34,6 +34,10 @@ function Reservation() {
 
     return (
         <>
+            <div className='UDReservationHeader'>
+             <h3>Reservations</h3>
+            </div>
+            <div className='UDReservationCardContainer'>
             {signedInUserId && reservations && reservations.map(reservation => (
                 <div className='reservationCard' key={reservation.id}>
                     <div key={reservation.id}>
@@ -46,6 +50,7 @@ function Reservation() {
                     </div>
                 </div>
             ))}
+            </div>
 
         </>
     )

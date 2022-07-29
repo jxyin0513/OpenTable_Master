@@ -45,15 +45,14 @@ function User() {
             </ul>
           </div>
         </div>
-        <div className='UDReservationWrapper'>
-          <div className='UDReservationHeader'>
-            <h3>Your Upcoming Reservations</h3>
+        <div className='UDResFavWrapper'>
+          <div className='UDReservationWrapper'>
+            <div className='UDReservationContainer'>
+              <Reservation userId={userId} />
+            </div>
           </div>
-          <div className='UDReservationContainer'>
-            <Reservation userId={userId} />
-          </div>
+          <UserFavorites />
         </div>
-        <UserFavorites />
       </>
       )}
       {sessionUserId!== +userId && (
