@@ -12,7 +12,6 @@ function RestaurantDetail() {
     const dispatch = useDispatch()
     const { id } = useParams()
     const restaurant = useSelector(state => state.restaurants[id])
-    console.log(restaurant, 'this is the restaurant')
     const userId = useSelector(state => state.session.user?.id)
     const session = useSelector(state => state.session)
     const favorite = useSelector(state => state.favorites[id])
@@ -24,7 +23,6 @@ function RestaurantDetail() {
     let review_user;
     if(reviews){
         review_user = Object.values(reviews).filter(review=>review.user_id === userId)
-        console.log(review_user)
     }
 
     //Converts 24hr format to 12hr format

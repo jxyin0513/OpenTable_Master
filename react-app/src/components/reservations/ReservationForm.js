@@ -40,7 +40,6 @@ function ReservationForm() {
         if (restaurant) {
             const open = restaurant.open_hours
             const close = restaurant.close_hours
-            console.log(open, close)
             const openCheck = new Date(`${date}T${open}`)
             const closeCheck = new Date(`${date}T${close}`)
             if (reservedDate < openCheck) {
