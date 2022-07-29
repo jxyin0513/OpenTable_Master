@@ -26,14 +26,14 @@ const CustomFooter = () => {
                 <ul className='footer-links'>
                     <li>
                         <a href={url.luis.github}>
-                            <img src='/assets/images/github.png' className='gitHub' alt='gitHub' />
+                            <img src='https://i.imgur.com/r3WE8OR.png' className='gitHub' alt='gitHub' />
                             <p>stuffy-doll</p>
                         </a>
                     </li>
                     <li>
 
                         <a href={url.luis.linkedIn}>
-                            <img src='/assets/images/linkedIn.png' className='linkedIn' alt='linkedIn' />
+                            <img src='https://i.imgur.com/CyfqUHg.png' className='linkedIn' alt='linkedIn' />
                             <p>Luis Sanchez-Porras</p>
                         </a>
 
@@ -44,14 +44,14 @@ const CustomFooter = () => {
                 <ul className='footer-links'>
                     <li>
                         <a href={url.ethan.github}>
-                            <img src='/assets/images/github.png' className='gitHub' alt='gitHub' />
+                            <img src='https://i.imgur.com/r3WE8OR.png' className='gitHub' alt='gitHub' />
                             <p>ebrowning</p>
                         </a>
                     </li>
                     <li>
 
                         <a href={url.ethan.linkedIn}>
-                            <img src='/assets/images/linkedIn.png' className='linkedIn' alt='linkedIn' />
+                            <img src='https://i.imgur.com/CyfqUHg.png' className='linkedIn' alt='linkedIn' />
                             <p>Ethan Browning</p>
                         </a>
 
@@ -61,14 +61,14 @@ const CustomFooter = () => {
                 <ul className='footer-links'>
                     <li>
                         <a href={url.allen.github}>
-                            <img src='/assets/images/github.png' className='gitHub' alt='gitHub' />
+                            <img src='https://i.imgur.com/r3WE8OR.png' className='gitHub' alt='gitHub' />
                             <p>aFaughn</p>
                         </a>
                     </li>
                     <li>
 
                         <a href={url.allen.linkedIn}>
-                            <img src='/assets/images/linkedIn.png' className='linkedIn' alt='linkedIn' />
+                            <img src='https://i.imgur.com/CyfqUHg.png' className='linkedIn' alt='linkedIn' />
                             <p>Allen Faughn</p>
                         </a>
 
@@ -78,14 +78,14 @@ const CustomFooter = () => {
                 <ul className='footer-links'>
                     <li>
                         <a href={url.jingxun.github}>
-                            <img src='/assets/images/github.png' className='gitHub' alt='gitHub' />
+                            <img src='https://i.imgur.com/r3WE8OR.png' className='gitHub' alt='gitHub' />
                             <p>jxyin0513</p>
                         </a>
                     </li>
                     <li>
 
                         <a href={url.jingxun.linkedIn}>
-                            <img src='/assets/images/linkedIn.png' className='linkedIn' alt='linkedIn' />
+                            <img src='https://i.imgur.com/CyfqUHg.png' className='linkedIn' alt='linkedIn' />
                             <p>Jingxun Yin</p>
                         </a>
 

@@ -20,7 +20,7 @@ const NavBar = () => {
       <ul className='navUl'>
         <li className='TableOpen'>
           <NavLink to='/' exact={true} activeClassName='active'>
-            <img src='/assets/images/table_open_default.jpg' height='50px' width='auto' alt='Site Logo'></img>
+            <img src='https://i.imgur.com/6N8qwAq.png' height='50px' width='auto' alt='Site Logo'></img>
           </NavLink>
         </li>
 
