@@ -83,6 +83,7 @@ function RestaurantDetail() {
     }
     if (restaurant) {
         return (
+
             <span id='overall-box'>
                 <img id='restaurant-image' src={restaurant.image_url} alt="restaurant"></img>
                 <div id='favorite-button-box'>
