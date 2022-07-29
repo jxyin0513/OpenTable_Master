@@ -5,23 +5,32 @@
 
 .navBar {
     background-color: white;
-    height: 50px;
+    /* height: 50px; */
     display: flex;
     align-items: center;
     width: 100%;
 }
 .navUl {
     display: flex;
-    justify-content: space-around;
+    justify-content:space-between;
     flex-direction: row;
-    align-items: center;
+    align-items:center;
     width: 100%;
 }
 .navUl > li > a {
     text-decoration: none;
     color: black;
 }
+.navUl > div > li > a {
+    text-decoration: none;
+    color: black;
+}
 .navUl > li > a:hover {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+.navUl > div> li > a:hover {
     text-decoration: none;
     color: black;
     font-weight: bold;
@@ -40,4 +49,14 @@
 .logout:hover {
     background-color: #bbbbbbbb;
     cursor: pointer;
+}
+.profile-loggedIn > li{
+    display: inline;
+    padding: 10px;
+    margin: 15px;
+}
+.profile-loggedOut > li {
+    display: inline;
+    padding: 10px;
+    margin: 15px;
 }

@@ -62,7 +62,7 @@ function App() {
         </Route>
         <Route><h1>404 Page Not Found</h1></Route>
       </Switch>
-      <CustomFooter/>
+      <CustomFooter />
     </BrowserRouter>
   );
 }
