@@ -34,7 +34,6 @@ export const CreateReservationThunk = (reservation) => async (dispatch) => {
     })
     if (res.ok) {
         const data = await res.json()
-        console.log(data)
         dispatch(createReservation(data))
         return data
     }

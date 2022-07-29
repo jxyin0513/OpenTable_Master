@@ -9,7 +9,6 @@ import RestaurantDetail from './components/restaurants/RestaurantDetail';
 import RestaurantForm from './components/restaurants/RestaurantForm';
 import Restaurants from './components/restaurants/Restaurants';
 import EditReview from './components/reviews/ReviewEdit';
-// import UsersList from './components/UsersList';
 import User from './components/User';
 import CustomFooter from './components/footer';
 import { authenticate } from './store/session';
@@ -48,9 +47,6 @@ function App() {
         <ProtectedRoute path='/new-form'>
           <RestaurantForm />
         </ProtectedRoute>
-        {/* <ProtectedRoute path='/users' exact={true} >
-          <UsersList />
-        </ProtectedRoute> */}
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>

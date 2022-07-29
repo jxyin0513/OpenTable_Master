@@ -48,7 +48,6 @@ export const GetRestaurantDetailThunk = (id) => async (dispatch) => {
     const response = await fetch(`/api/restaurants/${id}`)
     if (response.ok) {
         const data = await response.json()
-        console.log(data)
         dispatch(getRestaurant(data))
         return data
     }
@@ -62,21 +61,14 @@ export const CreateRestaurantThunk = (restaurant) => async (dispatch) => {
     })
     if (response.ok) {
         const data = await response.json()
-        // console.log(data.user_id, 'before thunk dispatch')
         dispatch(createRestaurant(data))
-        // console.log(data.user_id, 'after thunk dispatch')
         return null
     }else if (response.status < 500) {
         const data = await response.json();
-        console.log(data)
         if (data.errors) {
           return data.errors;
         }
     }
-    // else {
-    //     console.log(response.errors)
-    //     return response
-    // }
 
 }
 export const EditRestaurantThunk = (restaurant) => async (dispatch) => {
@@ -91,7 +83,6 @@ export const EditRestaurantThunk = (restaurant) => async (dispatch) => {
         return null
     }else if (response.status < 500) {
         const data = await response.json();
-        console.log(data)
         if (data.errors) {
           return data.errors;
         }
