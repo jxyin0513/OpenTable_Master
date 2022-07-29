@@ -4,33 +4,61 @@ html, body{
 }
 .footer-container {
     display: flex;
+    background-color:dimgray;
 }
-.footer-outer{
+.footer-wrapper{
     position: relative;
-    margin-top: -140px;
+    margin-top: -150px;
     bottom: 0;
     width: 100%;
-    height: 140px;
+    height: 150px;
+}
+.footer-col h4 {
+    padding: 4px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
 #root{
     min-height: 100%;
-    padding-bottom: 140px;
+    padding-bottom: 150px;
     box-sizing: border-box;
 }
-
+.footer-col{
+    display: flex;
+}
 .footer-container > div{
     padding: 10px;
     margin: 10px;
 }
-.footer-col > ul a{
+.footer-col a{
     text-decoration: none;
     color: black;
-
 }
-.footer-col > ul a:hover{
-    color:darkgray;
+.footer-col a:hover{
+    color:darkslateblue;
 }
-.footer-col > ul > li > p{
+.footer-col p{
     display: inline;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+    color: azure;
+}
+.dev-profile{
+    padding-left: 50px;
+    margin-left: 30px;
+}
+.advisor-profile{
+    padding-left: 90px;
+    margin-left: 50px;
+}
+.gitHub{
+    height: 15px;
+    width: 15px;
+}
+a.gitHub :hover{
+    color:darkblue;
+}
+.linkedIn {
+    height: 15px;
+    width: 15px;
 }
