@@ -9,7 +9,7 @@ const CustomFooter = () => {
                         <a href='https://github.com/stuffy-doll'><img src='/assets/images/github.png' className='gitHub' alt='gitHub' /><p>stuffy-doll</p></a>
                     </li>
                     <li>
-                        <a href=''><img src='/assets/images/linkedIn.png' className='linkedIn' alt='linkedIn' /><p>placeholder</p></a>
+                        <a href='https://google.com/'><img src='/assets/images/linkedIn.png' className='linkedIn' alt='linkedIn' /><p>placeholder</p></a>
                     </li>
                 </ul>
             <div className='ethan'></div>
@@ -18,7 +18,7 @@ const CustomFooter = () => {
                         <a href='https://github.com/eebrowning'><img src='/assets/images/github.png' className='gitHub' alt='gitHub' /><p>eebrowning</p></a>
                     </li>
                     <li>
-                        <a href=''><img src='/assets/images/linkedIn.png' className='linkedIn' alt='linkedIn' /><p>placeholder</p></a>
+                        <a href='https://google.com/'><img src='/assets/images/linkedIn.png' className='linkedIn' alt='linkedIn' /><p>placeholder</p></a>
                     </li>
                 </ul>
             <div className='allen'></div>
@@ -27,7 +27,7 @@ const CustomFooter = () => {
                         <a href='https://github.com/aFaughn'><img src='/assets/images/github.png' className='gitHub' alt='gitHub' /><p>aFaughn</p></a>
                     </li>
                     <li>
-                        <a href=''><img src='/assets/images/linkedIn.png' className='linkedIn' alt='linkedIn' /><p>placeholder</p></a>
+                        <a href='https://google.com/'><img src='/assets/images/linkedIn.png' className='linkedIn' alt='linkedIn' /><p>placeholder</p></a>
                     </li>
                 </ul>
             <div className='jingxun'></div>
@@ -36,7 +36,7 @@ const CustomFooter = () => {
                         <a href='https://github.com/jxyin0513'><img src='/assets/images/github.png' className='gitHub' alt='gitHub' /><p>jxyin0513</p></a>
                     </li>
                     <li>
-                        <a href=''><img src='/assets/images/linkedIn.png' className='linkedIn' alt='linkedIn' /><p>placeholder</p></a>
+                        <a href='https://google.com/'><img src='/assets/images/linkedIn.png' className='linkedIn' alt='linkedIn' /><p>placeholder</p></a>
                     </li>
                 </ul>
         </div>
