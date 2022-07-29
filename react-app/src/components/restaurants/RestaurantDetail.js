@@ -83,9 +83,8 @@ function RestaurantDetail() {
         return (
             <>
                 <img id='restaurant-image' src={restaurant.image_url} alt="restaurant"></img>
-
-                <span id='restaurant-page'>
-                    <div>
+                <span id='restaurant-details'>
+                    <div id='favorite-button'>
                         {session.user && (
                             <button onClick={(e) => {
                                 handleFav(e);
@@ -95,35 +94,39 @@ function RestaurantDetail() {
                         )}
 
                     </div>
-                    {session && restaurant && (
-                        <span id='restaurant-box'>
 
-                            <div id='restaurant-details'>
-                                <div>{restaurant.name}</div>
-                                <div>{restaurant.phone}</div>
-                                <div>{restaurant.cuisine}</div>
-                                <div>Hours Open: {timeConverter(restaurant.open_hours)} - {timeConverter(restaurant.close_hours)}</div>
+                    <span id='restaurant-page'>
+                        {session && restaurant && (
+                            <span id='restaurant-box'>
 
-                                <div>Price Point: {'$'.repeat(restaurant.price_point)}</div>
+                                <div id='restaurant-info'>
+                                    <div>{restaurant.name}</div>
+                                    <div>{restaurant.phone}</div>
+                                    <div>{restaurant.cuisine}</div>
+                                    <div>Hours Open: {timeConverter(restaurant.open_hours)} - {timeConverter(restaurant.close_hours)}</div>
+
+                                    <div>Price Point: {'$'.repeat(restaurant.price_point)}</div>
+                                </div>
+                            </span>
+                        )}
+                        {session.user && restaurant && restaurant.user_id === userId && (
+                            <div id='user-owned-buttons'>
+                                <button id='edit-restaurant' onClick={handleEdit}>Edit</button>
+                                <button id='delete-restaurant' onClick={handleDelete}>Delete</button>
                             </div>
-                        </span>
-                    )}
-                    {session.user && restaurant && restaurant.user_id === userId && (
-                        <>
-                            <button id='edit-restaurant' onClick={handleEdit}>Edit</button>
-                            <button id='delete-restaurant' onClick={handleDelete}>Delete</button>
-                        </>
-                    )}
+                        )}
 
-                    {review && <ReviewForm restaurantId={id} hide={() => setReview(false)} />}
-                    <Reviews restaurantId={id} />
-                    {edit && <EditRestaurant id={id} hide={() => setEdit(false)} />}
+                        {review && <ReviewForm restaurantId={id} hide={() => setReview(false)} />}
+                        {review_user.length === 0 && <button onClick={reviewClick}>Write a Review</button>}
+                        <Reviews restaurantId={id} />
+                        {edit && <EditRestaurant id={id} hide={() => setEdit(false)} />}
+
+
+                    </span>
                     <ReservationForm />
-                    {review_user.length === 0 && <button onClick={reviewClick}>Write a Review</button>}
-
-
                 </span>
             </>
+
         )
     } else {
         return (<Route><h1>404 Page Not Found</h1></Route>)

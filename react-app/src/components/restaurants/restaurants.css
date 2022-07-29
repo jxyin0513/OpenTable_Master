@@ -15,16 +15,33 @@ a {
     align-items: center;
 }
 
+
 #restaurant-image {
+    position: relative;
     width: 100%;
     height: auto;
 }
 
+#favorite-button {
+    z-index: 1;
+    background-color: red;
+    position: absolute;
+    left: 55rem;
+    top: 10rem;
+}
+
+#retaurant-details {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 #restaurant-page {
+    padding: 15px;
     background-color: white;
     position: relative;
     left: 100px;
-    top: 15px;
+    top: -150px;
     display: flex;
     flex-direction: column;
     width: 60%
@@ -38,7 +55,7 @@ a {
 }
 
 
-#restaurant-details {
+#restaurant-info {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
