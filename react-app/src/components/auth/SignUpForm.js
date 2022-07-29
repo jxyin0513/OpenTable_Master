@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import './signup-form.css';
 
@@ -58,47 +58,48 @@ const SignUpForm = () => {
       <form onSubmit={onSignUp}>
         <div>
           {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
+            <div className='signup-error' key={ind}>{error}</div>
           ))}
         </div>
-        <div>
-          <label>User Name</label>
+        <div className='signup-field'>
           <input
             type='text'
             name='username'
+            placeholder='Username'
             onChange={updateUsername}
             value={username}
           ></input>
         </div>
-        <div>
-          <label>Email</label>
+        <div className='signup-field'>
           <input
             type='text'
             name='email'
+            placeholder='Email'
             onChange={updateEmail}
             value={email}
           ></input>
         </div>
-        <div>
-          <label>Password</label>
+        <div className='signup-field'>
           <input
             type='password'
             name='password'
+            placeholder='Password'
             onChange={updatePassword}
             value={password}
           ></input>
         </div>
-        <div>
-          <label>Repeat Password</label>
+        <div className='signup-field'>
           <input
             type='password'
             name='repeat_password'
+            placeholder='Confirm Password'
             onChange={updateRepeatPassword}
             value={repeatPassword}
             required={true}
           ></input>
         </div>
-        <button type='submit'>Sign Up</button>
+        <button className='signup-button' type='submit'>Sign Up</button>
+        <p className='login-link'>Already have an account? <Link to='/login'>Log in!</Link></p>
       </form>
     </div>
   );

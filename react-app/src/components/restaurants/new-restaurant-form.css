@@ -1,0 +1,40 @@
+.restaurant-error {
+  text-align: center;
+  color: red;
+}
+
+.restaurant-field {
+  margin: 8px auto 8px 100px;
+}
+
+.restaurant-button {
+  margin-left: 180px;
+}
+
+.restaurant-form {
+  display: flex;
+  margin: 8% auto auto auto;
+  padding: 20px;
+  background-color: white;
+  flex-direction: column;
+  border: 2px solid #f85329;
+  border-radius: 12px;
+  min-width: 360px;
+  max-width: 420px;
+  min-height: 220px;
+}
+
+.restaurant-form>form>input {
+  width: 50%
+}
+
+.restaurant-form>form>button {
+  margin-top: 12px;
+  margin-left: 190px;
+}
+
+
+.restaurant-form>form>p {
+  color: #f85329;
+  margin-left: 100px;
+}
