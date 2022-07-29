@@ -1,0 +1,165 @@
+.userDetailBanner {
+    display: flex;
+    position: relative;
+    background-color: #f85329;
+    width: 100%;
+    height: 150px;
+    padding-top: 10px;
+}
+.userDetailWrapper {
+    width: 100%;
+}
+.usersUl {
+    width: 100%;
+    color: white;
+    font-family: arial;
+    display: flex;
+    flex-direction: column;
+    font-size: 24px;
+    align-items: center;
+    padding-left: 0px;
+}
+.userDetailEmail {
+    font-size: 12px;
+}
+.UDReservationWrapper {
+    max-width: 35%;
+    min-width: 15%;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+    background-color: #eee;
+}
+.UDReservationHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-family: arial;
+    font-size: 24px;
+    background-color:#f85329;
+    color: white;
+}
+.UDReservationCardContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 5px;
+    width: 350px;
+    max-width: 350px;
+    min-width: 170px;
+    background-color:#f85329;
+    border-radius: 10px;
+}
+.reservationCard {
+    margin: 5px;
+    font-family: arial;
+    width: 150px;
+    display: flex;
+    padding: 5px;
+    border: 1px solid #999;
+    background-color: white;
+    border-radius: 7px;
+}
+.reservationCard > div > button {
+    width: 150px;
+    height: 25px;
+    border: 0px;
+    background-color: rgba(155,0,0,1);
+    box-shadow: 0px 0px 5px #222;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.reservationCard > div > button:hover {
+    background-color: red;
+    box-shadow: 0px 0px 3px red;
+    border: 1px solid rgba(255,100,100);
+}
+.reservationCard > div {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-size: 18px;
+}
+.UDResFavWrapper {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #eee;
+    flex-wrap: wrap;
+}
+.user-favorites-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color:#f85329;
+    border-radius: 5px;
+    max-width: 600px;
+    font-family: arial;
+    padding: 5px;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    border: 2px solid #222;
+    margin: 40px;
+}
+.userFavoritesCardWrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color:#f85329;
+    border-radius: 5px;
+    max-width: 500px;
+    font-family: arial;
+    padding: 5px;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+}
+.user-favorite-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #999;
+    padding: 2px;
+    margin: 2px;
+    min-height: 130px;
+    width: 150px;
+    border: 1px solid #f85329;
+    color: black;
+}
+.user-favorite-card > a {
+    color: black;
+    padding: 3px;
+}
+.UDReservationContainer {
+    background-color:#f85329;
+    border: 2px solid #222;
+    border-radius: 5px;
+    margin: 40px;
+    min-width: 364px;
+}
+.remove-fav {
+    width: 150px;
+    height: 35px;
+    border: 0px;
+    background-color: rgba(155,0,0,1);
+    box-shadow: 0px 0px 5px #222;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.remove-fav:hover {
+    background-color: red;
+    box-shadow: 0px 0px 3px red;
+    border: 1px solid rgba(255,100,100);
+}

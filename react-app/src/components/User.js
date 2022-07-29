@@ -4,6 +4,7 @@ import { GetReservationThunk } from './../store/reservation';
 import { useParams } from 'react-router-dom'
 import Reservation from './reservations/Reservations';
 import UserFavorites from './restaurants/UserFavorites';
+import './User.css'
 
 function User() {
   const dispatch = useDispatch()
@@ -32,19 +33,26 @@ function User() {
     <>
       {+userId===sessionUserId &&(
       <>
-        <ul>
-          <li>
-            <strong>User Id</strong> {userId}
-          </li>
-          <li>
-            <strong>Username</strong> {user.username}
-          </li>
-          <li>
-            <strong>Email</strong> {user.email}
-          </li>
-        </ul>
-        <Reservation userId={userId} />
-        <UserFavorites />
+        <div className='userDetailBanner'>
+          <div className='userDetailWrapper'>
+            <ul className='usersUl'>
+              <li>
+                <h3 className='userDetail' id='UDUsername'>Welcome back,  {user.username}</h3>
+              </li>
+              <li>
+                <h3 className='userDetailEmail' id='UDEmail'>Email registered to this account:        {user.email}</h3>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className='UDResFavWrapper'>
+          <div className='UDReservationWrapper'>
+            <div className='UDReservationContainer'>
+              <Reservation userId={userId} />
+            </div>
+          </div>
+          <UserFavorites />
+        </div>
       </>
       )}
       {sessionUserId!== +userId && (
