@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CreateRestaurantThunk } from '../../store/restaurant';
 import { useDispatch, useSelector } from 'react-redux'
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 function RestaurantForm() {
     const dispatch = useDispatch()
@@ -34,9 +34,9 @@ function RestaurantForm() {
         }
 
         const newRestaurant = await dispatch(CreateRestaurantThunk(restaurant))
-        if(!newRestaurant){
+        if (!newRestaurant) {
             history.push('/')
-        }else{
+        } else {
             setErrors(newRestaurant)
         }
     }
@@ -45,7 +45,7 @@ function RestaurantForm() {
         <>
             <form onSubmit={onSubmit}>
                 <ul>
-                    {errors.length>0 && errors.map(error=>
+                    {errors.length > 0 && errors.map(error =>
                         <li className="errors">{error}</li>
                     )}
                 </ul>
@@ -60,7 +60,8 @@ function RestaurantForm() {
                 </label>
                 <label>Cuisine:
                     <select name='cuisine' onChange={e => setCuisine(e.target.value)}>
-                        {cuisines.map(cuisine=>(
+                        <option selected disabled>--Please Choose an Option--</option>
+                        {cuisines.map(cuisine => (
                             <option key={cuisine} value={cuisine}>{cuisine}</option>
                         ))}
                     </select>
@@ -72,7 +73,7 @@ function RestaurantForm() {
                     <input type='time' name='close_hours' onChange={e => setCloseHours(e.target.value)}></input>
                 </label>
                 <label>Image URL:
-                <input type='text' name='image_url' onChange={e => setURL(e.target.value)}></input>
+                    <input type='text' name='image_url' onChange={e => setURL(e.target.value)}></input>
                 </label>
                 <label>Price point:
                     <input type='text' name='price_point' onChange={e => setPrice_Point(e.target.value)}></input>

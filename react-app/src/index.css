@@ -1,36 +1,108 @@
 /* TODO Add site wide styles */
-html, body{
+html,
+body {
     height: 100%;
 }
+
 .footer-container {
     display: flex;
-}
-.footer-outer{
-    position: relative;
-    margin-top: -140px;
-    bottom: 0;
-    width: 100%;
-    height: 140px;
+    background-color:dimgray;
 }
 
-#root{
+.footer-wrapper{
+    position: relative;
+    margin-top: -150px;
+    bottom: 0;
+    width: 100%;
+    height: 150px;
+}
+.footer-col h4 {
+    padding: 4px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+#root {
     min-height: 100%;
-    padding-bottom: 140px;
+    padding-bottom: 150px;
     box-sizing: border-box;
+}
+
+.footer-col{
+    display: flex;
 }
 
 .footer-container > div{
     padding: 10px;
     margin: 10px;
 }
-.footer-col > ul a{
+
+.footer-col a{
     text-decoration: none;
     color: black;
+}
+
+.footer-col a:hover{
+    color:darkslateblue;
+}
+
+.footer-col p{
+    display: inline;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+    color:gainsboro;
 
 }
-.footer-col > ul a:hover{
-    color:darkgray;
+.dev-profile{
+    padding-left: 50px;
+    margin-left: 30px;
 }
-.footer-col > ul > li > p{
-    display: inline;
+.advisor-profile{
+    padding-left: 90px;
+    margin-left: 50px;
+}
+.gitHub{
+    height: 15px;
+    width: 15px;
+}
+a.gitHub :hover{
+    color:darkblue;
+}
+.linkedIn {
+    height: 15px;
+    width: 15px;
+}
+
+select {
+    border: 1px solid #f85329;
+    border-radius: 3px;
+    padding: 4px;
+}
+
+input {
+    border: 1px solid #f85329;
+    padding: 4px;
+    border-radius: 3px;
+}
+
+input:focus {
+    border: 2px solid #f85329;
+}
+
+button {
+    border: 2px solid #f85329;
+    padding: 3px;
+    min-width: 50px;
+    max-width: 110px;
+    border-radius: 3px;
+    background-color: white;
+    color: #f85329
+}
+
+button:hover {
+    background-color: #f85329;
+    color: white
+}
+
+label {
+    margin-right: 12px;
 }
