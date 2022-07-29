@@ -1,5 +1,5 @@
 /* TODO Add site wide styles */
-/* html, body{
+html, body{
     height: 100%;
 }
 .footer-container {
@@ -30,4 +30,7 @@
 }
 .footer-col > ul a:hover{
     color:darkgray;
-} */
+}
+.footer-col > ul > li > p{
+    display: inline;
+}
