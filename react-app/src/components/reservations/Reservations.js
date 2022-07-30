@@ -39,21 +39,21 @@ function Reservation() {
     return (
         <>
             <div className='UDReservationHeader'>
-             <h3>Reservations</h3>
+                <h3>Reservations</h3>
             </div>
             <div className='UDReservationCardContainer'>
-            {signedInUserId && reservations && reservations.map(reservation => (
-                <div className='reservationCard' key={reservation.id}>
-                    <div key={reservation.id}>
-                        <div>Reservation Id: {reservation.id}</div>
-                        <div>@{restaurants.find(restaurant => restaurant.id === reservation.restaurant_id).name}</div>
-                        <div>Date: {reservation.res_date}</div>
-                        <div>Time: {timeConverter(reservation.res_time)}</div>
-                        <div>Party Size: {reservation.party_size}</div>
-                        <button className={`del_${reservation.id}`} onClick={deleteRes}>Cancel Reservation</button>
+                {signedInUserId && reservations && reservations.map(reservation => (
+                    <div className='reservationCard' key={reservation.id}>
+                        <div key={reservation.id}>
+                            <div>@{restaurants.find(restaurant => restaurant.id === reservation.restaurant_id)?.name}</div>
+                            <div>Date: {reservation.res_date}</div>
+                            <div>Time: {timeConverter(reservation.res_time)}</div>
+                            <div>Party Size: {reservation.party_size}</div>
+                            <div>Reservation Id: {reservation.id}</div>
+                            <button className={`del_${reservation.id}`} onClick={deleteRes}>Cancel Reservation</button>
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))}
             </div>
 
         </>

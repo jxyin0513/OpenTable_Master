@@ -84,6 +84,7 @@ const favoriteReducer = (state = {}, action) => {
       return newState;
 
     case GET_ALL_FAVORITES:
+      newState = {}
       action.payload.forEach(favorite => {
         newState[favorite.id] = favorite
       });
