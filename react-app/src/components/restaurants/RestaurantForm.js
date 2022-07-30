@@ -64,7 +64,7 @@ function RestaurantForm() {
                 <h3 className='restaurant-form-message'>{message}</h3>
                 <form onSubmit={onSubmit}>
                     {errors.length > 0 && errors.map(error =>
-                        <div className="restaurant-error">{error}</div>
+                        <div key={error} className="restaurant-error">{error}</div>
                     )}
                     <input type='text' className='restaurant-field' name='name' placeholder='Restaurant Name' onChange={e => setName(e.target.value)}></input>
 
