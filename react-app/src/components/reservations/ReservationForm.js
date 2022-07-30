@@ -77,7 +77,7 @@ function ReservationForm() {
                             <p>Time: </p><input type='time' name='time' onChange={(e) => setTime(e.target.value)}></input>
                         </div>
                         <div className='reservation-party-field'>
-                            <p>Party Size: </p><input type='number' name='partySize' onChange={(e) => setPartySize(e.target.value)} min={1} max={10}></input>
+                            <p>Party Size: </p><input type='number' name='partySize' placeholder={1} onChange={(e) => setPartySize(e.target.value)} min={1} max={10}></input>
                         </div>
                         <button className='reservation-submit' type='submit' disabled={errors.length === 0 ? false : true}>Submit</button>
                     </form>
