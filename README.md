@@ -126,8 +126,8 @@ A good portion of development time was spent making the user experience as smoot
  - [ ] Restaurant average scores will appear on the main / route
 ## Screenshots
 ### Restaurants
-![Restaurants](https://upload.wikimedia.org/wikipedia/commons/1/19/Under_construction_graphic.gif)
+![Restaurants](https://i.imgur.com/hhSKi9C.png)
 ### Restaurant Details
-![RestaurantDetails](https://upload.wikimedia.org/wikipedia/commons/1/19/Under_construction_graphic.gif)
+![RestaurantDetails](https://i.imgur.com/JK9HafX.png)
 ### User Profile
-![UserProfile](https://upload.wikimedia.org/wikipedia/commons/1/19/Under_construction_graphic.gif)
+![UserProfile](https://i.imgur.com/ixlyLpk.png)
