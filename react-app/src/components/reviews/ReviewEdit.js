@@ -52,7 +52,7 @@ function EditReview() {
                     )}
                 </div>
                 <div className='edit-content'>
-                    <textarea name='content' placeholder="Write your edit here...or don't!" value={content} onChange={e => setContent(e.target.value)}></textarea>
+                    <textarea name='content' placeholder="Write your edit here...or don't!" value={content} onChange={e => setContent(e.target.value)} ></textarea>
                 </div>
                 <div className='edit-rating'>
                     <p>Rating: </p><input type='number' name='rating' placeholder='Rating' value={rating} onChange={e => setRating(e.target.value)}></input>

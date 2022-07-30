@@ -44,8 +44,9 @@ function Reviews({ restaurantId }) {
 
     function onDelete(e) {
         e.preventDefault();
-
-        dispatch(deleteReviewThunk(e.target.className))
+        let id = e.target.className.split('-')[1]
+        console.log('might need to parse id from ', e.target.className)
+        dispatch(deleteReviewThunk(id))
 
     }
 
@@ -79,7 +80,7 @@ function Reviews({ restaurantId }) {
                                         <NavLink to={`/edit/${review.id}`}>
                                             <button className={`edit-${review.id}`}>Edit</button>
                                         </NavLink>
-                                        <button className={`delete-${review.i}`} onClick={onDelete}>Delete</button>
+                                        <button className={`delete-${review.id}`} onClick={onDelete}>Delete</button>
                                     </div>
                                 )}
                             </div>

@@ -24,10 +24,12 @@ function ReviewForm({ restaurantId, hide }) {
             content,
             rating
         }
+        console.log('this is the review you want', review)
         const newReview = await dispatch(createReviewsThunk(review))
         if (newReview) {
             hide()
         }
+        return newReview
     }
     useEffect(() => {
         const arr = []
@@ -49,10 +51,10 @@ function ReviewForm({ restaurantId, hide }) {
                     )}
                 </div>
                 <div>
-                    <textarea className='review-content' name='content' placeholder="Write a review here...or don't!" onChange={e => setContent(e.target.value)}></textarea>
+                    <textarea className='review-content' name='content' value={content} placeholder="Write a review here...or don't!" onChange={e => setContent(e.target.value)}></textarea>
                 </div>
                 <div className='review-rating'>
-                    <p>Rating: </p><input type='number' className='review-rating' name='rating' onChange={e => setRating(e.target.value)}></input>
+                    <p>Rating: </p><input required type='number' className='review-rating' name='rating' onChange={e => setRating(e.target.value)}></input>
                 </div>
                 <div className='review-actions'>
                     <button type='submit' disabled={errors.length === 0 ? false : true}>Submit</button>
