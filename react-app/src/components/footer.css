@@ -21,3 +21,23 @@ a {
 p {
     padding-left: 4px;
 } */
+
+.flask {
+    height: 70px;
+    width: auto;
+}
+
+.python {
+    height: 70px;
+    width: auto;
+}
+
+.reactjs {
+    height: 70px;
+    width: auto;
+}
+
+.sqlalchemy {
+    height: 70px;
+    width: auto;
+}

@@ -73,7 +73,7 @@ function RestaurantForm() {
                     <input type='text' className='restaurant-field' name='street' placeholder='Street Address' onChange={e => setStreet(e.target.value)}></input>
 
                     <select name='cuisine' className='restaurant-field' onChange={e => setCuisine(e.target.value)}>
-                        <option selected disabled>--Cuisine--</option>
+                        <option value='Cuisine'>--Cuisine--</option>
                         {cuisines.map(cuisine => (
                             <option key={cuisine} value={cuisine}>{cuisine}</option>
                         ))}
