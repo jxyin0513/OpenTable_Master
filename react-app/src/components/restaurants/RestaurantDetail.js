@@ -85,7 +85,12 @@ function RestaurantDetail() {
         return (
 
             <span id='overall-box'>
-                <img id='restaurant-image' src={restaurant.image_url} alt="restaurant"></img>
+                {!restaurant.image_url && (
+                    <img id='restaurant-image' src='https://i.imgur.com/W5l5B9n.png' alt="default restaurant"></img>
+                )}
+                {restaurant.image_url && (
+                    <img id='restaurant-image' src={restaurant.image_url} alt="restaurant"></img>
+                )}
                 <div id='favorite-button-box'>
                     {session.user && (
                         <button id='favorite-button' onClick={(e) => {
