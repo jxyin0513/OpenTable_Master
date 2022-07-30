@@ -15,29 +15,31 @@ const UserFavorites = () => {
   }, [dispatch, userId]);
 
   return (
-    <div className='user-favorites-container'>
+    <>
       <div className='userFavoritesHeader'>
         <h3>Your Favorites</h3>
       </div>
-      <div className='userFavoritesCardWrapper'>
-      {favorites.map(favorite => (
-        <div key={favorite.id} className='user-favorite-card'>
-          <Link to={`/restaurants/${favorite.id}`}>{favorite.name}</Link>
-          <p>{favorite.phone}</p>
-          <p>{favorite.cuisine}</p>
-          <p>{favorite.hours}</p>
-          <p>{'$'.repeat(favorite.price_point)}</p>
-          <button className="remove-fav" onClick={async () => {
-            const fav = {
-              user_id: userId,
-              restaurant_id: favorite.id
-            }
-            await dispatch(removeFavoriteThunk(fav))
-          }}>Remove From Favorites</button>
+      <div className='user-favorites-container'>
+        <div className='userFavoritesCardWrapper'>
+          {favorites.map(favorite => (
+            <div key={favorite.id} className='user-favorite-card'>
+              <Link to={`/restaurants/${favorite.id}`}>{favorite.name}</Link>
+              <p>{favorite.phone}</p>
+              <p>{favorite.cuisine}</p>
+              <p>{favorite.hours}</p>
+              <p>{'$'.repeat(favorite.price_point)}</p>
+              <button className="remove-fav" onClick={async () => {
+                const fav = {
+                  user_id: userId,
+                  restaurant_id: favorite.id
+                }
+                await dispatch(removeFavoriteThunk(fav))
+              }}>Remove From Favorites</button>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
-    </div>
+      </div>
+    </>
   )
 };
 
