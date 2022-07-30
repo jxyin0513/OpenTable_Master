@@ -1,0 +1,23 @@
+.review-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 12px;
+  border-radius: 3px;
+  box-shadow: 2px 2px 4px gray;
+  width: auto;
+  min-height: 75px;
+}
+
+.review-content {
+  margin-bottom: 10px;
+}
+
+.rating-stars {
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+[class^="delete-"] {
+  margin-left: 12px;
+}

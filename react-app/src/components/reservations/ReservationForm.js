@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { CreateReservationThunk } from '../../store/reservation'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
+import './reservation-form.css'
 
 function ReservationForm() {
     const dispatch = useDispatch();
@@ -32,9 +33,11 @@ function ReservationForm() {
             history.push(`/users/${userId}`)
         }
     }
-    function onClick(){
+
+    function onClick() {
         history.push('/login')
     }
+
     useEffect(() => {
         // Prevent users from setting invalid reservation dates
         const reservedDate = new Date(`${date}T${time}:00`)
@@ -60,34 +63,35 @@ function ReservationForm() {
 
     if (userId) {
         return (
-            <form onSubmit={onSubmit}>
-                <ul>
-                    {errors.length > 0 && errors.map(error =>
-                        <li key={error} className="errors">{error}</li>
-                    )}
-                </ul>
-                <label>Date
-                    <input type='date' name='date' onChange={(e) => setDate(e.target.value)}></input>
-                </label>
-                <label>Time
-                    <input type='time' name='time' onChange={(e) => setTime(e.target.value)}></input>
-                </label>
-                <label>Party Size
-                    <input type='number' name='partySize' onChange={(e) => setPartySize(e.target.value)} min={1} max={10}></input>
-                </label>
-                <button type='submit' disabled={errors.length === 0 ? false : true}>Submit</button>
-            </form>
-
+            <div>
+                <h3>Save a table!</h3>
+                <div className='reservation-form-container'>
+                    <form onSubmit={onSubmit}>
+                        {errors.length > 0 && errors.map(error =>
+                            <div key={error} className="reservation-error">{error}</div>
+                        )}
+                        <div className='reservation-date-field'>
+                            <p>Date: </p><input type='date' name='date' onChange={(e) => setDate(e.target.value)}></input>
+                        </div>
+                        <div className='reservation-time-field'>
+                            <p>Time: </p><input type='time' name='time' onChange={(e) => setTime(e.target.value)}></input>
+                        </div>
+                        <div className='reservation-party-field'>
+                            <p>Party Size: </p><input type='number' name='partySize' onChange={(e) => setPartySize(e.target.value)} min={1} max={10}></input>
+                        </div>
+                        <button className='reservation-submit' type='submit' disabled={errors.length === 0 ? false : true}>Submit</button>
+                    </form>
+                </div>
+            </div>
+        );
+    } else {
+        return (
+            <div className='no-user-message'>
+                <p>Want to make a reservation?</p>
+                <button onClick={onClick}>login</button>
+            </div>
         )
     }
-    else {
-        return (
-        <>
-            <p>Want to make a reservation ?</p>
-            <button onClick={onClick}>login</button>
-        </>
-        )
-     }
 
 }
 

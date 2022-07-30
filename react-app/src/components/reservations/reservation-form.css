@@ -1,0 +1,30 @@
+.reservation-form-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.reservation-form-container>div {
+  margin-left: 50px;
+}
+
+.reservation-form-container>form>div>input {
+  margin-top: 10px;
+  width: 100px;
+}
+
+.reservation-form-container>form>div>p {
+  margin-top: 10px;
+}
+
+.reservation-form-container>form>div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.reservation-submit {
+  margin-top: 45px;
+  margin-left: 85px;
+}
