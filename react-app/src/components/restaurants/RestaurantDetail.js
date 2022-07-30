@@ -85,19 +85,20 @@ function RestaurantDetail() {
         return (
 
             <span id='overall-box'>
-                {!restaurant.image_url && (
-                    <img id='restaurant-image' src='https://i.imgur.com/W5l5B9n.png' alt="default restaurant"></img>
-                )}
-                {restaurant.image_url && (
-                    <img id='restaurant-image' src={restaurant.image_url} alt="restaurant"></img>
-                )}
+                <div id='detail-image-wrapper'>
+                    {!restaurant.image_url && (
+                        <img id='restaurant-image' src='https://i.imgur.com/W5l5B9n.png' alt="default restaurant"></img>
+                        )}
+                    {restaurant.image_url && (
+                        <img id='restaurant-image' src={restaurant.image_url} alt="restaurant"></img>
+                        )}
+                </div>
                 <div id='favorite-button-box'>
                     {session.user && (
                         <button id='favorite-button' onClick={(e) => {
                             handleFav(e);
                         }} className={`star-${starFill}`}>{favorite !== undefined ? "Remove from Favorites" : "Add to Favorites"}
                         </button>
-
                     )}
 
                 </div>
