@@ -1,0 +1,49 @@
+.review-error {
+  text-align: center;
+  color: red;
+}
+
+.review-form {
+  display: flex;
+  margin: 8% auto auto auto;
+  padding: 20px;
+  background-color: white;
+  flex-direction: column;
+  border: 2px solid #f85329;
+  border-radius: 12px;
+  min-width: 360px;
+  max-width: 420px;
+  min-height: 220px;
+}
+
+.review-form>form>div>textarea {
+  width: 360px;
+  min-width: 360px;
+  max-width: 360px;
+  min-height: 200px;
+  max-height: 250px;
+  margin-left: 6px;
+}
+
+.review-form>form>input {
+  width: 50%
+}
+
+.review-rating {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10px;
+  margin-left: 8px;
+  margin-bottom: 10px;
+}
+
+.review-rating>input {
+  margin-left: 10px;
+}
+
+.review-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}

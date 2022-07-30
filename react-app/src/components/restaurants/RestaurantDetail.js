@@ -24,7 +24,7 @@ function RestaurantDetail() {
     const reviews = useSelector(state => state.reviews)
     let review_user;
     if (reviews) {
-        review_user = Object.values(reviews).filter(review => {if(review.user_id === userId && review.restaurant_id===Number(id)) return true})
+        review_user = Object.values(reviews).filter(review => { if (review.user_id === userId && review.restaurant_id === Number(id)) return true })
     }
 
     //Converts 24hr format to 12hr format
@@ -132,9 +132,8 @@ function RestaurantDetail() {
                                 <button className='detail-button' id='delete-restaurant' onClick={handleDelete}>Delete</button>
                             </div>
                         )}
-
-                        {review && <ReviewForm restaurantId={id} hide={() => setReview(false)} />}
                         <Reviews restaurantId={id} />
+                        {review && <ReviewForm restaurantId={id} hide={() => setReview(false)} />}
                         {review_user.length === 0 && <button className='detail-button' onClick={reviewClick}>Write a Review</button>}
                         {edit && <EditRestaurant id={id} hide={() => setEdit(false)} />}
 

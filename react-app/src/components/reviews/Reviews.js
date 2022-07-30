@@ -4,6 +4,7 @@ import { deleteReviewThunk } from '../../store/review';
 // import { editReviewsThunk } from '../../store/review';
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import './reviews.css'
 
 function Reviews({ restaurantId }) {
     const dispatch = useDispatch();
@@ -58,27 +59,29 @@ function Reviews({ restaurantId }) {
                     {averageScore && (
                         <h2>Average Rating: {'⭐'.repeat(averageScore)}</h2>
                     )}
+                    <h3>Foodie Reviews</h3>
                     {reviews.map(review => {
                         return (
-                            <div key={review.id}>
-
-                                <p>{'⭐'.repeat(review.rating)}</p>
-                                <p>{userMatcher(users, review.user_id)} says "{review.content}"</p>
-                                {user && user.id === review.user_id && (
-                                    <div>
-                                        <div>
-                                            <NavLink to={`/edit/${review.id}`}>
-                                                <button className={review.id}>edit</button>
-                                            </NavLink>
-                                            <button className={review.id} onClick={onDelete}>delete</button>
-                                        </div>
-                                        {/* <div>
-                                            {editReview && (<EditReview id={review.id} hide={() => setEditReview(false)} />)}
-                                        </div> */}
+                            <div key={review.id} className='review-card'>
+                                {!review.content && (
+                                    <div className='review-content'>
+                                        {userMatcher(users, review.user_id)} is speechless...
                                     </div>
-                                )
-                                }
-
+                                )}
+                                {review.content && (
+                                    <div className='review-speechless'>
+                                        <p>{userMatcher(users, review.user_id)} says: "{review.content}"</p>
+                                    </div>
+                                )}
+                                <p className='rating-stars'>{userMatcher(users, review.user_id)}'s rating: {'⭐'.repeat(review.rating)}</p>
+                                {user && user.id === review.user_id && (
+                                    <div className='review-action-buttons'>
+                                        <NavLink to={`/edit/${review.id}`}>
+                                            <button className={`edit-${review.id}`}>Edit</button>
+                                        </NavLink>
+                                        <button className={`delete-${review.i}`} onClick={onDelete}>Delete</button>
+                                    </div>
+                                )}
                             </div>
                         )
                     })}

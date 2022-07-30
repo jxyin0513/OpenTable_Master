@@ -50,7 +50,7 @@ const NavBar = () => {
             </li>
             <li>
               <NavLink to={`/users/${sessionUser.id}`} exact={true} activeClassName='active'>
-                Hello {sessionUser.username} !
+                {sessionUser.username}
               </NavLink>
             </li>
             <li>
