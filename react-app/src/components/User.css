@@ -18,6 +18,10 @@
     font-size: 24px;
     align-items: center;
     padding-left: 0px;
+    list-style: none;
+}
+.usersUl > li > h3 {
+    color: white;
 }
 .userDetailEmail {
     font-size: 12px;
@@ -40,6 +44,12 @@
     font-family: arial;
     font-size: 24px;
     background-color:#f85329;
+    color: white;
+}
+.UDReservationHeader > h3 {
+    color: white;
+}
+.userFavoritesHeader > h3 {
     color: white;
 }
 .UDReservationCardContainer {
