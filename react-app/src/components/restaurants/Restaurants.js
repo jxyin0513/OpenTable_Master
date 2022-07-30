@@ -31,12 +31,14 @@ function Restaurants() {
                     (
                         <NavLink key={restaurant.id} to={`/restaurants/${restaurant.id}`}>
                             <div key={restaurant.id} className='restaurantDiv'>
-                                {!restaurant.image_url && (
-                                    <img src='https://i.imgur.com/W5l5B9n.png' alt="default restaurant"></img>
-                                )}
-                                {restaurant.image_url && (
-                                    <img src={restaurant.image_url} alt="restaurant"></img>
-                                )}
+                                <div id='restaurants-image-wrapper'>
+                                    {!restaurant.image_url && (
+                                        <img src='https://i.imgur.com/W5l5B9n.png' alt="default restaurant"></img>
+                                        )}
+                                    {restaurant.image_url && (
+                                        <img src={restaurant.image_url} alt="restaurant"></img>
+                                        )}
+                                </div>
                                 <div className='restaurantName'>{restaurant.name}</div>
                                 <div className='restaurantPhone'>{restaurant.phone}</div>
                                 <div className='restaurantStreet'>{restaurant.street}</div>
