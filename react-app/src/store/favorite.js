@@ -2,6 +2,7 @@ const GET_FAVORITE_RESTAURANTS = 'get/favoriteRestaurants'
 const GET_ALL_FAVORITES = 'get/allFavoriteRestaurants'
 const POST_FAVORITE_RESTAURANT = 'post/favoriteRestaurant'
 const REMOVE_FAVORITE_RESTAURANT = 'delete/favoriteRestaurant'
+const DESTROY_ALL_FAVORITES = 'delete/restaurantFavorites'
 
 const get = (payload) => ({
   type: GET_FAVORITE_RESTAURANTS,
@@ -20,6 +21,11 @@ const favorite = (payload) => ({
 
 const removeFavorite = (payload) => ({
   type: REMOVE_FAVORITE_RESTAURANT,
+  payload
+});
+
+const destroyAllFavorites = (payload) => ({
+  type: DESTROY_ALL_FAVORITES,
   payload
 });
 
@@ -72,6 +78,19 @@ export const removeFavoriteThunk = (payload) => async dispatch => {
   };
 };
 
+export const destroyAllFavoritesThunk = (restaurantId) => async dispatch => {
+  const res = await fetch(`/api/restaurants/favorites/${restaurantId}`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+  });
+  if (res.ok) {
+    const data = await res.json();
+    console.log(data);
+    dispatch(destroyAllFavorites(data));
+    return data;
+  }
+}
+
 const favoriteReducer = (state = {}, action) => {
   let newState = { ...state };
   switch (action.type) {
@@ -98,6 +117,10 @@ const favoriteReducer = (state = {}, action) => {
       delete newState[action.payload.restaurant_id];
       return newState;
 
+    case DESTROY_ALL_FAVORITES:
+      newState = { ...state };
+      delete newState[action.payload.restaurant_id];
+      return newState;
     default:
       return state;
   };
