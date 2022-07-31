@@ -10,7 +10,7 @@ function User() {
   const dispatch = useDispatch()
   const [user, setUser] = useState({});
   const { userId } = useParams();
-  const sessionUserId = useSelector(state=>state.session.user.id)
+  const sessionUserId = useSelector(state => state.session.user.id)
 
 
   useEffect(() => {
@@ -31,31 +31,31 @@ function User() {
 
   return (
     <>
-      {+userId===sessionUserId &&(
-      <>
-        <div className='userDetailBanner'>
-          <div className='userDetailWrapper'>
-            <ul className='usersUl'>
-              <li>
-                <h3 className='userDetail' id='UDUsername'>Welcome back,  {user.username}</h3>
-              </li>
-              <li>
-                <h3 className='userDetailEmail' id='UDEmail'>Email registered to this account:        {user.email}</h3>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className='UDResFavWrapper'>
-          <div className='UDReservationWrapper'>
-            <div className='UDReservationContainer'>
-              <Reservation userId={userId} />
+      {+userId === sessionUserId && (
+        <>
+          <div className='userDetailBanner'>
+            <div className='userDetailWrapper'>
+              <ul className='usersUl'>
+                <li>
+                  <h3 className='userDetail' id='UDUsername'>Welcome back,  {user.username}</h3>
+                </li>
+                <li>
+                  <h3 className='userDetailEmail' id='UDEmail'>Email registered to this account:        {user.email}</h3>
+                </li>
+              </ul>
             </div>
           </div>
-          <UserFavorites />
-        </div>
-      </>
+          <div className='UDResFavWrapper'>
+            <div className='UDReservationWrapper'>
+              <div className='UDReservationContainer'>
+                <Reservation userId={userId} />
+              </div>
+            </div>
+            <UserFavorites />
+          </div>
+        </>
       )}
-      {sessionUserId!== +userId && (
+      {sessionUserId !== +userId && (
         <h1>401 Unauthorized</h1>
       )}
     </>

@@ -144,7 +144,7 @@ def destroy_all_favorites(restaurant_id):
         if restaurant in user.user_favorite:
             user.user_favorite.remove(restaurant)
             db.session.commit()
-
+    return { "message": "success" }
 
 #Autofill search route
 @restaurant_router.route('/search', methods=['GET', 'POST'])
