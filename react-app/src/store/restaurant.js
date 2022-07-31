@@ -63,10 +63,10 @@ export const CreateRestaurantThunk = (restaurant) => async (dispatch) => {
         const data = await response.json()
         dispatch(createRestaurant(data))
         return null
-    }else if (response.status < 500) {
+    } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {
-          return data.errors;
+            return data.errors;
         }
     }
 
@@ -81,10 +81,10 @@ export const EditRestaurantThunk = (restaurant) => async (dispatch) => {
         const data = await response.json()
         dispatch(editRestaurant(data))
         return null
-    }else if (response.status < 500) {
+    } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {
-          return data.errors;
+            return data.errors;
         }
     }
 }
@@ -98,6 +98,8 @@ export const DeleteRestaurantThunk = (id) => async (dispatch) => {
         const data = await response.json()
         dispatch(deleteRestaurant(data))
         return data
+    } else {
+        console.log({ "message": "Unsuccessful" })
     }
 }
 

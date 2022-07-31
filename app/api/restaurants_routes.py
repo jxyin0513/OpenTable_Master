@@ -50,6 +50,10 @@ def singleRestaurant(restaurantId):
 #Deletes an individual restaurant and all objects with relations to it
 @restaurant_router.route('/<restaurantId>/delete', methods=['DELETE'])
 def deleteRestaurant(restaurantId):
+    users = User.query.all()
+    print('===============')
+    print("USERS:: ", users)
+    print('===============')
     restaurant= Restaurant.query.get(restaurantId)
     db.session.delete(restaurant)
     db.session.commit()
@@ -99,10 +103,8 @@ def favorite_restaurant():
 #GET's a user's favorite restaurants
 @restaurant_router.route('/favorites/<user_id>/<restaurant_id>')
 def get_favorites(user_id, restaurant_id):
-
     user = User.query.get(user_id)
     restaurant = Restaurant.query.get(restaurant_id)
-    print(user.user_favorite)
     if(restaurant in user.user_favorite):
         return {
         "user_id": user_id,
@@ -133,6 +135,14 @@ def remove_favorite(user_id, restaurant_id):
             "user_id": user_id,
             "restaurant_id": restaurant_id
         }
+
+@restaurant_router.route('/favorites/<restaurant_id>', methods=['DELETE'])
+def destroy_all_favorites(restaurant_id):
+    restaurant = Restaurant.query.get(restaurant_id)
+    for favorite in restaurant.restaurant_favorite:
+        restaurant.restaurant_favorite.remove(favorite)
+    db.session.commit()
+    return { "message": "Success" }
 
 #Autofill search route
 @restaurant_router.route('/search', methods=['GET', 'POST'])

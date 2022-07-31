@@ -80,6 +80,7 @@ def react_root(path):
 @app.route('/all/restaurants')
 def getAllRestaurants():
     restaurants = Restaurant.query.all()
+    print(restaurants[0].restaurant_favorite)
     restaurantsObj = [{
         'id': restaurant.id,
         'name': restaurant.name,
