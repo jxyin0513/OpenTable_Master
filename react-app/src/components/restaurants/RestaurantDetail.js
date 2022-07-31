@@ -66,8 +66,8 @@ function RestaurantDetail() {
     //Deletes a restaurant if the user is the owner
     async function handleDelete(e) {
         e.preventDefault();
-        await dispatch(destroyAllFavoritesThunk(id));
-        await dispatch(DeleteRestaurantThunk(id));
+        await dispatch(destroyAllFavoritesThunk(id))
+            .then(async () => await dispatch(DeleteRestaurantThunk(id)));
         history.push('/')
     }
 

@@ -24,7 +24,7 @@ function EditRestaurant({ id, hide }) {
     const [hour, minute] = openHoursArr
     const [hourC, minuteC] = closeHoursArr
 
-    function onClick(){
+    function onClick() {
         hide()
     }
 
@@ -58,7 +58,7 @@ function EditRestaurant({ id, hide }) {
             <form onSubmit={onSubmit}>
                 <ul>
                     {errors.length > 0 && errors.map(error =>
-                        <li className="errors">{error}</li>
+                        <li key={error} className="errors">{error}</li>
                     )}
                 </ul>
                 <label>Name:
