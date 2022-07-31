@@ -138,11 +138,13 @@ def remove_favorite(user_id, restaurant_id):
 
 @restaurant_router.route('/favorites/<restaurant_id>', methods=['DELETE'])
 def destroy_all_favorites(restaurant_id):
+    users = User.query.all()
     restaurant = Restaurant.query.get(restaurant_id)
-    for favorite in restaurant.restaurant_favorite:
-        restaurant.restaurant_favorite.remove(favorite)
-    db.session.commit()
-    return { "message": "Success" }
+    for user in users:
+        if restaurant in user.user_favorite:
+            user.user_favorite.remove(restaurant)
+            db.session.commit()
+
 
 #Autofill search route
 @restaurant_router.route('/search', methods=['GET', 'POST'])

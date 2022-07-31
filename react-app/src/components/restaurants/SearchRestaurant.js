@@ -30,8 +30,8 @@ const Search = () => {
         }} />
       <div className='results-container'>
         {enhancedSearch.map(result => (
-          <Link to={`/restaurants/${result.id}`}>
-            <div key={result.id} className='individual-result'>
+          <Link key={result.id} to={`/restaurants/${result.id}`}>
+            <div className='individual-result'>
               <p className='search-name'>{result.name}</p>
               <p>{result.cuisine}</p>
               <p className='search-detail'>Street Address: {result.street} | Phone: {result.phone}</p>

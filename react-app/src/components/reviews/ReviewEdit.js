@@ -48,7 +48,7 @@ function EditReview() {
             <form onSubmit={onSubmit}>
                 <div>
                     {errors.length > 0 && errors.map(error =>
-                        <div className="edit-error">{error}</div>
+                        <div key={error} className="edit-error">{error}</div>
                     )}
                 </div>
                 <div className='edit-content'>

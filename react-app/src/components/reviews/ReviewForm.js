@@ -47,7 +47,7 @@ function ReviewForm({ restaurantId, hide }) {
             <form onSubmit={onSubmit}>
                 <div>
                     {errors.length > 0 && errors.map(error =>
-                        <div className="review-error">{error}</div>
+                        <div key={error} className="review-error">{error}</div>
                     )}
                 </div>
                 <div>
