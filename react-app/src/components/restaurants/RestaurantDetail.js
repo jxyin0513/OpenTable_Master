@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DeleteRestaurantThunk, GetRestaurantDetailThunk } from '../../store/restaurant';
-import { destroyAllFavoritesThunk, getFavoritesThunk, removeFavoriteThunk, setFavoriteThunk } from '../../store/favorite';
+import { getFavoritesThunk, removeFavoriteThunk, setFavoriteThunk } from '../../store/favorite';
 import EditRestaurant from './RestaurantEdit';
 import Reviews from '../reviews/Reviews';
 import ReviewForm from '../reviews/ReviewForm';
@@ -66,7 +66,10 @@ function RestaurantDetail() {
     //Deletes a restaurant if the user is the owner
     async function handleDelete(e) {
         e.preventDefault();
-        await dispatch(destroyAllFavoritesThunk(id))
+        await fetch(`/api/restaurants/favorites/${id}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+        })
             .then(async () => await dispatch(DeleteRestaurantThunk(id)));
         history.push('/')
     }
