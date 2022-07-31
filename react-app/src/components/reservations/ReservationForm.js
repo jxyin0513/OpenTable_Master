@@ -12,7 +12,7 @@ function ReservationForm() {
     const { id } = useParams();
     const [date, setDate] = useState(new Date());
     const [time, setTime] = useState(new Date());
-    const [partySize, setPartySize] = useState(1);
+    const [partySize, setPartySize] = useState(0);
     const [errors, setErrors] = useState([]);
     const restaurant = useSelector(state => state.restaurants[id])
 
@@ -58,8 +58,11 @@ function ReservationForm() {
         if (current >= reservedDate) {
             arr.push('Please select appropriate time')
         }
+        if(partySize<1 || partySize>10){
+            arr.push('Please select your group party size 1-10.')
+        }
         setErrors(arr)
-    }, [date, time, id, restaurant])
+    }, [date, time, id, restaurant, partySize])
 
     if (userId) {
         return (
@@ -77,7 +80,7 @@ function ReservationForm() {
                             <p>Time: </p><input type='time' name='time' onChange={(e) => setTime(e.target.value)}></input>
                         </div>
                         <div className='reservation-party-field'>
-                            <p>Party Size: </p><input type='number' name='partySize' placeholder={1} onChange={(e) => setPartySize(e.target.value)} min={1} max={10}></input>
+                            <p>Party Size: </p><input type='number' name='partySize' min={0} max={10} onChange={(e) => setPartySize(e.target.value)}></input>
                         </div>
                         <button className='reservation-submit' type='submit' disabled={errors.length === 0 ? false : true}>Submit</button>
                     </form>

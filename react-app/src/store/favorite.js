@@ -95,6 +95,7 @@ const favoriteReducer = (state = {}, action) => {
   let newState = { ...state };
   switch (action.type) {
     case GET_FAVORITE_RESTAURANTS:
+      newState={}
       if (action.payload["message"]) {
         return newState
 

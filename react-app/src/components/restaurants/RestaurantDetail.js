@@ -20,7 +20,8 @@ function RestaurantDetail() {
     const history = useHistory()
     const [edit, setEdit] = useState(false);
     const [review, setReview] = useState(false)
-    const [starFill, setStarFill] = useState(favorite ? 'fill' : 'noFill');
+    const [starFill, setStarFill] = useState('noFill');
+    console.log(userId,favorite, starFill)
     const reviews = useSelector(state => state.reviews)
     let review_user;
     if (reviews) {
@@ -101,7 +102,7 @@ function RestaurantDetail() {
                     {session.user && (
                         <button id='favorite-button' onClick={(e) => {
                             handleFav(e);
-                        }} className={`star-${starFill}`}>{favorite !== undefined ? "Remove from Favorites" : "Add to Favorites"}
+                        }} className={`star-${favorite!== undefined? 'fill':'noFill'}`}>{favorite !== undefined ? "Remove from Favorites" : "Add to Favorites"}
                         </button>
                     )}
 
