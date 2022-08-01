@@ -1,33 +1,45 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { SearchRestaurantsThunk } from '../../store/restaurant'
 
 const Search = () => {
   const dispatch = useDispatch()
   const [enhancedSearch, setEnhancedSearch] = useState([])
   const [keystroke, setKeystroke] = useState('');
-
-  const cleanup = () => {
-    setEnhancedSearch([])
+  const allRestaurants = useSelector(state=>state.restaurants)
+  const restaurants = Object.values(allRestaurants);
+  let search = []
+  // const cleanup = () => {
+  //   setEnhancedSearch([])
+  // }
+  const filteredRestaurant = (e)=>{
+    if(e.target.value){
+      search = restaurants.filter(restaurant=>{
+        if(restaurant.name.toLowerCase().startsWith(e.target.value.toLowerCase()) || restaurant.cuisine.toLowerCase().startsWith(e.target.value.toLowerCase())){
+          return true;
+        }
+      })
+    }
+    setEnhancedSearch(search)
   }
-
   return (
     <>
       <input
         className='restaurantSearch'
         type='text'
-        value={keystroke}
         placeholder="Search your favorite restaurant or cuisine"
-        onChange={async (e) => {
-          setKeystroke(e.target.value)
-          const res = await dispatch(SearchRestaurantsThunk(e.target.value))
-          if (res) {
-            setEnhancedSearch(res.restaurants)
-          } else {
-            cleanup()
+        onChange={
+          filteredRestaurant
           }
-        }} />
+          // setKeystroke(e.target.value)
+          // const res = await dispatch(SearchRestaurantsThunk(e.target.value))
+          // if (res) {
+          //   setEnhancedSearch(res.restaurants)
+          // } else {
+          //   cleanup()
+          // }
+         />
       <div className='results-container'>
         {enhancedSearch.map(result => (
           <Link key={result.id} to={`/restaurants/${result.id}`}>
