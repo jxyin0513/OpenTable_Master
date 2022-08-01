@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { EditRestaurantThunk } from '../../store/restaurant';
 import { useDispatch, useSelector } from 'react-redux'
+import './RestaurantEdit.css'
 
 function EditRestaurant({ id, hide }) {
     const dispatch = useDispatch()
@@ -55,7 +56,7 @@ function EditRestaurant({ id, hide }) {
 
     return (
         <>
-            <form onSubmit={onSubmit}>
+            <form className='edit-formR' onSubmit={onSubmit}>
                 <ul>
                     {errors.length > 0 && errors.map(error =>
                         <li key={error} className="errors">{error}</li>

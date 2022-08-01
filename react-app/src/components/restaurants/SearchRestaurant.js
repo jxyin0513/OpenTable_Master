@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { SearchRestaurantsThunk } from '../../store/restaurant'
+import { useSelector } from 'react-redux';
+// import { SearchRestaurantsThunk } from '../../store/restaurant'
 
 const Search = () => {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const [enhancedSearch, setEnhancedSearch] = useState([])
-  const [keystroke, setKeystroke] = useState('');
+  // const [keystroke, setKeystroke] = useState('');
   const allRestaurants = useSelector(state=>state.restaurants)
   const restaurants = Object.values(allRestaurants);
   let search = []
@@ -16,7 +16,7 @@ const Search = () => {
   const filteredRestaurant = (e)=>{
     if(e.target.value){
       search = restaurants.filter(restaurant=>{
-        if(restaurant.name.toLowerCase().startsWith(e.target.value.toLowerCase()) || restaurant.cuisine.toLowerCase().startsWith(e.target.value.toLowerCase())){
+        if(restaurant.name.toLowerCase().includes(e.target.value.toLowerCase()) || restaurant.cuisine.toLowerCase().includes(e.target.value.toLowerCase())){
           return true;
         }
       })
