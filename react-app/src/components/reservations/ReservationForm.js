@@ -14,6 +14,7 @@ function ReservationForm() {
     const [time, setTime] = useState(new Date());
     const [partySize, setPartySize] = useState(0);
     const [errors, setErrors] = useState([]);
+    const [errorsB, setErrorsB] = useState([]);
     const restaurant = useSelector(state => state.restaurants[id])
 
 
@@ -29,8 +30,10 @@ function ReservationForm() {
         }
 
         const newRes = await dispatch(CreateReservationThunk(reservation))
-        if (newRes) {
+        if (!newRes) {
             history.push(`/users/${userId}`)
+        }else{
+            setErrorsB(newRes)
         }
     }
 
@@ -71,6 +74,9 @@ function ReservationForm() {
                 <div className='reservation-form-container'>
                     <form onSubmit={onSubmit}>
                         {errors.length > 0 && errors.map(error =>
+                            <div key={error} className="reservation-error">{error}</div>
+                        )}
+                        {errorsB.length > 0 && errorsB.map(error =>
                             <div key={error} className="reservation-error">{error}</div>
                         )}
                         <div className='reservation-date-field'>
