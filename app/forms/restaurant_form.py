@@ -13,6 +13,8 @@ def validate_close(form, open_hours):
     # print('form data >>>>>>', form.data['open_hours'])
     if form.data['open_hours']==form.data['close_hours']:
         raise ValidationError('Open must be before close')
+    if form.data['open_hours']>form.data['close_hours']:
+        raise ValidationError('Open must be before close')
 
 
 class NewRestaurantForm(FlaskForm):
