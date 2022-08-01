@@ -78,12 +78,14 @@ function RestaurantDetail() {
     //Dispatches edits to the current restaurant if the owner is the user
     function handleEdit(e) {
         e.preventDefault()
+        setReview(false)
         setEdit(true);
     }
     function reviewClick(e) {
         if (!session.user) {
             history.push('/login')
         }
+        setEdit(false)
         setReview(true)
     }
     if (restaurant) {
