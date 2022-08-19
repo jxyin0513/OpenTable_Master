@@ -24,22 +24,23 @@ def newRestaurantForm():
     print(form.data, 'this is what you want')
     if form.validate_on_submit():
         restaurant = Restaurant(
-                                user_id = form.data['user_id'],
-                                name = form.data['name'],
-                                phone = form.data['phone'],
-                                street = form.data['street'],
-                                cuisine = form.data['cuisine'],
-                                open_hours = form.data['open_hours'],
-                                close_hours = form.data['close_hours'],
-                                image_url = form.data['image_url'],
-                                price_point = form.data['price_point']
-                                )
+            user_id = form.data['user_id'],
+            name = form.data['name'],
+            phone = form.data['phone'],
+            street = form.data['street'],
+            cuisine = form.data['cuisine'],
+            open_hours = form.data['open_hours'],
+            close_hours = form.data['close_hours'],
+            image_url = form.data['image_url'],
+            price_point = form.data['price_point']
+            )
+        db.session.add(restaurant)
+        db.session.commit()
+        return restaurant.to_dict()
     if form.errors:
         print(form.errors)
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
-    db.session.add(restaurant)
-    db.session.commit()
-    return restaurant.to_dict()
+
 
 #GET's an individual restaurants details
 @restaurant_router.route('/<restaurantId>')
@@ -75,14 +76,13 @@ def editRestaurant(restaurantId):
         restaurant.close_hours = form.data['close_hours']
         restaurant.image_url = form.data['image_url']
         restaurant.price_point = form.data['price_point']
+        db.session.commit()
+        return restaurant.to_dict()
 
     if form.errors:
         print(form.errors)
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
-    db.session.commit()
-
-    return restaurant.to_dict()
 
 
 #POSTs a new favorite for a user
