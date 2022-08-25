@@ -5,40 +5,48 @@
 
 .navBar {
     background-color: white;
+    font-family: arial;
     /* height: 50px; */
     display: flex;
     align-items: center;
     width: 100%;
 }
+
 .navUl {
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
     flex-direction: row;
-    align-items:center;
+    align-items: center;
     width: 100%;
 }
-.navUl > li > a {
+
+.navUl>li>a {
     text-decoration: none;
     color: black;
 }
-.navUl > div > li > a {
+
+.navUl>div>li>a {
     text-decoration: none;
     color: black;
 }
-.navUl > li > a:hover {
+
+.navUl>li>a:hover {
     text-decoration: none;
     color: black;
     font-weight: bold;
 }
-.navUl > div> li > a:hover {
+
+.navUl>div>li>a:hover {
     text-decoration: none;
     color: black;
     font-weight: bold;
 }
-.navUl > li {
+
+.navUl>li {
     list-style: none;
     font-family: arial;
 }
+
 .logout {
     height: 30px;
     width: 100px;
@@ -46,16 +54,19 @@
     border: 1px solid #66666666;
     font-weight: bold;
 }
+
 .logout:hover {
     background-color: #bbbbbbbb;
     cursor: pointer;
 }
-.profile-loggedIn > li{
+
+.profile-loggedIn>li {
     display: inline;
     padding: 10px;
     margin: 15px;
 }
-.profile-loggedOut > li {
+
+.profile-loggedOut>li {
     display: inline;
     padding: 10px;
     margin: 15px;
