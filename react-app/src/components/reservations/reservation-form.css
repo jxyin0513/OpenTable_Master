@@ -1,30 +1,77 @@
+.reservation-error {
+  color: red;
+}
+
 .reservation-form-container {
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
+  height: 100%;
+  width: 90%;
 }
 
-.reservation-form-container>div {
-  margin-left: 50px;
+#reservation-form-box>div {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
+
+.reservation-form-container>form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  /* border: 1px solid chartreuse; */
+  height: 85%;
+}
+
 
 .reservation-form-container>form>div>input {
   margin-top: 10px;
-  width: 100px;
+  /* width: 100px; */
 }
 
 .reservation-form-container>form>div>p {
   margin-top: 10px;
 }
 
-.reservation-form-container>form>div {
+/* .reservation-form-container>form>div {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  width: 80%;
+} */
+
+.reservation-date-field,
+.reservation-time-field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* justify-content: space-between; */
+  width: 41%;
 }
 
+.reservation-party-field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* justify-content: space-between; */
+  width: 90%;
+  order: -1;
+}
+
+.reservation-party-field>input {
+  width: 100%;
+}
+
+
 .reservation-submit {
-  margin-top: 45px;
-  margin-left: 85px;
+  /* margin-top: 45px;
+  margin-left: 85px; */
+  width: 100%;
+  height: 48px;
 }

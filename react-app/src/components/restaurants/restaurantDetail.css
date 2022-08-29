@@ -1,25 +1,28 @@
 #restaurant-image {
     position: relative;
     width: 100%;
-    max-height: 400px;
+    max-height: 500px;
     object-fit: cover;
 }
+
 #detail-image-wrapper {
     position: relative;
     width: 100%;
     max-height: 400px;
     height: 400px;
     object-fit: cover;
-    background-color:#f85329;
+    background-color: #f85329;
+
 }
+
 #favorite-button-box {
     z-index: 1;
     /* background-color: red; */
     position: absolute;
-    left: 4rem;
+    right: 4rem;
     top: 6rem;
     height: 35px;
-    width: 170px;
+    /* width: 170px; */
 }
 
 #favorite-button {
@@ -28,7 +31,7 @@
     border: 2px whitesmoke;
     /* color: black; */
     height: 100%;
-    width: 100%;
+    width: 170px;
 }
 
 .star-fill {
@@ -47,7 +50,8 @@
 }
 
 #restaurant-page {
-
+    position: relative;
+    top: 45px;
     height: 600px;
     display: flex;
     flex-direction: row;
@@ -60,7 +64,7 @@
     background-color: white;
     position: relative;
     left: 4rem;
-    top: -200px;
+    /* top: -200px; */
     display: flex;
     flex-direction: column;
     width: 30rem;
@@ -72,15 +76,20 @@
 
 #reservation-form-box {
     border-radius: 4px;
-    box-shadow: -1.5px 1.5px 1px rgb(183, 181, 181);
+    box-shadow: -1.5px 1.5px 5px rgb(183, 181, 181);
 
     background-color: white;
-    position: relative;
-    left: 100px;
-    top: -200px;
-    width: 17.5rem;
-    height: 280px
+    position: sticky;
+    left: 60%;
+    top: 0px;
+    width: 340px;
+    height: 340px
 }
+
+/* #reservation-form-box div {
+    height: 100%;
+} */
+
 
 #restaurant-name {
     padding-left: 10px;
