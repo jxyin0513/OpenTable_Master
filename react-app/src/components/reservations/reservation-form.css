@@ -1,5 +1,6 @@
 .reservation-error {
   color: red;
+  order: -1
 }
 
 .reservation-form-container {
