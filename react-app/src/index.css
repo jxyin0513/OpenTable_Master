@@ -156,7 +156,7 @@ button {
     border: 2px solid #f85329;
     padding: 3px;
     min-width: 50px;
-    max-width: 110px;
+    /* max-width: 110px;  GLOBAL STYLING ISSUE  */
     border-radius: 3px;
     background-color: white;
     color: #f85329
