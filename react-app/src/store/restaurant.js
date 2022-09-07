@@ -4,6 +4,7 @@ const SEARCH_RESTAURANTS = '/get/searchRestaurants'
 const CREATE_RESTAURANT = '/post/restaurant'
 const EDIT_RESTAURANT = '/edit/restaurant'
 const DELETE_RESTAURANT = '/delete/restaurant'
+const CREATE_IMAGE = '/upload/images'
 
 const getRestaurants = (restaurants) => ({
     type: GET_RESTAURANTS,
@@ -19,6 +20,11 @@ const createRestaurant = (restaurant) => ({
     type: CREATE_RESTAURANT,
     restaurant
 });
+
+const createImage = (image) =>({
+    type:CREATE_IMAGE,
+    image
+})
 
 const editRestaurant = (restaurant) => ({
     type: EDIT_RESTAURANT,
@@ -54,14 +60,35 @@ export const GetRestaurantDetailThunk = (id) => async (dispatch) => {
 
 }
 export const CreateRestaurantThunk = (restaurant) => async (dispatch) => {
+    console.log(restaurant)
     const response = await fetch(`/api/restaurants/newRestaurant`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(restaurant)
+        // headers: { "Content-Type": "application/json" },
+        body: restaurant
     })
     if (response.ok) {
         const data = await response.json()
+        console.log(data)
         dispatch(createRestaurant(data))
+        return null
+    } else if (response.status < 500) {
+        const data = await response.json();
+        console.log(data)
+        if (data.errors) {
+            return data.errors;
+        }
+    }
+}
+export const UploadImageThunk = (image) => async (dispatch) => {
+    console.log(image)
+    const response = await fetch(`/api/restaurants/newRestaurant`, {
+        method: "POST",
+        // headers: { "Content-Type": "application/json" },
+        body: image.image_url
+    })
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(createRestaurant(data.image))
         return null
     } else if (response.status < 500) {
         const data = await response.json();
@@ -69,8 +96,8 @@ export const CreateRestaurantThunk = (restaurant) => async (dispatch) => {
             return data.errors;
         }
     }
-
 }
+
 export const EditRestaurantThunk = (restaurant) => async (dispatch) => {
     const response = await fetch(`/api/restaurants/${restaurant.id}/edit`, {
         method: "PUT",
@@ -133,7 +160,12 @@ export const restaurantReducer = (state = initialState, action) => {
             return new_State;
 
         case CREATE_RESTAURANT:
+            if(action.restaurant.url) return newState;
             newState[action.restaurant.id] = action.restaurant
+            return newState;
+
+        case CREATE_IMAGE:
+            newState[action.image.id]['image_url'] = action.image.url
             return newState;
 
         case EDIT_RESTAURANT:
