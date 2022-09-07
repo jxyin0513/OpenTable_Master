@@ -1,6 +1,6 @@
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, SubmitField, TimeField, SelectField
+from wtforms import StringField, IntegerField, SubmitField, TimeField, SelectField, FileField
 from wtforms.validators import DataRequired, Regexp, ValidationError
 
 
@@ -25,5 +25,5 @@ class NewRestaurantForm(FlaskForm):
     cuisine = StringField('Cuisine', validators=[DataRequired(message="Select your cuisine type")])
     open_hours = TimeField('Open', validators=[DataRequired(message="Please provide your open hour")])
     close_hours = TimeField('Close', validators=[DataRequired(message="Please provide your close hour"), validate_close])
-    image_url = StringField('Image')
+    image_url = FileField('Image')
     price_point = IntegerField('Price Point', validators=[DataRequired(message="Please provide your price point")])

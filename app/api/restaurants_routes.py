@@ -2,8 +2,9 @@ from flask import Blueprint, redirect, render_template, request
 from app.forms.restaurant_form import NewRestaurantForm
 from app.models import Restaurant, db, favorites
 from app.models.user import User
+from app.aws.aws_upload import upload_file_to_s3, allowed_file, get_unique_filename
 
-restaurant_router = Blueprint('restaurants',__name__)
+restaurant_router = Blueprint('restaurants', __name__)
 
 def validation_errors_to_error_messages(validation_errors):
     """
@@ -20,27 +21,69 @@ def validation_errors_to_error_messages(validation_errors):
 @restaurant_router.route('/newRestaurant', methods=['GET', 'POST'])
 def newRestaurantForm():
     form = NewRestaurantForm()
+    print(request.form.get('user_id'), '---')
+    # print(url, '---')
+    if "image" not in request.files:
+        return {"errors": ["image is required for new restaurant"]}, 400
+    image = request.files["image"]
+    if not allowed_file(image.filename):
+        return {"errors": ["file type is not permitted"]}, 400
+    image.filename = get_unique_filename(image.filename)
+    upload = upload_file_to_s3(image)
+
+    if "url" not in upload:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+        return upload, 400
+    url = upload["url"]
+    form = NewRestaurantForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     print(form.data, 'this is what you want')
     if form.validate_on_submit():
         restaurant = Restaurant(
-            user_id = form.data['user_id'],
-            name = form.data['name'],
-            phone = form.data['phone'],
-            street = form.data['street'],
-            cuisine = form.data['cuisine'],
-            open_hours = form.data['open_hours'],
-            close_hours = form.data['close_hours'],
-            image_url = form.data['image_url'],
-            price_point = form.data['price_point']
+            user_id = int(request.form.get('user_id')),
+            name = request.form.get('name'),
+            phone = request.form.get('phone'),
+            street = request.form.get('street'),
+            cuisine = request.form.get('cuisine'),
+            open_hours = request.form.get('open_hours'),
+            close_hours = request.form.get('close_hours'),
+            image_url = url,
+            price_point = request.form.get('price_point')
             )
         db.session.add(restaurant)
         db.session.commit()
         return restaurant.to_dict()
     if form.errors:
-        print(form.errors)
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
+# @restaurant_router.route('/images/<id>', methods=['POST'])
+# def uploadImage(id):
+#     print(request.files)
+#     if "image" not in request.files:
+#         return {"errors": ["image required"]}, 400
+#     image = request.files["image"]
+#     if not allowed_file(image.filename):
+#         return {"errors": ["file type not permitted"]}, 400
+#     image.filename = get_unique_filename(image.filename)
+#     upload = upload_file_to_s3(image)
+
+#     if "url" not in upload:
+#         # if the dictionary doesn't have a url key
+#         # it means that there was an error when we tried to upload
+#         # so we send back that error message
+#         return upload, 400
+#     url = upload["url"]
+#     # flask_login allows us to get the current user from the request
+#     new_image = Restaurant.query.get(id)
+#     new_image.image_url = url
+#     # db.session.add(new_image)
+#     db.session.commit()
+#     return {'image': {
+#         'id': id,
+#         'url': url
+#     }}
 
 #GET's an individual restaurants details
 @restaurant_router.route('/<restaurantId>')
