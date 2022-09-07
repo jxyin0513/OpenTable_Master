@@ -21,7 +21,7 @@ function RestaurantDetail() {
     const [edit, setEdit] = useState(false);
     const [review, setReview] = useState(false)
     const [starFill, setStarFill] = useState('noFill');
-    console.log(userId,favorite, starFill)
+    console.log(userId, favorite, starFill)
     const reviews = useSelector(state => state.reviews)
     let review_user;
     if (reviews) {
@@ -95,16 +95,16 @@ function RestaurantDetail() {
                 <div id='detail-image-wrapper'>
                     {!restaurant.image_url && (
                         <img id='restaurant-image' src='https://i.imgur.com/W5l5B9n.png' alt="default restaurant"></img>
-                        )}
+                    )}
                     {restaurant.image_url && (
                         <img id='restaurant-image' src={restaurant.image_url} alt="restaurant"></img>
-                        )}
+                    )}
                 </div>
                 <div id='favorite-button-box'>
                     {session.user && (
                         <button id='favorite-button' onClick={(e) => {
                             handleFav(e);
-                        }} className={`star-${favorite!== undefined? 'fill':'noFill'}`}>{favorite !== undefined ? "Remove from Favorites" : "Add to Favorites"}
+                        }} className={`star-${favorite !== undefined ? 'fill' : 'noFill'}`}>{favorite !== undefined ? "Remove from Favorites" : "Add to Favorites"}
                         </button>
                     )}
 
@@ -145,10 +145,10 @@ function RestaurantDetail() {
                                 <button className='detail-button' id='delete-restaurant' onClick={handleDelete}>Delete</button>
                             </div>
                         )}
+                        {edit && <EditRestaurant id={id} hide={() => setEdit(false)} />}
                         <Reviews restaurantId={id} />
                         {review && <ReviewForm restaurantId={id} hide={() => setReview(false)} />}
                         {review_user.length === 0 && <button className='detail-button' onClick={reviewClick}>Write a Review</button>}
-                        {edit && <EditRestaurant id={id} hide={() => setEdit(false)} />}
 
 
                     </span>
