@@ -109,7 +109,7 @@ function RestaurantForm() {
                     <p>Closing</p>
                     <input type='time' className='restaurant-field' name='close_hours' onChange={e => setCloseHours(e.target.value)}></input>
 
-                    <input type='text' className='restaurant-field' name='image_url' placeholder='Image Url' onChange={e => setURL(e.target.value)}></input>
+                    {/* <input type='text' className='restaurant-field' name='image_url' placeholder='Image Url' onChange={e => setURL(e.target.value)}></input> */}
 
                     <input type="file" className='restaurant-field' accept="image/*"  onChange={updateImage} />
 

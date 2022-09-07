@@ -16,6 +16,7 @@ function EditRestaurant({ id, hide }) {
     const [openHours, setOpenHours] = useState(trimOpen)
     const [closeHours, setCloseHours] = useState(trimClose)
     const [url, setURL] = useState(restaurant.image_url)
+    const [image, setImage] = useState(null);
     const [price_point, setPrice_Point] = useState(restaurant.price_point)
     const [errors, setErrors] = useState([]);
     const cuisines = ['American', 'Barbecue', 'Cafe', 'Chinese', 'Fast Food', 'Indian', 'Italian', 'Japanese', 'Korean BBQ', 'Mediterranean', 'Mexican', 'Middle Earth', 'Thai', 'Vegan']
@@ -32,25 +33,29 @@ function EditRestaurant({ id, hide }) {
     //handles editing of restaurant
     async function onSubmit(e) {
         e.preventDefault();
-        const restaurant = {
-            id,
-            user_id: userId,
-            name,
-            phone,
-            street,
-            cuisine,
-            open_hours: openHours,
-            close_hours: closeHours,
-            image_url: url,
-            price_point
-        }
-        const edited = await dispatch(EditRestaurantThunk(restaurant))
+        const formData = new FormData();
+        formData.append("image", image);
+        formData.append("user_id", userId);
+        formData.append("name", name);
+        formData.append("phone", phone);
+        formData.append("street", street);
+        formData.append("cuisine", cuisine);
+        formData.append("open_hours", openHours);
+        formData.append("close_hours", closeHours);
+        formData.append("price_point", price_point);
+
+        const edited = await dispatch(EditRestaurantThunk(formData, id))
 
         if (!edited) {
             hide();
         } else {
             setErrors(edited)
         }
+
+    }
+    const updateImage = (e) => {
+        const file = e.target.files[0];
+        setImage(file);
     }
 
 
@@ -84,8 +89,11 @@ function EditRestaurant({ id, hide }) {
                 <label>Close Hours:
                     <input type='time' name='close_hours' value={`${hourC}:${minuteC}`} onChange={e => setCloseHours(e.target.value)}></input>
                 </label>
-                <label>Image URL:
+                {/* <label>Image:
                     <input type='text' name='image_url' value={url} onChange={e => setURL(e.target.value)}></input>
+                </label> */}
+                <label>Image:
+                    <input type="file" accept="image/*"  onChange={updateImage} />
                 </label>
                 <label>Price point:
                     <input type='text' name='price_point' value={price_point} onChange={e => setPrice_Point(e.target.value)}></input>

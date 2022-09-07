@@ -79,30 +79,30 @@ export const CreateRestaurantThunk = (restaurant) => async (dispatch) => {
         }
     }
 }
-export const UploadImageThunk = (image) => async (dispatch) => {
-    console.log(image)
-    const response = await fetch(`/api/restaurants/newRestaurant`, {
-        method: "POST",
-        // headers: { "Content-Type": "application/json" },
-        body: image.image_url
-    })
-    if (response.ok) {
-        const data = await response.json()
-        dispatch(createRestaurant(data.image))
-        return null
-    } else if (response.status < 500) {
-        const data = await response.json();
-        if (data.errors) {
-            return data.errors;
-        }
-    }
-}
+// export const UploadImageThunk = (image) => async (dispatch) => {
+//     console.log(image)
+//     const response = await fetch(`/api/restaurants/newRestaurant`, {
+//         method: "POST",
+//         // headers: { "Content-Type": "application/json" },
+//         body: image.image_url
+//     })
+//     if (response.ok) {
+//         const data = await response.json()
+//         dispatch(createRestaurant(data.image))
+//         return null
+//     } else if (response.status < 500) {
+//         const data = await response.json();
+//         if (data.errors) {
+//             return data.errors;
+//         }
+//     }
+// }
 
-export const EditRestaurantThunk = (restaurant) => async (dispatch) => {
-    const response = await fetch(`/api/restaurants/${restaurant.id}/edit`, {
+export const EditRestaurantThunk = (restaurant, id) => async (dispatch) => {
+    const response = await fetch(`/api/restaurants/${id}/edit`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(restaurant)
+        // headers: { "Content-Type": "application/json" },
+        body: restaurant
     })
     if (response.ok) {
         const data = await response.json()

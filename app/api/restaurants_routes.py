@@ -107,18 +107,33 @@ def deleteRestaurant(restaurantId):
 @restaurant_router.route('/<restaurantId>/edit', methods=['PUT'])
 def editRestaurant(restaurantId):
     restaurant= Restaurant.query.get(restaurantId)
+    url=''
+    if "image" in request.files:
+        image = request.files["image"]
+        if not allowed_file(image.filename):
+            return {"errors": ["file type is not permitted"]}, 400
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+
+        if "url" not in upload:
+            # if the dictionary doesn't have a url key
+            # it means that there was an error when we tried to upload
+            # so we send back that error message
+            return upload, 400
+        url = upload["url"]
     form= NewRestaurantForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     print(form.data['name'])
     if(form.validate_on_submit()):
-        restaurant.name= form.data['name']
-        restaurant.phone = form.data['phone']
-        restaurant.street = form.data['street']
-        restaurant.cuisine = form.data['cuisine']
-        restaurant.open_hours = form.data['open_hours']
-        restaurant.close_hours = form.data['close_hours']
-        restaurant.image_url = form.data['image_url']
-        restaurant.price_point = form.data['price_point']
+        restaurant.name= request.form.get('name')
+        restaurant.phone = request.form.get('phone')
+        restaurant.street = request.form.get('street')
+        restaurant.cuisine = request.form.get('cuisine')
+        restaurant.open_hours = request.form.get('open_hours')
+        restaurant.close_hours = request.form.get('close_hours')
+        if(url != ''):
+            restaurant.image_url = url
+        restaurant.price_point = request.form.get('price_point')
         db.session.commit()
         return restaurant.to_dict()
 
