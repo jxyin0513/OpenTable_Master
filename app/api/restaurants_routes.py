@@ -42,7 +42,7 @@ def newRestaurantForm():
     print(form.data, 'this is what you want')
     if form.validate_on_submit():
         restaurant = Restaurant(
-            user_id = int(request.form.get('user_id')),
+            user_id = request.form.get('user_id'),
             name = request.form.get('name'),
             phone = request.form.get('phone'),
             street = request.form.get('street'),
