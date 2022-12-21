@@ -15,7 +15,7 @@ function EditRestaurant({ id, hide }) {
     const [cuisine, setCuisine] = useState(restaurant.cuisine)
     const [openHours, setOpenHours] = useState(trimOpen)
     const [closeHours, setCloseHours] = useState(trimClose)
-    const [url, setURL] = useState(restaurant.image_url)
+    // const [url, setURL] = useState(restaurant.image_url)
     const [image, setImage] = useState(null);
     const [price_point, setPrice_Point] = useState(restaurant.price_point)
     const [errors, setErrors] = useState([]);
